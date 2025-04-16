@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminDashboardController">
+
+    <VBox fillWidth="false" layoutY="41.0" spacing="20">
+        <!-- Statistics Cards -->
+        <HBox spacing="15">
+            <VBox prefWidth="150" style="-fx-background-color: #3498db; -fx-padding: 20; -fx-border-radius: 8; -fx-background-radius: 8;">
+                <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Total Students" />
+                <Label fx:id="totalStudentsLabel" style="-fx-text-fill: white; -fx-font-size: 24px;" text="0" />
+            </VBox>
+            <VBox prefWidth="150" style="-fx-background-color: #e67e22; -fx-padding: 20; -fx-border-radius: 8; -fx-background-radius: 8;">
+                <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Total Teachers" />
+                <Label fx:id="totalTeachersLabel" style="-fx-text-fill: white; -fx-font-size: 24px;" text="0" />
+            </VBox>
+            <VBox prefWidth="150.0" style="-fx-background-color: #2ecc71; -fx-padding: 20; -fx-border-radius: 8; -fx-background-radius: 8;">
+                <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Total Classes" />
+                <Label fx:id="totalClassesLabel" style="-fx-text-fill: white; -fx-font-size: 24px;" text="0" />
+            </VBox>
+            <VBox prefWidth="160.0" style="-fx-background-color: #c0392b; -fx-padding: 20; -fx-border-radius: 8; -fx-background-radius: 8;">
+                <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Pending Approvals" />
+                <Label fx:id="pendingApprovalsLabel" style="-fx-text-fill: white; -fx-font-size: 24px;" text="0" />
+            </VBox>
+        </HBox>
+      <padding>
+         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+      </padding>
+    </VBox>
+<!--        <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="dashboard area" />-->
+<!--        &lt;!&ndash; Recent Activity Table &ndash;&gt;-->
+<!--        <Label text="Recent Activity" style="-fx-font-size: 16px; -fx-font-weight: bold;" />-->
+<!--        <TableView fx:id="recentActivityTable" prefHeight="200">-->
+<!--            <columns>-->
+<!--                <TableColumn fx:id="colUser" text="User" />-->
+<!--                <TableColumn fx:id="colRole" text="Role" />-->
+<!--                <TableColumn fx:id="colStatus" text="Status" />-->
+<!--                <TableColumn fx:id="colDate" text="Date" />-->
+<!--            </columns>-->
+<!--        </TableView>-->
+
+<!--        &lt;!&ndash; Quick Actions &ndash;&gt;-->
+<!--        <Label text="Quick Actions" style="-fx-font-size: 16px; -fx-font-weight: bold;" />-->
+<!--        <HBox spacing="10">-->
+<!--            <Button text="Add User" fx:id="addUserBtn" prefWidth="120" />-->
+<!--            <Button text="View Students" fx:id="viewStudentsBtn" prefWidth="120" />-->
+<!--            <Button text="Assign Class" fx:id="assignClassBtn" prefWidth="120" />-->
+<!--            <Button text="Approve Users" fx:id="approveUsersBtn" prefWidth="120" />-->
+<!--        </HBox>-->
+
+
+</AnchorPane>

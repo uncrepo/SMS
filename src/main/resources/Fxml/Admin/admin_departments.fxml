@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminDepartmentController">
+<VBox fillWidth="false" layoutX="14.0" layoutY="53.0" prefHeight="500.0" prefWidth="600.0" spacing="15">
+   
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="manage departments students tab" />
+    <!-- Student Table -->
+    <TableView fx:id="studentTableView" prefHeight="270.0" VBox.vgrow="NEVER">
+        <columns>
+            <TableColumn fx:id="colStudentId" text="Student ID" />
+            <TableColumn fx:id="colFullName" prefWidth="200" text="Full name" />
+            <TableColumn fx:id="colDepartment" text="Department" />
+            <TableColumn fx:id="colYear" text="Year" />
+            <TableColumn fx:id="colSection" text="Section" />
+        </columns>
+    </TableView>
+       <TableView fx:id="coursesTableView" prefHeight="200.0" VBox.vgrow="NEVER">
+           <columns>
+               <TableColumn fx:id="colCourseCode" text="Course Code" />
+               <TableColumn fx:id="colCourseTitle" prefWidth="200" text="Title" />
+               <TableColumn fx:id="colCreditHour" text="Credit Hour" />
+               <TableColumn fx:id="colAssignedTeacher" prefWidth="200" text="Assigned Teachers" />
+           </columns>
+       </TableView>
+</VBox>
+
+ <HBox layoutX="24.0" layoutY="14.0" spacing="20">
+     <ComboBox fx:id="departmentComboBox" prefWidth="180" promptText="Select Department" />
+     <ComboBox fx:id="yearComboBox" prefWidth="100" promptText="Select Year" />
+     <ComboBox fx:id="sectionComboBox" prefWidth="100" promptText="Select Section" />
+     <Button fx:id="showStudentsBtn" prefWidth="100" text="Show" />
+ </HBox>
+</AnchorPane>

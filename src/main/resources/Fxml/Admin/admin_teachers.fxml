@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminTeacherController">
+        <!-- Filter and Actions -->
+        <!-- Teacher Table -->
+    <VBox fillWidth="false" layoutX="14.0" layoutY="53.0" prefHeight="300.0" spacing="15">
+        <TableView fx:id="teacherTableView" snapToPixel="false" VBox.vgrow="NEVER">
+            <columns>
+                <TableColumn fx:id="colTeacherId" prefWidth="25.0" text="ID" />
+                <TableColumn fx:id="colFullName" prefWidth="159.0" text="Teacher's Name" />
+                <TableColumn fx:id="colEmail" prefWidth="180.0" text="Email" />
+                <TableColumn fx:id="colYear" prefWidth="33.0" text="Year" />
+                <TableColumn fx:id="colSection" prefWidth="50.0" text="Section" />
+                <TableColumn fx:id="colDepartment" text="Department" />
+                <TableColumn fx:id="colCourseCode" prefWidth="90.0" text="Course Code" />
+                <!--            <TableColumn fx:id="colActions" text="Actions" prefWidth="150" >-->
+                <!--                <cellFactory>-->
+                <!--                    <Callback >-->
+                <!--                        <TableCell>-->
+                <!--                            <Button text="Edit" fx:id="editTeacherBtn" onAction="#onEditTeacherClick"/>-->
+                <!--                        </TableCell>-->
+                <!--                    </Callback>-->
+                <!--                </cellFactory>-->
+                <!--            </TableColumn>-->
+            </columns>
+        </TableView>
+    </VBox>
+     <HBox layoutX="24.0" layoutY="14.0" spacing="10">
+         <TextField fx:id="searchTeacherField" prefWidth="200" promptText="Search by name or ID" />
+         <ComboBox fx:id="departmentComboBox" prefWidth="150" promptText="Department" />
+         <Button fx:id="searchBtn" prefWidth="100" text="Search" />
+         <Button fx:id="addTeacherBtn" prefWidth="100" text="Add Teacher" />
+     </HBox>
+
+    <HBox layoutX="24.0" layoutY="365.0" spacing="20">
+        <ComboBox fx:id="assignDepartmentComboBox" prefWidth="180" promptText="Select Department" />
+        <ComboBox fx:id="selectTeacherComboBox" prefWidth="200.0" promptText="Select a Teacher" />
+    </HBox>
+    <HBox layoutX="24.0" layoutY="400.0" spacing="20">
+        <ComboBox fx:id="selectCourseComboBox" prefWidth="180.0" promptText="Select Course" />
+        <ComboBox fx:id="assignYearComboBox" prefWidth="100" promptText="Select Year" />
+        <ComboBox fx:id="assignSectionComboBox" prefWidth="120" promptText="Select Section" />
+        <Button fx:id="assignTeacherBtn" prefWidth="100" text="Assign Teacher" />
+    </HBox>
+</AnchorPane>
