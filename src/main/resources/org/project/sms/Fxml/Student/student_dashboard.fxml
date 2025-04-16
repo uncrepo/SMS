@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.project.sms.Controllers.Student.StudentController"
+            prefHeight="400.0" prefWidth="600.0">
+    <VBox spacing="10" layoutX="10" layoutY="10">
+        <Label text="Welcome, Student!" style="-fx-font-size: 18px;" />
+        <TableView fx:id="gradeTable">
+            <columns>
+                <TableColumn fx:id="courseCol" text="Course" />
+                <TableColumn fx:id="gradeCol" text="Grade" />
+                <TableColumn fx:id="statusCol" text="Status" />
+            </columns>
+        </TableView>
+    </VBox>
+</AnchorPane>
