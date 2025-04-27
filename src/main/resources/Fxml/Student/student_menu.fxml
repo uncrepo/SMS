@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.project.sms.Controllers.Student.StudentMenuController"
+            prefHeight="400.0" prefWidth="600.0">
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Student Panel" />
+
+    <VBox alignment="TOP_CENTER" prefHeight="501.0" prefWidth="200" spacing="10" style="-fx-background-color: #eeeeee;">
+        <VBox prefHeight="500.0" prefWidth="200.0" spacing="10" style="-fx-padding: 15; -fx-background-color: #34495e;">
+            <Button fx:id="btnDashboard" prefWidth="180" text="Dashboard" />
+            <Button fx:id="btnDepartmentInfo" prefWidth="180" text="Department Info" />
+            <Button fx:id="btnResults" prefWidth="180" text="Results" />
+            <Button fx:id="btnProfile" prefWidth="180" text="Profile" />
+
+            <Separator prefWidth="180" />
+
+            <Button fx:id="btnLogout" prefWidth="180" style="-fx-text-fill: red;" text="Logout" />
+
+        </VBox>
+    </VBox>
+</AnchorPane>

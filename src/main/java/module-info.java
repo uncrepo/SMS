@@ -13,4 +13,5 @@ module org.project.sms {
     exports org.project.sms.Controllers.Student;
     exports org.project.sms.Models;
     exports org.project.sms.Views;
+    exports org.project.sms.options;
 }

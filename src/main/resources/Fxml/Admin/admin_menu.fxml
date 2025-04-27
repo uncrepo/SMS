@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminMenuController">
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Admin Panel" />
+
+    <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200" spacing="10" style="-fx-background-color: #eeeeee;">
+    <VBox prefHeight="860.0" prefWidth="200.0" spacing="10" style="-fx-padding: 15; -fx-background-color: #34495e;">
+    <Button fx:id="btnDashboard" prefWidth="180" text="Dashboard" />
+    <Button fx:id="btnTeachers" prefWidth="180" text="Teachers" />
+    <Button fx:id="btnDepartments" prefWidth="180" text="Departments" />
+<!--    <Button fx:id="btnClasses" prefWidth="180" text="Classes" />-->
+    <Button fx:id="btnGrades" prefWidth="180" text="Grades" />
+
+    <Separator prefWidth="180" />
+
+    <Button fx:id="btnLogout" prefWidth="180" style="-fx-text-fill: red;" text="Logout" />
+
+    </VBox>
+    </VBox>
+</AnchorPane>
