@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminProfileController">
    <children>
       <Label prefHeight="25.0" prefWidth="180.0" text="Admin Profile">
          <padding>
@@ -23,7 +23,7 @@
                   <HBox alignment="CENTER_LEFT" prefWidth="400.0" spacing="12.0">
                      <children>
                         <Label text="Full Name" />
-                        <TextField />
+                        <TextField fx:id="adminFullNameField" />
                         <Label text="(required)" />
                      </children>
                      <padding>
@@ -41,20 +41,10 @@
                         <Insets left="40.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" disable="true" layoutX="10.0" layoutY="80.0" prefWidth="400.0" spacing="22.0">
-                     <children>
-                        <Label text="Grade" />
-                        <ChoiceBox prefHeight="25.0" prefWidth="125.0" />
-                        <Label text="(required)" />
-                     </children>
-                     <padding>
-                        <Insets left="40.0" />
-                     </padding>
-                  </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="98.0" prefWidth="400.0" spacing="12.0">
                      <children>
                         <Label text="Email" />
-                        <TextField />
+                        <TextField fx:id="adminEmailField" />
                         <Label layoutX="252.0" layoutY="14.0" text="(optional)" />
                      </children>
                      <padding>
@@ -64,7 +54,7 @@
                   <HBox alignment="CENTER_LEFT" disable="true" layoutX="10.0" layoutY="98.0" prefWidth="400.0" spacing="12.0">
                      <children>
                         <Label text="Guardian number" />
-                        <TextField />
+                        <TextField fx:id="guardianField" />
                         <Label text="(required)" />
                      </children>
                      <padding>
@@ -74,7 +64,7 @@
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="150.0" prefWidth="400.0" spacing="12.0">
                      <children>
                         <Label text="Phone number" />
-                        <TextField />
+                        <TextField fx:id="phoneNumberField" />
                         <Label text="(optional)" />
                      </children>
                      <padding>
@@ -84,7 +74,7 @@
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="129.0" prefWidth="400.0" spacing="12.0">
                      <children>
                         <Label text="Username" />
-                        <TextField />
+                        <TextField fx:id="usernameField" />
                         <Label text="(required)" />
                         <Button layoutX="277.0" layoutY="10.0" mnemonicParsing="false" text="copy" />
                      </children>
@@ -95,7 +85,7 @@
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="232.0" prefWidth="400.0" spacing="12.0">
                      <children>
                         <Label text="Password" />
-                        <TextField />
+                        <TextField fx:id="passwordField" />
                         <Label text="(required)" />
                         <Button mnemonicParsing="false" text="copy" />
                      </children>
@@ -105,9 +95,9 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="232.0" prefWidth="400.0" spacing="50.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Edit" />
-                        <Button layoutX="277.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Save changes" />
-                        <Button layoutX="110.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Cancel" />
+                        <Button fx:id="editBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Edit" />
+                        <Button fx:id="saveChangesBtn" layoutX="277.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Save changes" />
+                        <Button fx:id="cancelBtn" layoutX="110.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Cancel" />
                      </children>
                      <padding>
                         <Insets bottom="40.0" left="100.0" />
@@ -150,7 +140,7 @@
             </VBox>
          </children>
          <padding>
-            <Insets top="25.0" />
+            <Insets top="23.0" />
          </padding>
       </HBox>
    </children>

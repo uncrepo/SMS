@@ -18,7 +18,7 @@ public class TeacherController implements Initializable {
             switch (newVal) {
                 case ASSIGNMENTS -> teacher_parent.setCenter(Model.getInstance().getTeacherViewFactory().getTeacherAssignmentsView());
                 case CLASSES -> teacher_parent.setCenter(Model.getInstance().getTeacherViewFactory().getTeacherClassesView());
-                case GRADES -> teacher_parent.setCenter(Model.getInstance().getTeacherViewFactory().getTeacherGradesView());
+                case PROFILE -> teacher_parent.setCenter(Model.getInstance().getTeacherViewFactory().getTeacherProfileView());
                 default -> teacher_parent.setCenter(Model.getInstance().getTeacherViewFactory().getTeacherDashboardView());
             }
         });

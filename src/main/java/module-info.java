@@ -3,6 +3,7 @@ module org.project.sms {
     requires javafx.fxml;
     requires java.sql;
     requires de.jensd.fx.glyphs.fontawesome;
+    requires mysql.connector.j;
 
 
     opens org.project.sms to javafx.fxml;

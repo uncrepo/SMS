@@ -4,5 +4,5 @@ public enum TeacherMenuOptions {
     DASHBOARD,
     CLASSES,
     ASSIGNMENTS,
-    GRADES
+    PROFILE
 }

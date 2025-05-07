@@ -24,7 +24,7 @@ public class TeacherMenuController implements Initializable {
         btnDashboard.setOnAction(event -> onDashboard());
         btnClasses.setOnAction(event -> onClasses());
         btnAssignments.setOnAction(event -> onAssignments());
-        btnGrades.setOnAction(event -> onGrades());
+        btnGrades.setOnAction(event -> onProfile());
     }
 
 
@@ -43,8 +43,8 @@ public class TeacherMenuController implements Initializable {
     }
 
 
-    private void onGrades() {
-        Model.getInstance().getTeacherSelectedMenu().set(TeacherMenuOptions.GRADES);
+    private void onProfile() {
+        Model.getInstance().getTeacherSelectedMenu().set(TeacherMenuOptions.PROFILE);
 
     }
 

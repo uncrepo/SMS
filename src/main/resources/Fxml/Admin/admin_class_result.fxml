@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminClassResultController">
+<VBox fillWidth="false" layoutX="14.0" layoutY="53.0" prefHeight="500.0" prefWidth="860.0" spacing="15">
+   
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="View Previous Classes Results" />
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="900.0" spacing="15.0" VBox.vgrow="NEVER">
+         <children>
+          <!-- Student Table -->
+          <TableView fx:id="studentTableView" prefHeight="430.0" prefWidth="700.0" HBox.hgrow="NEVER">
+              <columns>
+                  <TableColumn fx:id="colStudentId" prefWidth="51.0" resizable="false" text="ID" />
+                  <TableColumn fx:id="colFullName" prefWidth="169.0" resizable="false" text="Full name" />
+                  <TableColumn fx:id="colAcademicYear" prefWidth="118.0" resizable="false" text="Academic Year" />
+                  <TableColumn fx:id="colGrade" minWidth="0.0" prefWidth="62.0" resizable="false" text="Grade" />
+                  <TableColumn fx:id="colSection" prefWidth="59.0" resizable="false" text="Section" />
+                  <TableColumn fx:id="colAverage" prefWidth="66.0" resizable="false" text="Average" />
+                  <TableColumn fx:id="colPromotion" prefWidth="87.0" resizable="false" text="Promotion" />
+              </columns>
+          </TableView>
+             <TableView fx:id="coursesTableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="280.0" HBox.hgrow="NEVER">
+                 <columns>
+                     <TableColumn fx:id="colCourseTitle" prefWidth="103.0" resizable="false" text="Subject" />
+                     <TableColumn fx:id="colAssignedTeacher" prefWidth="177.0" resizable="false" text="Assigned Teachers" />
+                 </columns>
+             </TableView>
+         </children>
+      </HBox>
+</VBox>
+
+ <HBox alignment="CENTER_LEFT" layoutX="24.0" layoutY="14.0" spacing="20">
+      <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="25.0" prefWidth="175.0" spacing="1.0">
+         <children>
+           <Label style="-fx-text-fill: black; -fx-font-size: 12px;" text="select Year" />
+           <ComboBox fx:id="academicYearComboBox" prefHeight="25.0" prefWidth="100.0" promptText="Select Year" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="189.0">
+         <children>
+           <Label prefHeight="20.0" prefWidth="68.0" style="-fx-text-fill: black; -fx-font-size: 12px;" text="select Grade" />
+           <ComboBox fx:id="gradeComboBox" prefHeight="25.0" prefWidth="125.0" promptText="Select Grade" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="195.0" spacing="1.0">
+         <children>
+           <Label style="-fx-text-fill: black; -fx-font-size: 12px;" text="select Section" />
+           <ComboBox fx:id="sectionComboBox" prefWidth="120" promptText="Select Section" />
+         </children>
+      </HBox>
+     <Button fx:id="showStudentsBtn" prefWidth="100" text="Show" />
+ </HBox>
+</AnchorPane>

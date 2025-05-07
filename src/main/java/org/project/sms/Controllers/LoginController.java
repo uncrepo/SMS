@@ -17,22 +17,18 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
-    @FXML
-    public ComboBox<AccountType> roleComboBox;
-    @FXML
+//    public ComboBox<AccountType> roleComboBox;
     public TextField emailField;
-    @FXML
     public PasswordField passwordField;
-    @FXML
     public Label errorLabel;
     public Button loginButton;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        roleComboBox.setItems(FXCollections.observableArrayList(AccountType.STUDENT, AccountType.TEACHER, AccountType.ADMIN));
-        roleComboBox.setValue(Model.getInstance().getViewFactory().getLoginAccountType());
-        roleComboBox.valueProperty().addListener(observable -> Model.getInstance().getViewFactory().setLoginAccountType(roleComboBox.getValue()));
+//        roleComboBox.setItems(FXCollections.observableArrayList(AccountType.STUDENT, AccountType.TEACHER, AccountType.ADMIN));
+//        roleComboBox.setValue(Model.getInstance().getViewFactory().getLoginAccountType());
+//        roleComboBox.valueProperty().addListener(observable -> Model.getInstance().getViewFactory().setLoginAccountType(roleComboBox.getValue()));
         loginButton.setOnAction(event -> handleLogin());
 
     }
@@ -50,22 +46,17 @@ public class LoginController implements Initializable {
 
     //    @FXML
     public void handleLogin() {
-        AccountType role = roleComboBox.getValue();
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        if (role == null) {
-            errorLabel.setText("Please select a role.");
-            return;
-        }
         if (email.isEmpty() || password.isEmpty()) {
             errorLabel.setText("Please fill in all fields.");
             return;
-        }
+        } // add a ! icon infront of the message.
 
         User user = new UsersDAO().login(email, password);
 
-        if (user != null && user.getRole() == role) {
+        if (user != null) {
             completeLogin(user); // ✅ pass User object here
         }
     }
@@ -79,18 +70,22 @@ public class LoginController implements Initializable {
                 model.setCurrentStudent(student);
                 model.getCurrentUserRole().set(AccountType.STUDENT);
                 model.getStudentViewFactory().showStudentWindow();
+                closeLoginWindow();
             }
             case TEACHER -> {
                 Teacher teacher = new TeacherDAO().getTeacherByUserId(user.getUserId());
                 model.setCurrentTeacher(teacher);
                 model.getCurrentUserRole().set(AccountType.TEACHER);
                 model.getTeacherViewFactory().showTeacherWindow();
+                closeLoginWindow();
+
             }
             case ADMIN -> {
                 Admin admin = new AdminDAO().getAdminByUserId(user.getUserId());
                 model.setCurrentAdmin(admin);
                 model.getCurrentUserRole().set(AccountType.ADMIN);
                 model.getAdminViewFactory().showAdminWindow();
+                closeLoginWindow();
             }
         }
     }

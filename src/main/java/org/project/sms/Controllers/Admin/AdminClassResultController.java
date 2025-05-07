@@ -8,74 +8,70 @@ import org.project.sms.Models.Course;
 import org.project.sms.Models.Student;
 import org.project.sms.dao.CourseDAO;
 import org.project.sms.dao.StudentDAO;
-import org.project.sms.options.DepartmentOptions;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AdminDepartmentController implements Initializable {
-    public ComboBox<DepartmentOptions> departmentComboBox;
-    public ComboBox<String> yearComboBox;
-    public ComboBox<String> sectionComboBox;
-    public Button showStudentsBtn;
-    public TableView<Student> studentTableView;
+public class AdminClassResultController implements Initializable {
+    public TableView studentTableView;
     public TableColumn<Student, String> colStudentId;
     public TableColumn<Student, String> colFullName;
-    public TableColumn<Student, String> colDepartment;
-    public TableColumn<Student, String> colYear;
+    public TableColumn<Student, String> colAcademicYear;
+    public TableColumn<Student, String> colGrade;
     public TableColumn<Student, String> colSection;
-    private final StudentDAO studentDAO = new StudentDAO();
+    public TableColumn<Student, String> colAverage;
+    public TableColumn<Student, String> colPromotion;
 
-    private final CourseDAO courseDAO = new CourseDAO();
-    public TableView<Course> coursesTableView;
-    public TableColumn<Course, String> colCourseCode;
+    public TableView coursesTableView;
     public TableColumn<Course, String> colCourseTitle;
-    public TableColumn<Course, String> colCreditHour;
     public TableColumn<Course, String> colAssignedTeacher;
+
+    public ComboBox<String> gradeComboBox;
+    public ComboBox<String> academicYearComboBox;
+    public ComboBox<String> sectionComboBox;
+
+    public Button showStudentsBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initComboBoxes();
-        initTableColumns();
-
-        showStudentsBtn.setOnAction(e -> loadStudentsByFilter());
     }
+
 
     // create under options
     private void initComboBoxes() {
-        departmentComboBox.setItems(FXCollections.observableArrayList(DepartmentOptions.values()));
-        yearComboBox.setItems(FXCollections.observableArrayList("1", "2", "3", "4","5"));
-        sectionComboBox.setItems(FXCollections.observableArrayList("A", "B", "C"));
+        gradeComboBox.setItems(FXCollections.observableArrayList("1","2"));
+        academicYearComboBox.setItems(FXCollections.observableArrayList("2024/25","2023/24","2022/23"));
+        sectionComboBox.setItems(FXCollections.observableArrayList("A", "B", "C","D","E"));
     }
 
     private void initTableColumns() {
         colStudentId.setCellValueFactory(new PropertyValueFactory<>("studentId"));
         colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
-        colDepartment.setCellValueFactory(new PropertyValueFactory<>("department"));
-        colYear.setCellValueFactory(new PropertyValueFactory<>("year"));
+        colAcademicYear.setCellValueFactory(new PropertyValueFactory<>("academicYear"));
+        colGrade.setCellValueFactory(new PropertyValueFactory<>("grade"));
         colSection.setCellValueFactory(new PropertyValueFactory<>("section"));
+        colPromotion.setCellValueFactory(new PropertyValueFactory<>("promotion"));
+        colAverage.setCellValueFactory(new PropertyValueFactory<>("average"));
 
-        colCourseCode.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
         colCourseTitle.setCellValueFactory(new PropertyValueFactory<>("courseTitle"));
-        colCreditHour.setCellValueFactory(new PropertyValueFactory<>("creditHour"));
         colAssignedTeacher.setCellValueFactory(new PropertyValueFactory<>("assignedTeacher"));
     }
 
     private void loadStudentsByFilter() {
-        String department = departmentComboBox.getValue().toString();
-        String year = yearComboBox.getValue();
+        String grade = gradeComboBox.getValue().toString();
+        String year = academicYearComboBox.getValue();
         String section = sectionComboBox.getValue();
 
-        if (department == null || year == null || section == null) {
+        if (grade == null || year == null || section == null) {
             showAlert("Please select department, year, and section.");
             return;
         }
 
-        List<Student> students = studentDAO.getStudentsByDepartmentYearSection(department, year, section);
+        List<Student> students = StudentDAO.getStudentsClassResultsByGradeYearSection(grade, year, section);
         studentTableView.setItems(FXCollections.observableArrayList(students));
 
-        List<Course> courses = courseDAO.getCoursesByDepartmentYearSection(department, year, section);
+        List<Course> courses = CourseDAO.getCoursesByGradeYearSection(grade, year, section);
         coursesTableView.setItems(FXCollections.observableArrayList(courses));
     }
 

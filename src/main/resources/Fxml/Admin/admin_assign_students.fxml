@@ -8,7 +8,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.project.sms.Controllers.Admin.AdminAssignStudentsController"
             prefHeight="400.0" prefWidth="600.0">
-    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="teacher classes area" />
 
 </AnchorPane>

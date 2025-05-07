@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER_LEFT" prefHeight="650.0" prefWidth="600.0" spacing="15.0">
+      <VBox alignment="CENTER_LEFT" prefWidth="600.0" spacing="15.0">
          <children>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="140.0" prefWidth="400.0" spacing="7.0">
                <children>
@@ -29,7 +29,7 @@
                   <Insets left="40.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="178.0" prefWidth="400.0" spacing="22.0">
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefWidth="400.0" spacing="22.0">
                <children>
                   <Label text="Section" />
                   <ChoiceBox disable="true" prefHeight="25.0" prefWidth="125.0" />
@@ -39,34 +39,11 @@
                   <Insets left="40.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefWidth="400.0" spacing="22.0">
-               <children>
-                  <Label text="Subject" />
-                  <ChoiceBox disable="true" prefHeight="25.0" prefWidth="125.0" />
-               </children>
-               <padding>
-                  <Insets left="40.0" />
-               </padding>
-            </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="192.0" prefWidth="400.0" spacing="10.0">
                <children>
-                  <Label text="Individual Assignment" />
-                  <TextArea disable="true" editable="false" prefHeight="160.0" prefWidth="315.0" />
-                  <Label />
-               </children>
-               <padding>
-                  <Insets left="40.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefWidth="400.0" spacing="8.0">
-               <children>
-                  <Label text="Submission Deadline">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <DatePicker disable="true" editable="false" prefHeight="25.0" prefWidth="117.0" />
-                  <Label />
+                  <Label text="Set Individual Assignment" />
+                  <TextArea prefHeight="160.0" prefWidth="315.0" />
+                  <Label text="(optional)" />
                </children>
                <padding>
                   <Insets left="40.0" />
@@ -74,8 +51,8 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="190.0" prefWidth="400.0" spacing="10.0">
                <children>
-                  <Label text="Group Assignment" />
-                  <TextArea disable="true" editable="false" prefHeight="160.0" prefWidth="315.0" />
+                  <Label text="Set Group Assignment" />
+                  <TextArea prefHeight="160.0" prefWidth="315.0" />
                   <Label text="(optional)" />
                </children>
                <padding>
@@ -84,23 +61,36 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="192.0" prefWidth="400.0" spacing="8.0">
                <children>
-                  <Label text="Submission Deadline">
+                  <Label text="Set Deadline">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Label>
-                  <DatePicker disable="true" editable="false" prefHeight="25.0" prefWidth="117.0" />
-                  <Label />
+                  <DatePicker prefHeight="25.0" prefWidth="117.0" />
+                  <Label text="(optional)" />
                </children>
                <padding>
                   <Insets left="40.0" />
                </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="232.0" prefWidth="400.0" spacing="50.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" text="Update" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Reset" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Cancel" />
+               </children>
+               <padding>
+                  <Insets bottom="40.0" left="100.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
             </HBox>
          </children>
          <padding>
             <Insets top="60.0" />
          </padding>
       </VBox>
-      <Label prefHeight="68.0" prefWidth="223.0" text="Assignments">
+      <Label text="Set Assignment for Subject">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

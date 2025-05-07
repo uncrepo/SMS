@@ -5,21 +5,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminTeacherController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.project.sms.Controllers.Admin.AdminStudentsController">
         <!-- Filter and Actions -->
         <!-- Teacher Table -->
     <VBox fillWidth="false" layoutX="14.0" layoutY="53.0" prefHeight="400.0" spacing="15">
-        <TableView fx:id="teacherTableView" prefWidth="1010.0" snapToPixel="false" VBox.vgrow="NEVER">
+        <TableView fx:id="teacherTableView" prefWidth="800.0" snapToPixel="false" VBox.vgrow="NEVER">
             <columns>
                 <TableColumn fx:id="colTeacherId" prefWidth="34.0" text="ID" />
-                <TableColumn fx:id="colFullName" prefWidth="158.0" text="Teacher's Name" />
-                <TableColumn fx:id="colEmail" prefWidth="182.0" text="Email" />
+                <TableColumn fx:id="colFullName" prefWidth="150.0" text="Student's Name" />
+                <TableColumn fx:id="colEmail" prefWidth="190.0" text="Email" />
                 <TableColumn fx:id="colPhone" prefWidth="97.0" text="Phone Number" />
                 <TableColumn fx:id="colGuardian" minWidth="0.0" prefWidth="129.0" text="Guardian Number" />
-                <TableColumn fx:id="colAcademicYear" prefWidth="95.0" text="Academic Year" />
-                <TableColumn fx:id="colGrade" prefWidth="68.0" text="Grade" />
-                <TableColumn fx:id="colCourse" prefWidth="185.0" text="Course" />
-                <TableColumn fx:id="colSection" prefWidth="61.0" text="Section" />
+                <TableColumn fx:id="colAcademicYear" prefWidth="100.0" text="Academic Year" />
+                <TableColumn fx:id="colGrade" prefWidth="98.0" text="Grade" />
+                <TableColumn fx:id="colStudentYearResult" prefWidth="98.0" text="Results" />
                 <!--            <TableColumn fx:id="colActions" text="Actions" prefWidth="150" >-->
                 <!--                <cellFactory>-->
                 <!--                    <Callback >-->
@@ -32,14 +32,13 @@
             </columns>
         </TableView>
       <padding>
-         <Insets top="40.0" />
+         <Insets top="41.0" />
       </padding>
     </VBox>
      <HBox layoutX="24.0" layoutY="14.0" spacing="10">
-         <TextField fx:id="searchTeacherField" prefHeight="25.0" prefWidth="158.0" promptText="Search by name or ID" />
-         <ComboBox fx:id="gradeComboBox" prefHeight="25.0" prefWidth="87.0" promptText="Grade" />
-      <ComboBox fx:id="courseComboBox" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="89.0" promptText="Course" />
-      <ComboBox fx:id="academicYearComboBox" layoutX="178.0" layoutY="10.0" prefHeight="25.0" prefWidth="120.0" promptText="Academic Year" />
+         <TextField fx:id="searchStudentField" prefHeight="25.0" prefWidth="158.0" promptText="Search by name or ID" />
+         <ComboBox fx:id="GradeComboBox" prefHeight="25.0" prefWidth="87.0" promptText="Grade" />
+      <ComboBox fx:id="AcademicYearComboBox" layoutX="178.0" layoutY="10.0" prefHeight="25.0" prefWidth="120.0" promptText="Academic Year" />
          <Button fx:id="searchBtn" prefWidth="100" text="Search" />
       <padding>
          <Insets top="35.0" />
@@ -67,7 +66,7 @@
 <!--        <ComboBox fx:id="assignSectionComboBox" prefWidth="120" promptText="Select Section" />-->
 <!--        <Button fx:id="assignTeacherBtn" prefWidth="100" text="Assign Teacher" />-->
 <!--    </HBox>-->
-   <Label text="View Teachers Details">
+   <Label text="View Students Details">
       <font>
          <Font name="System Bold" size="20.0" />
       </font>

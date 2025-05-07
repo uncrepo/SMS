@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label prefHeight="25.0" prefWidth="180.0" text="Admin Profile">
+      <Label prefHeight="25.0" prefWidth="180.0" text="Teacher Profile">
          <padding>
             <Insets left="20.0" top="10.0" />
          </padding>
@@ -23,7 +23,7 @@
                   <HBox alignment="CENTER_LEFT" prefWidth="400.0" spacing="12.0">
                      <children>
                         <Label text="Full Name" />
-                        <TextField />
+                        <TextField disable="true" />
                         <Label text="(required)" />
                      </children>
                      <padding>
@@ -64,7 +64,7 @@
                   <HBox alignment="CENTER_LEFT" disable="true" layoutX="10.0" layoutY="98.0" prefWidth="400.0" spacing="12.0">
                      <children>
                         <Label text="Guardian number" />
-                        <TextField />
+                        <TextField disable="true" />
                         <Label text="(required)" />
                      </children>
                      <padding>
@@ -84,7 +84,7 @@
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="129.0" prefWidth="400.0" spacing="12.0">
                      <children>
                         <Label text="Username" />
-                        <TextField />
+                        <TextField disable="true" />
                         <Label text="(required)" />
                         <Button layoutX="277.0" layoutY="10.0" mnemonicParsing="false" text="copy" />
                      </children>
@@ -95,7 +95,7 @@
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="232.0" prefWidth="400.0" spacing="12.0">
                      <children>
                         <Label text="Password" />
-                        <TextField />
+                        <TextField disable="true" />
                         <Label text="(required)" />
                         <Button mnemonicParsing="false" text="copy" />
                      </children>

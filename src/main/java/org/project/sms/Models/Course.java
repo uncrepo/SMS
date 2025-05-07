@@ -18,13 +18,10 @@ public class Course {
         this.creditHour = new SimpleStringProperty(creditHour);
     }
 
-    public Course(String courseId, String courseTitle, String courseCode, String creditHour, String assignedTeacher) {
-        this.courseId = new SimpleStringProperty(courseId);
-        this.courseTitle = new SimpleStringProperty(courseTitle);
-        this.courseCode = new SimpleStringProperty(courseCode);
-        this.creditHour = new SimpleStringProperty(creditHour);
-        this.assignedTeacher = new SimpleStringProperty(assignedTeacher);
 
+    public Course(String courseTitle, String assignedTeacher) {
+        this.courseTitle = new SimpleStringProperty(courseTitle);
+        this.assignedTeacher = new SimpleStringProperty(assignedTeacher);
     }
 
 
@@ -35,7 +32,6 @@ public class Course {
     public void setAssignedTeacher(String name) {
         this.assignedTeacher.set(name);
     }
-
 
     public void setCourseTitle(String courseTitle) {
         this.courseTitle.set(courseTitle);

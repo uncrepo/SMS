@@ -10,7 +10,7 @@ public class TeacherViewFactory extends ViewFactory {
     private AnchorPane teacherDashboardView;
     private AnchorPane teacherClassesView;
     private AnchorPane teacherAssignmentsView;
-    private AnchorPane teacherGradesView;
+    private AnchorPane teacherProfileView;
 
 
     public void showTeacherWindow() {
@@ -31,7 +31,7 @@ public class TeacherViewFactory extends ViewFactory {
     public AnchorPane getTeacherAssignmentsView() {
         if(teacherAssignmentsView==null) {
             try {
-                teacherAssignmentsView = new FXMLLoader(getClass().getResource("/Fxml/Teacher/teacher_assignments.fxml")).load();
+                teacherAssignmentsView = new FXMLLoader(getClass().getResource("/Fxml/Teacher/teacher_assignment.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -42,7 +42,7 @@ public class TeacherViewFactory extends ViewFactory {
     public AnchorPane getTeacherClassesView() {
         if(teacherClassesView==null) {
             try {
-                teacherClassesView = new FXMLLoader(getClass().getResource("/Fxml/Teacher/teacher_classes.fxml")).load();
+                teacherClassesView = new FXMLLoader(getClass().getResource("/Fxml/Teacher/teacher_class.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -50,15 +50,15 @@ public class TeacherViewFactory extends ViewFactory {
         return teacherClassesView;
     }
 
-    public AnchorPane getTeacherGradesView() {
-        if(teacherGradesView==null) {
+    public AnchorPane getTeacherProfileView() {
+        if(teacherProfileView==null) {
             try {
-                teacherGradesView = new FXMLLoader(getClass().getResource("/Fxml/Teacher/teacher_grades.fxml")).load();
+                teacherProfileView = new FXMLLoader(getClass().getResource("/Fxml/Teacher/teacher_profile.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return teacherGradesView;
+        return teacherProfileView;
     }
 
 }

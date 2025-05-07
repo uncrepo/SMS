@@ -5,10 +5,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Teacher.TeacherClassController">
+<AnchorPane prefHeight="600.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminStudentStatsController">
    <HBox spacing="20.0">
       <padding>
-         <Insets left="25.0" top="94.0" />
+         <Insets left="24.0" right="20.0" top="94.0" />
       </padding>
       <children>
               <!-- Filter and Actions -->
@@ -19,7 +19,7 @@
                   <Font name="System Bold" size="17.0" />
                </font>
             </Label>
-              <TableView fx:id="teacherTableView" prefHeight="526.0" prefWidth="556.0" snapToPixel="false" VBox.vgrow="NEVER">
+              <TableView fx:id="teacherTableView" prefHeight="526.0" prefWidth="550.0" snapToPixel="false" VBox.vgrow="NEVER">
                   <columns>
                       <TableColumn fx:id="colFullName" prefWidth="160.0" text="Subject" />
                       <TableColumn fx:id="colAttendance" prefWidth="73.0" text="attendance" />
@@ -53,22 +53,22 @@
                      <Font name="System Bold" size="17.0" />
                   </font>
                </Label>
-               <TableView fx:id="teacherTableView1" prefHeight="526.0" prefWidth="556.0" snapToPixel="false" VBox.vgrow="NEVER">
+               <TableView fx:id="teacherTableView2" prefHeight="526.0" prefWidth="550.0" snapToPixel="false" VBox.vgrow="NEVER">
                   <columns>
-                     <TableColumn fx:id="colFullName1" prefWidth="160.0" text="Subject" />
-                     <TableColumn fx:id="colAttendance1" prefWidth="73.0" text="attendance" />
-                     <TableColumn fx:id="colIndivAsgn1" prefWidth="64.0" text="indiv Asgn" />
-                     <TableColumn fx:id="colGrpAsgn1" prefWidth="76.0" text="group Asgn" />
-                     <TableColumn fx:id="colMidExam1" prefWidth="65.0" text="mid exam" />
-                     <TableColumn fx:id="colFinalExam1" prefWidth="65.0" text="final exam" />
-                     <TableColumn fx:id="colTotal1" prefWidth="53.0" text="total" />
+                     <TableColumn fx:id="colFullName2" prefWidth="160.0" text="Subject" />
+                     <TableColumn fx:id="colAttendance2" prefWidth="73.0" text="attendance" />
+                     <TableColumn fx:id="colIndivAsgn2" prefWidth="64.0" text="indiv Asgn" />
+                     <TableColumn fx:id="colGrpAsgn2" prefWidth="76.0" text="group Asgn" />
+                     <TableColumn fx:id="colMidExam2" prefWidth="65.0" text="mid exam" />
+                     <TableColumn fx:id="colFinalExam2" prefWidth="65.0" text="final exam" />
+                     <TableColumn fx:id="colTotal2" prefWidth="53.0" text="total" />
                   </columns>
                </TableView>
             </children>
          </VBox>
       </children>
    </HBox>
-   <HBox alignment="CENTER_LEFT" layoutY="116.0" spacing="42.0">
+   <HBox alignment="CENTER_LEFT" layoutY="116.0" spacing="35.0">
       <children>
          <HBox alignment="CENTER_LEFT" spacing="6.0" HBox.hgrow="NEVER">
             <children>
@@ -77,7 +77,7 @@
                      <Font name="System Bold" size="14.0" />
                   </font>
                </Label>
-               <TextField disable="true" prefHeight="25.0" prefWidth="55.0" />
+               <TextField fx:id="myAcademicField" disable="true" prefHeight="25.0" prefWidth="55.0" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="42.0" layoutY="10.0" spacing="6.0">
@@ -87,7 +87,7 @@
                      <Font name="System Bold" size="14.0" />
                   </font>
                </Label>
-               <TextField disable="true" prefHeight="25.0" prefWidth="55.0" />
+               <TextField fx:id="myGradeField" disable="true" prefHeight="25.0" prefWidth="55.0" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="208.0" layoutY="10.0" spacing="6.0">
@@ -97,7 +97,27 @@
                      <Font name="System Bold" size="14.0" />
                   </font>
                </Label>
-               <TextField disable="true" prefHeight="25.0" prefWidth="55.0" />
+               <TextField fx:id="mySectionFIeld" disable="true" prefHeight="25.0" prefWidth="55.0" />
+            </children>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" layoutX="400.0" layoutY="10.0" spacing="6.0">
+            <children>
+               <Label text="Average :">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Label>
+               <TextField fx:id="mySectionFIeld1" disable="true" prefHeight="25.0" prefWidth="55.0" />
+            </children>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" layoutX="560.0" layoutY="10.0" spacing="6.0">
+            <children>
+               <Label text="Promotion :">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Label>
+               <TextField fx:id="mySectionFIeld11" disable="true" prefHeight="25.0" prefWidth="55.0" />
             </children>
          </HBox>
       </children>
@@ -154,7 +174,7 @@
                <Insets left="8.0" right="6.0" />
             </HBox.margin>
          </Label>
-         <ComboBox fx:id="gradeComboBox" disable="true" prefHeight="25.0" prefWidth="88.0" promptText="Grade" />
+         <ComboBox fx:id="gradeComboBox" prefHeight="25.0" prefWidth="88.0" promptText="Grade" />
          <Label text="Section">
             <padding>
                <Insets left="15.0" />
@@ -163,7 +183,7 @@
                <Insets right="6.0" />
             </HBox.margin>
          </Label>
-         <ComboBox fx:id="courseComboBox" disable="true" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="89.0" promptText="Section" />
+         <ComboBox fx:id="courseComboBox" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="89.0" promptText="Section" />
       </children>
    </HBox>
 </AnchorPane>

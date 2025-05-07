@@ -5,24 +5,20 @@ import javafx.beans.property.StringProperty;
 
 public class Student {
     private  StringProperty studentId;
-    private  StringProperty department;
-    private  StringProperty year;
-    private  StringProperty section;
     private StringProperty fullName;
+    private  StringProperty email;
+    private  StringProperty phone;
+    private  StringProperty guardian;
 
-    public Student(String id, String department, String section, String year) {
-        this.studentId = new SimpleStringProperty(id);
-        this.department = new SimpleStringProperty(department);
-        this.year = new SimpleStringProperty(year);
-        this.section = new SimpleStringProperty(section);
-    }
+    private  StringProperty section;
+    private  StringProperty grade;
 
-    public Student(String id, String name, String department, String section, String year) {
+    public Student(String id, String name, String email, String guardian, String phone) {
         this.studentId = new SimpleStringProperty(id);
         this.fullName = new SimpleStringProperty(name);
-        this.department = new SimpleStringProperty(department);
-        this.year = new SimpleStringProperty(year);
-        this.section = new SimpleStringProperty(section);
+        this.email = new SimpleStringProperty(email);
+        this.guardian = new SimpleStringProperty(guardian);
+        this.section = new SimpleStringProperty(phone);
     }
 
     public void setStudentId(String studentId) {
@@ -34,16 +30,16 @@ public class Student {
     }
 
 
-    public void setSection(String section) {
-        this.section.set(section);
+    public void setPhone(String phone) {
+        this.phone.set(phone);
     }
 
-    public void setYear(String year) {
-        this.year.set(year);
+    public void setGuardian(String guardian) {
+        this.guardian.set(guardian);
     }
 
-    public void setDepartment(String department) {
-        this.department.set(department);
+    public void setEmail(String email) {
+        this.email.set(email);
     }
 
     public String getStudentId() { return studentId.get(); }
@@ -53,13 +49,13 @@ public class Student {
     public StringProperty FullNameProperty() { return fullName; }
 
 
-    public String getDepartment() { return department.get(); }
-    public StringProperty departmentProperty() { return department; }
+    public String getEmail() { return email.get(); }
+    public StringProperty emailProperty() { return email; }
 
-    public String getYear() { return year.get(); }
-    public StringProperty yearProperty() { return year; }
+    public String getGuardian() { return guardian.get(); }
+    public StringProperty guardianProperty() { return guardian; }
 
-    public String getSection() { return section.get(); }
-    public StringProperty sectionProperty() { return section; }
+    public String getPhone() { return phone.get(); }
+    public StringProperty phoneProperty() { return phone; }
 }
 
