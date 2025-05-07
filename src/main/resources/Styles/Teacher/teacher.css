@@ -1,0 +1,74 @@
+/* admin.css */
+
+/* Overall BorderPane parent */
+#admin_parent {
+    -fx-background-color: linear-gradient(to bottom, #f4f7f9, #dfe6e9); /* subtle gradient background */
+    -fx-padding: 0;
+}
+
+/* Top HBox (Header) */
+.hbox {
+    -fx-padding: 16;
+    -fx-spacing: 20;
+    -fx-background-color: #2c3e50;
+    -fx-alignment: center_left;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 8, 0.2, 0, 2); /* soft shadow */
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #1abc9c;
+}
+
+/* Welcome Label */
+.hbox > .label {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.3), 2, 0.0, 1, 1);
+}
+
+/* Logout Button */
+.hbox > .button {
+    -fx-background-color: linear-gradient(to right, #e74c3c, #c0392b);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.2), 3, 0.0, 0, 1);
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+/* Logout Button Hover Effect */
+.hbox > .button:hover {
+    -fx-background-color: linear-gradient(to right, #c0392b, #a93226);
+    -fx-translate-y: -1px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0.2, 0, 3);
+}
+
+/* Optional: Smooth button interaction */
+.button {
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+/* Optional: Animation keyframe-style (simulated) effect on button press */
+.hbox > .button:pressed {
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-background-color: #922b21;
+}
+
+/* Admin content area (center) - optional enhancement */
+.center-content {
+    -fx-padding: 20;
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0.2, 0, 4);
+}
+
+/* Additional idea: animation on entrance (requires some JavaFX code behind) */
+.fade-in {
+    -fx-opacity: 0;
+    -fx-transition: opacity 0.5s ease-in-out;
+}
