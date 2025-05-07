@@ -3,6 +3,7 @@ module org.project.sms {
     requires javafx.fxml;
     requires java.sql;
     requires de.jensd.fx.glyphs.fontawesome;
+    requires mysql.connector.j;
 
 
     opens org.project.sms to javafx.fxml;
@@ -13,4 +14,5 @@ module org.project.sms {
     exports org.project.sms.Controllers.Student;
     exports org.project.sms.Models;
     exports org.project.sms.Views;
+    exports org.project.sms.options;
 }

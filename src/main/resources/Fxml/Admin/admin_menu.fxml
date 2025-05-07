@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="220.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminMenuController">
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Admin Panel" />
+
+    <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="220.0" spacing="10.0" style="-fx-background-color: #eeeeee;">
+    <VBox alignment="TOP_CENTER" prefHeight="860.0" prefWidth="200.0" spacing="10" style="-fx-padding: 15; -fx-background-color: #82bdf6;">
+    <Button fx:id="btnDashboard" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" text="Dashboard" />
+<!--    <Button fx:id="btnClasses" prefWidth="180" text="Classes" />-->
+    <Button fx:id="btnStudents" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" text="Students" />
+         <VBox spacing="7.0">
+            <padding>
+               <Insets left="30.0" />
+            </padding>
+            <children>
+               <Button fx:id="btnStudentStats" alignment="TOP_LEFT" layoutX="40.0" layoutY="10.0" prefWidth="180" style="-fx-background-color: transparent;" text="Student Academic Stats" />
+               <Button fx:id="btnAddStudent" alignment="TOP_LEFT" layoutX="40.0" layoutY="42.0" prefWidth="180" style="-fx-background-color: transparent;" text="Add new Student" />
+                <Button fx:id="btnEditStudent" alignment="TOP_LEFT" layoutX="38.0" layoutY="10.0" prefWidth="180" style="-fx-background-color: transparent;" text="Edit/Remove Students" />
+            </children>
+         </VBox>
+    <Button fx:id="btnTeachers" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" text="Teachers" />
+         <VBox fillWidth="false" spacing="7.0">
+            <children>
+               <Button fx:id="btnAssignTeacher" alignment="TOP_LEFT" layoutX="38.0" layoutY="10.0" prefWidth="180" style="-fx-background-color: transparent;" text="Assign Teachers" />
+                <Button fx:id="btnAddTeacher" alignment="TOP_LEFT" layoutX="38.0" layoutY="10.0" prefWidth="180" style="-fx-background-color: transparent;" text="Add new Teachers" />
+                <Button fx:id="btnEditTeacher" alignment="TOP_LEFT" layoutX="38.0" layoutY="10.0" prefWidth="180" style="-fx-background-color: transparent;" text="Edit/Remove Teachers" />
+            </children>
+            <padding>
+               <Insets left="30.0" />
+            </padding>
+         </VBox>
+    <Button fx:id="btnClasses" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" text="Classes" />
+         <VBox spacing="7.0">
+            <children>
+               <Button fx:id="btnAssignStudents" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" text="Assign Students to Classes" />
+               <Button fx:id="btnGenerateSchedule" alignment="TOP_LEFT" layoutX="40.0" layoutY="106.0" prefWidth="180" style="-fx-background-color: transparent;" text="Generate Class Schedule" />
+               <Button fx:id="btnAddClass" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" text="Add new Classes" />
+                <Button fx:id="btnEditClass" alignment="TOP_LEFT" layoutX="38.0" layoutY="10.0" prefWidth="180" style="-fx-background-color: transparent;" text="Edit/Remove Class" />
+               <Button fx:id="btnPrevClasses" alignment="TOP_LEFT" layoutX="40.0" layoutY="42.0" prefWidth="180" style="-fx-background-color: transparent;" text="Previous Classes Results" />
+            </children>
+            <padding>
+               <Insets left="30.0" />
+            </padding>
+         </VBox>
+
+    <Separator prefWidth="180" />
+         <Button fx:id="btnAdminProfile" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" text="Admin Profile" />
+        <Region VBox.vgrow="ALWAYS" />
+    <Button fx:id="btnLogout" prefWidth="180" style="-fx-text-fill: red;" text="Logout" />
+
+    </VBox>
+    </VBox>
+</AnchorPane>

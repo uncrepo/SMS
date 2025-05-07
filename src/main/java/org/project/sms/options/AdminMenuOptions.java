@@ -1,0 +1,28 @@
+package org.project.sms.options;
+
+public enum AdminMenuOptions {
+    DASHBOARD,
+
+    STUDENTS,
+    STUDENT_STATS,
+    ADD_NEW_STUDENT,
+    EDIT_STUDENT,
+
+
+
+    TEACHERS,
+    ADD_NEW_TEACHER,
+    ASSIGN_TEACHER,
+    EDIT_TEACHER,
+
+
+    CLASSES,
+    ADD_NEW_CLASS,
+    ASSIGN_STUDENT_CLASS,
+    PREVIOUS_CLASS_RESULTS,
+    GENERATE_CLASS_SCHEDULE,
+    EDIT_CLASS,
+
+    ADMIN_PROFILE,
+    ADMIN_LOGS
+}
