@@ -3,8 +3,8 @@ package org.project.sms.Models;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Student {
-    private  StringProperty studentId;
+public class Class {
+    private  StringProperty classId;
     private StringProperty fullName;
     private  StringProperty email;
     private  StringProperty phone;
@@ -12,33 +12,30 @@ public class Student {
     private  StringProperty academicYear;
     private  StringProperty grade;
     private  StringProperty section;
-    private  StringProperty promotion;
-    private  StringProperty average;
 
 
-    public Student(String id, String name) {
-        this.studentId = new SimpleStringProperty(id);
+    public Class(String id, String name) {
+        this.classId = new SimpleStringProperty(id);
         this.fullName = new SimpleStringProperty(name);
     }
 
-    public Student(String id, String name, String email, String guardian, String phone) {
-        this.studentId = new SimpleStringProperty(id);
+    public Class(String id, String name, String email, String guardian, String phone) {
+        this.classId = new SimpleStringProperty(id);
         this.fullName = new SimpleStringProperty(name);
         this.email = new SimpleStringProperty(email);
         this.guardian = new SimpleStringProperty(guardian);
         this.phone = new SimpleStringProperty(phone);
     }
 
-    public Student(String assignedId, String name, String academicYear, String grade, String section, String studentId) {
-        this.studentId = new SimpleStringProperty(assignedId);
-        this.fullName = new SimpleStringProperty(name);
+    public Class(String classId,String academicYear, String grade, String section) {
+        this.classId = new SimpleStringProperty(classId);
         this.academicYear = new SimpleStringProperty(academicYear);
         this.grade = new SimpleStringProperty(grade);
         this.section = new SimpleStringProperty(section);
     }
 
-    public Student(String id, String name, String email, String guardian, String phone, String academicYear, String grade, String section) {
-        this.studentId = new SimpleStringProperty(id);
+    public Class(String id, String name, String email, String guardian, String phone, String academicYear, String grade, String section) {
+        this.classId = new SimpleStringProperty(id);
         this.fullName = new SimpleStringProperty(name);
         this.email = new SimpleStringProperty(email);
         this.guardian = new SimpleStringProperty(guardian);
@@ -49,8 +46,8 @@ public class Student {
     }
 
 
-    public void setStudentId(String studentId) {
-        this.studentId.set(studentId);
+    public void setClassId(String studentId) {
+        this.classId.set(studentId);
     }
 
     public void setFullName(String name) {
@@ -82,13 +79,6 @@ public class Student {
         this.section.set(section);
     }
 
-    public void setPromotion(String promotion) {
-        this.promotion.set(promotion);
-    }
-
-    public void setAverage(String average) {
-        this.section.set(average);
-    }
     public String getAcademicYear() { return academicYear.get(); }
     public StringProperty academicYearProperty() { return academicYear; }
 
@@ -98,8 +88,8 @@ public class Student {
     public String getSection() { return section.get(); }
     public StringProperty sectionProperty() { return section; }
 
-    public String getStudentId() { return studentId.get(); }
-    public StringProperty studentIdProperty() { return studentId; }
+    public String getClassId() { return classId.get(); }
+    public StringProperty classIdProperty() { return classId; }
 
     public String getFullName() { return fullName.get(); }
     public StringProperty FullNameProperty() { return fullName; }
@@ -113,12 +103,5 @@ public class Student {
 
     public String getPhone() { return phone.get(); }
     public StringProperty phoneProperty() { return phone; }
-
-    public String getPromotion() { return promotion.get(); }
-    public StringProperty promotionProperty() { return promotion; }
-
-    public String getAverage() { return average.get(); }
-    public StringProperty averageProperty() { return average; }
-
 }
 

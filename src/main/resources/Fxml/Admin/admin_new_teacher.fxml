@@ -61,22 +61,12 @@
                   <Insets left="40.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="132.0" prefWidth="400.0" spacing="5.0">
-               <children>
-                  <Label text="Grade" />
-                  <ComboBox fx:id="gradeComboBox1" prefHeight="25.0" prefWidth="105.0" promptText="Grade" />
-                  <Label text="(optional)" />
-               </children>
-               <padding>
-                  <Insets left="40.0" />
-               </padding>
-            </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="129.0" prefWidth="400.0" spacing="12.0">
                <children>
                   <Label text="Username" />
                   <TextField fx:id="teacherUsernameField" promptText="unique username" />
                   <Label text="(required)" />
-                  <Button fx:id="generateUsername" mnemonicParsing="false" text="Generate username" />
+                  <Button fx:id="generateUsernameBtn" mnemonicParsing="false" text="Generate username" />
                   <Button fx:id="usernameCopy" layoutX="277.0" layoutY="10.0" mnemonicParsing="false" text="copy" />
                </children>
                <padding>
@@ -88,7 +78,7 @@
                   <Label text="Password" />
                   <TextField fx:id="passwordField" prefHeight="25.0" prefWidth="159.0" promptText="strong password" />
                   <Label text="(required)" />
-                  <Button fx:id="generatePassword" mnemonicParsing="false" text="Generate password" />
+                  <Button fx:id="generatePasswordBtn" mnemonicParsing="false" text="Generate password" />
                   <Button fx:id="passwordCopy" mnemonicParsing="false" text="copy" />
                </children>
                <padding>
@@ -119,9 +109,8 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="232.0" prefWidth="400.0" spacing="50.0">
                <children>
-                  <Button layoutX="277.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Add new Student" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Reset" />
-                  <Button layoutX="110.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Cancel" />
+                  <Button fx:id="addTeacherBtn" layoutX="277.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Add new Teacher" />
+                  <Button fx:id="resetBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Reset" />
                </children>
                <padding>
                   <Insets bottom="40.0" left="100.0" />

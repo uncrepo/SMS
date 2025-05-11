@@ -1,17 +1,39 @@
 package org.project.sms.Controllers.Admin;
 
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import org.project.sms.Models.Model;
 
 import java.net.URL;
+import java.sql.Time;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.SimpleTimeZone;
+
 
 public class AdminController implements Initializable {
     public BorderPane admin_parent;
+    public Label greetText;
+    public Label loggedInText;
+    private final String name = Model.getInstance().getCurrentAdmin().getFullName();
+    private final String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        MenuOptions();
+        initValues();
+
+    }
+
+
+    private void initValues() {
+        greetText.setText("Hello "+name+", Welcome back Admin");
+        loggedInText.setText("last Logged in : " + time);
+    }
+
+    private void MenuOptions() {
         Model.getInstance().getAdminSelectedMenu().addListener((obs, oldVal, newVal) -> {
             switch (newVal) {
                 case STUDENTS -> admin_parent.setCenter(Model.getInstance().getAdminViewFactory().getAdminStudentsView());
@@ -37,7 +59,5 @@ public class AdminController implements Initializable {
                 default -> admin_parent.setCenter(Model.getInstance().getAdminViewFactory().getAdminDashboardView());
             }
         });
-
-//        admin_parent.setCenter(Model.getInstance().getAdminViewFactory().getDashboardView());
     }
 }

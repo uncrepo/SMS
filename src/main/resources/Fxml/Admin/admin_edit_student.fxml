@@ -5,22 +5,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminEditStudentController">
-   <HBox spacing="6.0">
+<AnchorPane prefHeight="550.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminEditStudentController">
+   <HBox spacing="10.0">
       <padding>
          <Insets left="25.0" top="90.0" />
       </padding>
       <children>
               <!-- Filter and Actions -->
               <!-- Teacher Table -->
-          <VBox fillWidth="false" prefHeight="400.0" prefWidth="500.0" spacing="15.0">
-              <TableView fx:id="teacherTableView" prefWidth="480.0" snapToPixel="false" VBox.vgrow="NEVER">
+          <VBox fillWidth="false" prefHeight="670.0" prefWidth="586.0" spacing="15.0">
+              <TableView fx:id="studentTableView" prefHeight="425.0" prefWidth="560.0" snapToPixel="false" VBox.vgrow="NEVER">
                   <columns>
-                      <TableColumn fx:id="colTeacherId" prefWidth="34.0" text="ID" />
-                      <TableColumn fx:id="colFullName" prefWidth="160.0" text="Student's Name" />
-                      <TableColumn fx:id="colAcademicYear" prefWidth="103.0" text="Academic Year" />
-                      <TableColumn fx:id="colGrade" prefWidth="87.0" text="Grade" />
-                      <TableColumn fx:id="colCourse" prefWidth="98.0" text="Section" />
+                      <TableColumn fx:id="colStudentId" editable="false" prefWidth="46.0" resizable="false" sortable="false" text="ID" />
+                      <TableColumn fx:id="colFullName" editable="false" prefWidth="147.0" resizable="false" sortable="false" text="Student's Name" />
+                  <TableColumn fx:id="colEmail" editable="false" prefWidth="173.0" resizable="false" sortable="false" text="Email" />
+                      <TableColumn fx:id="colPhone" editable="false" prefWidth="93.0" resizable="false" sortable="false" text="Phone" />
+                      <TableColumn fx:id="colGuardian" editable="false" prefWidth="100.0" resizable="false" sortable="false" text="Guardian" />
                       <!--            <TableColumn fx:id="colActions" text="Actions" prefWidth="150" >-->
                       <!--                <cellFactory>-->
                       <!--                    <Callback >-->
@@ -33,7 +33,7 @@
                   </columns>
               </TableView>
             <padding>
-               <Insets top="60.0" />
+               <Insets top="31.0" />
             </padding>
           </VBox>
          <VBox prefWidth="400.0" spacing="20.0">
@@ -45,7 +45,7 @@
                            <Insets left="37.0" />
                         </HBox.margin>
                      </Button>
-                      <Button fx:id="deleteBtn" alignment="CENTER" prefWidth="100" text="Delete" />
+                      <Button fx:id="deleteStudentBtn" alignment="CENTER" prefWidth="100" text="Delete" />
                   </children>
                   <VBox.margin>
                      <Insets />
@@ -53,22 +53,32 @@
                </HBox>
                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="200.0" spacing="10.0">
                   <children>
-                     <Label text="Selected  Student :">
+                     <Label text="Selected Student :">
                         <font>
                            <Font name="System Bold" size="14.0" />
                         </font>
                      </Label>
-                     <TextField fx:id="selectedStudentField" disable="true" prefHeight="25.0" prefWidth="160.0" promptText="Student's name" />
+                     <TextField fx:id="selectedStudentNameField" editable="false" prefHeight="25.0" prefWidth="199.0" promptText="student's name" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="55.0" prefWidth="200.0" spacing="10.0">
+                  <children>
+                     <Label text="Selected Student ID :">
+                        <font>
+                           <Font name="System Bold" size="14.0" />
+                        </font>
+                     </Label>
+                     <TextField fx:id="selectedStudentIdField" editable="false" prefHeight="25.0" prefWidth="97.0" promptText="student's id" />
                   </children>
                </HBox>
                 <HBox alignment="CENTER_LEFT" prefWidth="400.0" spacing="12.0">
                     <children>
                         <Label text="Full Name" />
-                        <TextField disable="true" prefHeight="25.0" prefWidth="190.0" />
+                        <TextField fx:id="fullNameField" disable="true" editable="false" prefHeight="25.0" prefWidth="225.0" />
                         <Label text="(required)" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER_LEFT" disable="true" layoutX="10.0" layoutY="110.0" prefWidth="400.0" spacing="22.0">
+                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="110.0" prefWidth="400.0" spacing="22.0">
                     <children>
                         <Label text="Gender" />
                         <RadioButton mnemonicParsing="false" text="male" />
@@ -76,51 +86,30 @@
                         <Label text="(required)" />
                     </children>
                 </HBox>
-               <HBox alignment="CENTER_LEFT" disable="true" layoutX="10.0" layoutY="182.0" prefWidth="400.0" spacing="22.0">
-                  <children>
-                     <Label text="Academic Year" />
-                     <ChoiceBox prefHeight="25.0" prefWidth="125.0" />
-                     <Label text="(required)" />
-                  </children>
-               </HBox>
-               <HBox alignment="CENTER_LEFT" disable="true" layoutX="10.0" layoutY="182.0" prefWidth="400.0" spacing="22.0">
-                  <children>
-                     <Label text="Grade" />
-                     <ChoiceBox prefHeight="25.0" prefWidth="125.0" />
-                     <Label text="(required)" />
-                  </children>
-               </HBox>
-                <HBox alignment="CENTER_LEFT" disable="true" layoutX="10.0" layoutY="80.0" prefWidth="400.0" spacing="22.0">
+                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="98.0" prefWidth="400.0" spacing="12.0">
                     <children>
-                        <Label text="Section" />
-                        <ChoiceBox prefHeight="25.0" prefWidth="125.0" />
-                        <Label text="(required)" />
+                        <Label text="Email" />
+                        <TextField fx:id="emailField" prefHeight="25.0" prefWidth="217.0" />
+                        <Label layoutX="252.0" layoutY="14.0" text="(optional)" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="98.0" prefWidth="400.0" spacing="12.0">
                     <children>
-                        <Label text="Email" />
-                        <TextField disable="true" prefHeight="25.0" prefWidth="218.0" />
-                        <Label layoutX="252.0" layoutY="14.0" text="(optional)" />
-                    </children>
-                </HBox>
-                <HBox alignment="CENTER_LEFT" disable="true" layoutX="10.0" layoutY="98.0" prefWidth="400.0" spacing="12.0">
-                    <children>
                         <Label text="Guardian number" />
-                        <TextField />
-                        <Label text="(required)" />
+                        <TextField fx:id="guardianField" />
+                        <Label text="(optional)" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="150.0" prefWidth="400.0" spacing="12.0">
                     <children>
                         <Label text="Phone number" />
-                        <TextField disable="true" />
-                        <Label text="(optional)" />
+                        <TextField fx:id="phoneField" />
+                        <Label text="(required)" />
                     </children>
                 </HBox>
                <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                   <children>
-                      <Button fx:id="saveChangesBtn" disable="true" prefHeight="25.0" prefWidth="128.0" text="Save Changes" />
+                      <Button fx:id="saveChangesBtn" prefHeight="25.0" prefWidth="122.0" text="Save Changes" />
                       <Button fx:id="toggleEnableBtn" prefHeight="25.0" prefWidth="128.0" text="Disable/Enable" />
                   </children>
                   <padding>
@@ -129,18 +118,19 @@
                </HBox>
             </children>
             <HBox.margin>
-               <Insets top="92.0" />
+               <Insets top="70.0" />
             </HBox.margin>
          </VBox>
       </children>
    </HBox>
-     <HBox alignment="CENTER_LEFT" layoutX="24.0" layoutY="14.0" spacing="10">
-      <Label text="Student's Name or ID" />
-         <TextField fx:id="searchTeacherField" prefHeight="25.0" prefWidth="158.0" promptText="Search by name or ID" />
-         <Button fx:id="searchBtn" prefWidth="100" text="Search">
+     <HBox alignment="CENTER_LEFT" layoutX="24.0" layoutY="34.0" spacing="10">
+      <Label text="Teacher's Name or ID" />
+         <TextField fx:id="searchStudentField" prefHeight="25.0" prefWidth="232.0" promptText="Search by name or ID" />
+         <Button fx:id="searchBtn" prefHeight="25.0" prefWidth="111.0" text="Search">
          <HBox.margin>
             <Insets left="8.0" />
          </HBox.margin></Button>
+      <Button fx:id="resetBtn" layoutX="366.0" layoutY="45.0" prefHeight="25.0" prefWidth="78.0" text="Reset" />
       <padding>
          <Insets top="35.0" />
       </padding>
@@ -175,40 +165,4 @@
          <Insets left="20.0" top="10.0" />
       </padding>
    </Label>
-   <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="53.0">
-      <padding>
-         <Insets top="35.0" />
-      </padding>
-      <children>
-         <Label layoutX="154.0" layoutY="45.0" text="Academic Year">
-            <padding>
-               <Insets left="15.0" />
-            </padding>
-            <HBox.margin>
-               <Insets right="6.0" />
-            </HBox.margin>
-         </Label>
-         <ComboBox fx:id="academicYearComboBox" layoutX="178.0" layoutY="10.0" prefHeight="25.0" prefWidth="125.0" promptText="Academic Year" />
-         <Label layoutX="107.0" layoutY="45.0" text="Grade">
-            <HBox.margin>
-               <Insets left="8.0" right="6.0" />
-            </HBox.margin>
-         </Label>
-         <ComboBox fx:id="gradeComboBox" prefHeight="25.0" prefWidth="88.0" promptText="Grade" />
-         <Label text="Section">
-            <padding>
-               <Insets left="15.0" />
-            </padding>
-            <HBox.margin>
-               <Insets right="6.0" />
-            </HBox.margin>
-         </Label>
-         <ComboBox fx:id="courseComboBox" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="89.0" promptText="Section" />
-         <Button fx:id="searchByFilterBtn" text="Search by filter">
-            <HBox.margin>
-               <Insets left="20.0" />
-            </HBox.margin>
-         </Button>
-      </children>
-   </HBox>
 </AnchorPane>

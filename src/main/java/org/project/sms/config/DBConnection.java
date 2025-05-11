@@ -19,7 +19,6 @@ public class DBConnection {
         }
     }
 
-//    public ResultSet getStudent(String pAddress, String password) {}
 
     public Connection getConnection() {
         return connection;

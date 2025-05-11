@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GradeDAO {
-    public static List<Grade> getAllGrades() {
-        List<Grade> grades = new ArrayList<>();
-        String query = " SELECT grade FROM grades";
+    public static List<String> getAllGrades() {
+        List<String> grades = new ArrayList<>();
+        String query = "SELECT grade FROM grades";
 
         try (Connection conn = Model.getInstance().getDbConnection().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -22,9 +22,9 @@ public class GradeDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                grades.add(new Grade(
+                grades.add(
                         rs.getString("grade")
-                ));
+                );
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -33,19 +33,45 @@ public class GradeDAO {
     }
 
     public static String getGradeID(String grade) {
-        String query = "SELECT grade_id FROM where grade = ?";
+        String gradeId = null;
+        String query = "SELECT grade_id FROM Grades where grade = ?";
+
         try (Connection conn = Model.getInstance().getDbConnection().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
+            stmt.setString(1, grade);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                grade = rs.getString("grade_id");
+                gradeId = rs.getString("grade_id");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return grade;
+        return gradeId;
+    }
+
+    public static String getGradeCourseID(String grade, String course) {
+        String gradeCourseId = null;
+        String query = "SELECT grade_course_id FROM grade_course where grade_id = ? AND course_id = ?";
+
+        String gradeId = getGradeID(grade);
+        String courseId = CourseDAO.getCourseID(course);
+
+        try (Connection conn = Model.getInstance().getDbConnection().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, gradeId);
+            stmt.setString(2, courseId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                gradeCourseId = rs.getString("grade_course_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return gradeCourseId;
     }
 }
 

@@ -1,53 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminClassesController">
-<VBox fillWidth="false" layoutX="14.0" layoutY="53.0" prefHeight="500.0" prefWidth="830.0" spacing="15">
+<AnchorPane prefHeight="627.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminClassesController">
+<VBox fillWidth="false" layoutX="10.0" layoutY="27.0" prefHeight="600.0" prefWidth="939.0" spacing="15">
+      <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="View Class Details" />
    
-    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="View Class Details" />
-      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="900.0" spacing="15.0" VBox.vgrow="NEVER">
+    <HBox spacing="20">
+         <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="25.0" prefWidth="134.0" spacing="5.0">
+            <children>
+              <Label style="-fx-text-fill: black; -fx-font-size: 14px;" text="Year" />
+              <ComboBox fx:id="academicYearComboBox" prefHeight="25.0" prefWidth="100.0" promptText="Select Year" />
+            </children>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="156.0" spacing="5.0">
+            <children>
+              <Label prefHeight="20.0" prefWidth="43.0" style="-fx-text-fill: black; -fx-font-size: 14px;" text="Grade" />
+              <ComboBox fx:id="gradeComboBox" prefHeight="25.0" prefWidth="118.0" promptText="Select Grade" />
+            </children>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="175.0" spacing="6.0">
+            <children>
+              <Label style="-fx-text-fill: black; -fx-font-size: 14px;" text="Section" />
+              <ComboBox fx:id="sectionComboBox" prefHeight="25.0" prefWidth="124.0" promptText="Select Section" />
+            </children>
+         </HBox>
+        <Button fx:id="showStudentsBtn" prefWidth="100" text="Show" />
+         <Button fx:id="resetBtn" layoutX="535.0" layoutY="10.0" prefWidth="100" text="Reset" />
+    </HBox>
+      <HBox layoutX="10.0" layoutY="55.0" spacing="20">
+         <children>
+         
+          <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Students" />
+            <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="25.0" prefWidth="134.0" spacing="5.0">
+               <children>
+                  <Label style="-fx-text-fill: black; -fx-font-size: 14px;" text="Year" />
+                  <TextField fx:id="yearField" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="83.0" promptText="default" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="156.0" spacing="5.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="43.0" style="-fx-text-fill: black; -fx-font-size: 14px;" text="Grade" />
+                  <TextField fx:id="gradeField" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="83.0" promptText="default" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="175.0" spacing="6.0">
+               <children>
+                  <Label style="-fx-text-fill: black; -fx-font-size: 14px;" text="Section" />
+                  <TextField fx:id="sectionField" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="83.0" promptText="default" />
+               </children>
+            </HBox>
+         </children>
+         <VBox.margin>
+            <Insets bottom="-7.0" left="10.0" top="5.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="900.0" spacing="30.0" VBox.vgrow="NEVER">
          <children>
           <!-- Student Table -->
-          <TableView fx:id="studentTableView" prefHeight="430.0" prefWidth="700.0" HBox.hgrow="NEVER">
+          <TableView fx:id="studentsTableView" prefWidth="314.0" HBox.hgrow="NEVER">
               <columns>
-                  <TableColumn fx:id="colStudentId" prefWidth="39.0" text="ID" />
-                  <TableColumn fx:id="colFullName" prefWidth="159.0" text="Full name" />
-                  <TableColumn fx:id="colEmail" prefWidth="190.0" text="Email" />
-                  <TableColumn fx:id="colGuardian" prefWidth="114.0" text="Guardian Number" />
-                  <TableColumn fx:id="colPhone" prefWidth="102.0" text="Phone Number" />
+                  <TableColumn fx:id="colStudentId" prefWidth="83.0" resizable="false" text="student ID" />
+                  <TableColumn fx:id="colFullName" prefWidth="231.0" resizable="false" text="Full name" />
               </columns>
           </TableView>
-             <TableView fx:id="coursesTableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="280.0" HBox.hgrow="NEVER">
+             <TableView fx:id="coursesTableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="330.0" HBox.hgrow="NEVER">
                  <columns>
-                     <TableColumn fx:id="colCourseTitle" prefWidth="103.0" text="Subject" />
-                     <TableColumn fx:id="colAssignedTeacher" prefWidth="177.0" text="Assigned Teachers" />
+                     <TableColumn fx:id="colCourseTitle" prefWidth="182.0" resizable="false" text="Subject" />
+                     <TableColumn fx:id="colAssignedTeacher" prefWidth="147.0" resizable="false" text="Assigned Teachers" />
                  </columns>
+               <HBox.margin>
+                  <Insets top="53.0" />
+               </HBox.margin>
              </TableView>
          </children>
       </HBox>
+      <padding>
+         <Insets left="20.0" top="5.0" />
+      </padding>
 </VBox>
-
- <HBox layoutX="24.0" layoutY="14.0" spacing="20">
-      <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="25.0" prefWidth="175.0">
-         <children>
-           <Label style="-fx-text-fill: black; -fx-font-size: 14px;" text="select Year" />
-           <ComboBox fx:id="yearComboBox" prefHeight="25.0" prefWidth="100.0" promptText="Select Year" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="188.0">
-         <children>
-           <Label prefHeight="20.0" prefWidth="96.0" style="-fx-text-fill: black; -fx-font-size: 14px;" text="select Grade" />
-           <ComboBox fx:id="gradeComboBox" prefHeight="25.0" prefWidth="125.0" promptText="Select Grade" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="210.0">
-         <children>
-           <Label style="-fx-text-fill: black; -fx-font-size: 14px;" text="select Section" />
-           <ComboBox fx:id="sectionComboBox" prefWidth="120" promptText="Select Section" />
-         </children>
-      </HBox>
-     <Button fx:id="showStudentsBtn" prefWidth="100" text="Show" />
- </HBox>
 </AnchorPane>

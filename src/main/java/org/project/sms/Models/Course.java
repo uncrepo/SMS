@@ -18,6 +18,10 @@ public class Course {
         this.creditHour = new SimpleStringProperty(creditHour);
     }
 
+    public Course(String courseTitle) {
+        this.courseTitle = new SimpleStringProperty(courseTitle);
+    }
+
 
     public Course(String courseTitle, String assignedTeacher) {
         this.courseTitle = new SimpleStringProperty(courseTitle);

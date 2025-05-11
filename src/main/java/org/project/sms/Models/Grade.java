@@ -15,6 +15,11 @@ public class Grade {
         this.grade.set(grade);
     }
 
+//    @Override
+//    public String toString() {
+//        return this.grade;
+//    }
+//
     public String getGrade() { return grade.get(); }
     public StringProperty gradeProperty() { return grade; }
 
