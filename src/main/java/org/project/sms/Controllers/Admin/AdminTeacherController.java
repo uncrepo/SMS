@@ -2,6 +2,7 @@ package org.project.sms.Controllers.Admin;
 
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -9,6 +10,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import org.project.sms.Models.Model;
 import org.project.sms.Models.Teacher;
+import org.project.sms.dao.CalendarDAO;
+import org.project.sms.dao.CourseDAO;
+import org.project.sms.dao.GradeDAO;
 import org.project.sms.dao.TeacherDAO;
 import org.project.sms.options.DepartmentOptions;
 import org.project.sms.options.SectionOptions;
@@ -22,47 +26,51 @@ public class AdminTeacherController implements Initializable {
 //    public TableColumn colStatus;
 //    public TableColumn colActions;
 //        public Button editTeacherBtn;
-        public TextField searchTeacherField;
-        public Button searchBtn;
+    public TextField searchTeacherField;
+    public Button searchBtn;
+    public Button resetBtn;
 
-        public TableView<Teacher> teacherTableView;
-        public TableColumn<Teacher, String> colTeacherId;
-        public TableColumn<Teacher, String> colFullName;
-        public TableColumn<Teacher, String> colEmail;
-        public TableColumn<Teacher, String> colGrade;
-        public TableColumn<Teacher, String> colSection;
-        public TableColumn<Teacher, String> colCourse;
-        public TableColumn<Teacher, String> colAcademicYear;
-        public TableColumn colGuardian;
-        public TableColumn colPhone;
+    public TableView<Teacher> teacherTableView;
+    public TableColumn<Teacher, String> colTeacherId;
+    public TableColumn<Teacher, String> colFullName;
+    public TableColumn<Teacher, String> colEmail;
+    public TableColumn<Teacher, String> colGrade;
+    public TableColumn<Teacher, String> colSection;
+    public TableColumn<Teacher, String> colCourse;
+    public TableColumn<Teacher, String> colAcademicYear;
+    public TableColumn<Teacher, String> colGuardian;
+    public TableColumn<Teacher, String> colPhone;
 
     public ComboBox<String> courseComboBox;
     public ComboBox<String> gradeComboBox;
     public ComboBox<String> academicYearComboBox;
+    public ComboBox<String> sectionComboBox;
 
-    public ComboBox sortByComboBox;
-    public ComboBox filterComboBox;
-
-    private TeacherDAO teacherDAO = new TeacherDAO();
+    public ComboBox<String> sortByComboBox;
+    public ComboBox<String> filterComboBox;
 
 
-    public AdminTeacherController() {
-}
     public void initialize(URL location, ResourceBundle resources) {
         initTableCols();
-
-        sortByComboBox.setItems(FXCollections.observableArrayList(DepartmentOptions.values()));
-        filterComboBox.setItems(FXCollections.observableArrayList(SectionOptions.values()));
+        initOptions();
 
         // Load the teacher data
         loadTeacherData();
 
         // Filter action on search
         searchBtn.setOnAction(e -> filterTeachers());
+        resetBtn.setOnAction(e -> clearFields());
+    }
+
+    private void clearFields() {
+        gradeComboBox.getSelectionModel().clearSelection();
+        academicYearComboBox.getSelectionModel().clearSelection();
+        sectionComboBox.getSelectionModel().clearSelection();
+        courseComboBox.getSelectionModel().clearSelection();
     }
 
     private void loadTeacherData() {
-        teacherTableView.setItems(FXCollections.observableArrayList(teacherDAO.getAllTeachersDefault()));
+        teacherTableView.setItems(FXCollections.observableArrayList(TeacherDAO.getAllTeachersDefault()));
     }
 
     private void filterTeachers() {
@@ -70,9 +78,10 @@ public class AdminTeacherController implements Initializable {
         String academicYear = academicYearComboBox.getValue();
         String grade = gradeComboBox.getValue();
         String course = courseComboBox.getValue();
+        String section = sectionComboBox.getValue();
 
-        // Perform filtering based on the input search text, department, and section
-//        teacherTableView.setItems(teacherDAO.searchTeachers(searchText, academicYear, grade, course));
+         // Perform filtering based on the input search text, department, and section
+        teacherTableView.setItems(TeacherDAO.searchTeachersByNameFullView(searchText, grade, section, academicYear, course));
     }
 
     private void initTableCols() {
@@ -86,6 +95,32 @@ public class AdminTeacherController implements Initializable {
         colGuardian.setCellValueFactory(new PropertyValueFactory<>("guardian"));
         colPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
     }
+
+
+    private void initOptions() {
+        ObservableList<String> grades = FXCollections.observableArrayList(GradeDAO.getAllGrades());
+        gradeComboBox.setItems(grades);
+
+        ObservableList<String> courses = FXCollections.observableArrayList(CourseDAO.getAllCourses());
+        courseComboBox.setItems(courses);
+        sectionComboBox.setItems(FXCollections.observableArrayList("A","B","C","D"));
+
+
+        if(gradeComboBox.getValue() != null) {
+            ObservableList<String> coursesByGrade = FXCollections.observableArrayList(CourseDAO.getAllCoursesByGrade(gradeComboBox.getValue()));
+            courseComboBox.setItems(coursesByGrade);
+        }
+
+        ObservableList<String> calendars = FXCollections.observableArrayList(CalendarDAO.getAllCalendar());
+        academicYearComboBox.setItems(calendars);
+
+//        sortByComboBox.setItems();
+//        filterComboBox.setItems();
+
+
+    }
+
+
 
 
 //    private void onEditTeacherClick() {
