@@ -1,19 +1,12 @@
 package org.project.sms.Controllers.Admin;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.project.sms.Models.Course;
-import org.project.sms.Models.Grade;
 import org.project.sms.Models.Teacher;
 import org.project.sms.dao.*;
-import org.project.sms.options.AcademicYearOptions;
-import org.project.sms.options.DepartmentOptions;
-import org.project.sms.options.GradeOptions;
-import org.project.sms.options.SectionOptions;
 
 import java.net.URL;
 import java.util.ResourceBundle;
