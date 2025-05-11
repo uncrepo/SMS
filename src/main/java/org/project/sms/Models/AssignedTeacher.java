@@ -2,9 +2,8 @@ package org.project.sms.Models;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
 
-public class Teacher {
+public class AssignedTeacher {
     private  StringProperty teacherId;
     private  StringProperty fullName;
     private  StringProperty email;
@@ -16,12 +15,12 @@ public class Teacher {
     private  StringProperty section;
 
 
-    public Teacher(String fullName, String courseCode) {
+    public AssignedTeacher(String fullName, String courseCode) {
         this.fullName = new SimpleStringProperty(fullName);
         this.courseName = new SimpleStringProperty(courseCode);
     }
 
-    public Teacher(String teacherId, String fullName ,String email, String phone, String guardian, String academicYear, String grade, String courseName, String section) {
+    public AssignedTeacher(String teacherId, String fullName , String email, String phone, String guardian, String academicYear, String grade, String courseName, String section) {
         this.teacherId = new SimpleStringProperty(teacherId);
         this.fullName = new SimpleStringProperty(fullName);
         this.email = new SimpleStringProperty(email);
@@ -33,15 +32,7 @@ public class Teacher {
         this.section = new SimpleStringProperty(section);
     }
 
-    public Teacher(String teacherId, String fullName ,String email, String phone, String guardian) {
-        this.teacherId = new SimpleStringProperty(teacherId);
-        this.fullName = new SimpleStringProperty(fullName);
-        this.email = new SimpleStringProperty(email);
-        this.phone = new SimpleStringProperty(phone);
-        this.guardian = new SimpleStringProperty(guardian);
-    }
-
-    public Teacher(String teacherId, String fullName , String academicYear, String grade, String courseName, String section) {
+    public AssignedTeacher(String teacherId, String fullName , String academicYear,String grade, String courseName, String section) {
         this.teacherId = new SimpleStringProperty(teacherId);
         this.fullName = new SimpleStringProperty(fullName);
         this.academicYear = new SimpleStringProperty(academicYear);
@@ -50,7 +41,7 @@ public class Teacher {
         this.section  = new SimpleStringProperty(section);
     }
 
-    public Teacher(String teacherId, String grade, String fullName) {
+    public AssignedTeacher(String teacherId, String grade, String fullName) {
         this.teacherId = new SimpleStringProperty(teacherId);
         this.fullName = new SimpleStringProperty(fullName);
         this.grade = new SimpleStringProperty(grade);

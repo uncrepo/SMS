@@ -132,7 +132,7 @@ public class AdminViewFactory extends ViewFactory {
     public AnchorPane getAdminAssignStudentView() {
         if (adminAssignStudentsView == null) {
             try {
-                adminAssignStudentsView = new FXMLLoader(getClass().getResource("/Fxml/Admin/admin_assign_students.fxml")).load();
+                adminAssignStudentsView = new FXMLLoader(getClass().getResource("/Fxml/Admin/admin_assign_student.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }

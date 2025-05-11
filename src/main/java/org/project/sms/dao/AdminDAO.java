@@ -21,11 +21,8 @@ public class AdminDAO {
 
             if (rs.next()) {
                 Admin admin = new Admin();
-                admin.setId(rs.getString("user_id"));
-                admin.setUserId(rs.getString("email"));
+                admin.setUserId(rs.getString("user_id"));
                 admin.setFullName(rs.getString("full_name"));
-//                admin.setEmail(rs.getString("email"));
-//                admin.setClassId(rs.getInt("class_id"));
                 return admin;
             }
 

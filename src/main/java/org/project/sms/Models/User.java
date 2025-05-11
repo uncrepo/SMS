@@ -39,7 +39,7 @@ public class User {
 
 
     public String getUserId() { return user_id.get(); }
-    public StringProperty userIDProperty() { return user_id; }
+    public StringProperty userIdProperty() { return user_id; }
 
     public String getFullName() { return fullName.get(); }
     public StringProperty FullNameProperty() { return fullName; }

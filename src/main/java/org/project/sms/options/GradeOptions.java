@@ -1,5 +1,6 @@
 package org.project.sms.options;
 
+
 public enum GradeOptions {
     GRADE_1,
     GRADE_2,
@@ -12,5 +13,13 @@ public enum GradeOptions {
     GRADE_9,
     GRADE_10,
     GRADE_11,
-    GRADE_12,
+    GRADE_12;
+
+    public String toString() {
+        return name().replace("_"," ");
+    }
+
 }
+
+
+
