@@ -14,12 +14,12 @@
               <!-- Filter and Actions -->
               <!-- Teacher Table -->
           <VBox fillWidth="false" prefHeight="400.0" prefWidth="380.0" spacing="15.0">
-              <TableView fx:id="teacherTableView" prefWidth="480.0" snapToPixel="false" VBox.vgrow="NEVER">
+              <TableView fx:id="classesTableView" prefWidth="480.0" snapToPixel="false" VBox.vgrow="NEVER">
                   <columns>
-                      <TableColumn fx:id="colTeacherId" prefWidth="75.0" text="class ID" />
+                      <TableColumn fx:id="colClassId" prefWidth="75.0" text="class ID" />
                       <TableColumn fx:id="colAcademicYear" prefWidth="128.0" text="Academic Year" />
                       <TableColumn fx:id="colGrade" prefWidth="82.0" text="Grade" />
-                      <TableColumn fx:id="colCourse" prefWidth="94.0" text="Section" />
+                      <TableColumn fx:id="colSection" prefWidth="94.0" text="Section" />
                       <!--            <TableColumn fx:id="colActions" text="Actions" prefWidth="150" >-->
                       <!--                <cellFactory>-->
                       <!--                    <Callback >-->
@@ -57,33 +57,33 @@
                            <Font name="System Bold" size="14.0" />
                         </font>
                      </Label>
-                     <TextField fx:id="selectedClassField" disable="true" prefHeight="25.0" prefWidth="160.0" />
+                     <TextField fx:id="selectedClassIdField" prefHeight="25.0" prefWidth="63.0" promptText="class id" />
                   </children>
                </HBox>
-               <HBox alignment="CENTER_LEFT" disable="true" layoutX="10.0" layoutY="182.0" prefWidth="400.0" spacing="22.0">
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="182.0" prefWidth="400.0" spacing="22.0">
                   <children>
                      <Label text="Academic Year" />
-                     <ChoiceBox prefHeight="25.0" prefWidth="125.0" />
+                     <ComboBox fx:id="EditAcademicYearComboBox" prefHeight="25.0" prefWidth="114.0" promptText="default" />
                      <Label text="(required)" />
                   </children>
                </HBox>
-               <HBox alignment="CENTER_LEFT" disable="true" layoutX="10.0" layoutY="182.0" prefWidth="400.0" spacing="22.0">
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="182.0" prefWidth="400.0" spacing="25.0">
                   <children>
                      <Label text="Grade" />
-                     <ChoiceBox prefHeight="25.0" prefWidth="125.0" />
+                     <ComboBox fx:id="EditGradeComboBox" prefHeight="25.0" prefWidth="125.0" promptText="default" />
                      <Label text="(required)" />
                   </children>
                </HBox>
-                <HBox alignment="CENTER_LEFT" disable="true" layoutX="10.0" layoutY="80.0" prefWidth="400.0" spacing="22.0">
+                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefWidth="400.0" spacing="22.0">
                     <children>
                         <Label text="Section" />
-                        <ChoiceBox prefHeight="25.0" prefWidth="125.0" />
+                        <ComboBox fx:id="EditSectionComboBox" prefHeight="25.0" prefWidth="125.0" promptText="default" />
                         <Label text="(required)" />
                     </children>
                 </HBox>
                <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                   <children>
-                      <Button fx:id="saveChangesBtn" disable="true" prefHeight="25.0" prefWidth="128.0" text="Save Changes" />
+                      <Button fx:id="saveChangesBtn" prefHeight="25.0" prefWidth="128.0" text="Save Changes" />
                   </children>
                   <padding>
                      <Insets left="15.0" top="20.0" />
@@ -154,12 +154,17 @@
                <Insets right="6.0" />
             </HBox.margin>
          </Label>
-         <ComboBox fx:id="courseComboBox" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="89.0" promptText="Section" />
-         <Button fx:id="searchByFilterBtn" text="Search by filter">
+         <ComboBox fx:id="sectionComboBox" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="89.0" promptText="Section" />
+          <Button fx:id="searchBtn" text="Search">
             <HBox.margin>
                <Insets left="20.0" />
             </HBox.margin>
          </Button>
+          <Button fx:id="resetBtn" text="Reset">
+              <HBox.margin>
+                  <Insets left="20.0" />
+              </HBox.margin>
+          </Button>
       </children>
    </HBox>
 </AnchorPane>
