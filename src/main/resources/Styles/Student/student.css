@@ -38,3 +38,6 @@
 
 /* Included admin_menu.fxml styling can be added here if needed */
 /* Included admin_dashboard.fxml styling can be added here if needed */
+.content-section {
+    -fx-background-color: red;
+}

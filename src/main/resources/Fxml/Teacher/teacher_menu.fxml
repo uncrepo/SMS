@@ -1,23 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Teacher.TeacherMenuController">
-    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Teacher Panel" />
+<AnchorPane prefHeight="608.0" prefWidth="303.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Teacher.TeacherMenuController">
+    <VBox prefHeight="608.0" prefWidth="229.0" spacing="10" style="-fx-padding: 15; -fx-background-color: #34495e;" styleClass="btnDashboard" stylesheets="@../../Styles/Teacher/teacher.css">
+        <children>
+            <!-- Dashboard Button -->
+            <Button fx:id="btnDashboard" prefHeight="54.0" prefWidth="180.0" styleClass="btnDashboard" text="  Dashboard" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="16.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../images_and_icons/157441354416312008604128-128.png" />
+                </ImageView>
+            </graphic></Button>
 
-    <VBox alignment="TOP_CENTER" prefHeight="501.0" prefWidth="200" spacing="10" style="-fx-background-color: #eeeeee;">
-        <VBox prefHeight="500.0" prefWidth="200.0" spacing="10" style="-fx-padding: 15; -fx-background-color: #34495e;">
-            <Button fx:id="btnDashboard" prefWidth="180" text="Dashboard" />
-            <Button fx:id="btnClasses" prefWidth="180" text="Classes" />
-            <Button fx:id="btnAssignments" prefWidth="180" text="Assignments" />
-            <!--    <Button fx:id="btnClasses" prefWidth="180" text="Classes" />-->
-            <Button fx:id="btnGrades" prefWidth="180" text="Grades" />
+            <!-- Classes Button -->
+            <Button fx:id="btnClasses" prefHeight="51.0" prefWidth="183.0" styleClass="btnDashboard" text="        Classes" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="16.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="36.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../images_and_icons/5310765951631541782-128.png" />
+                </ImageView>
+            </graphic></Button>
 
-            <Separator prefWidth="180" />
+            <!-- Assignments Button -->
+            <Button fx:id="btnAssignments" prefHeight="55.0" prefWidth="187.0" styleClass="btnDashboard" text="  Assignments" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="16.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="31.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../images_and_icons/17044133511679048254-128.png" />
+                </ImageView>
+            </graphic></Button>
 
-            <Button fx:id="btnLogout" prefWidth="180" style="-fx-text-fill: red;" text="Logout" />
+            <!-- Grades Button -->
+            <Button fx:id="btnGrades" prefHeight="50.0" prefWidth="188.0" styleClass="btnDashboard" text="        Grades" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="16.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="39.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../images_and_icons/8332323691638280423-128.png" />
+                </ImageView>
+            </graphic></Button>
 
-        </VBox>
+            <!-- Separator -->
+            <Separator opacity="0.41" prefWidth="180.0" />
+
+            <!-- Logout Button -->
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="66.0" prefWidth="164.0">
+                <children>
+                    <Button fx:id="btnLogout" layoutY="14.0" prefHeight="24.0" prefWidth="180.0" style="-fx-text-fill: red;" styleClass="btnLogout" stylesheets="@../../Styles/Teacher/teacher.css" text="Logout">
+                  <font>
+                     <Font name="System Bold" size="32.0" />
+                  </font>
+               </Button>
+                </children>
+            </AnchorPane>
+        </children>
     </VBox>
 </AnchorPane>
