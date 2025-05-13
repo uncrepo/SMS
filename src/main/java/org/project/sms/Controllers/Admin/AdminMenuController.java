@@ -62,7 +62,7 @@ public class AdminMenuController implements Initializable {
 
 
         btnAdminProfile.setOnAction(actionEvent -> onProfile());
-//        btnLogout.setOnAction(actionEvent ->);
+        btnLogout.setOnAction(actionEvent -> closeWindow());
 
     }
 
@@ -145,6 +145,11 @@ public class AdminMenuController implements Initializable {
     private void onStudents() {
         Model.getInstance().getAdminSelectedMenu().set(AdminMenuOptions.STUDENTS);
 
+    }
+
+    private void closeWindow() {
+        btnLogout.getScene().getWindow().hide();
+        Model.getInstance().getViewFactory().showLoginWindow();// Closes login stage
     }
 
 

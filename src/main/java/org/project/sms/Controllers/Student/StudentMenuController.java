@@ -25,6 +25,8 @@ public class StudentMenuController implements Initializable {
         btnDepartmentInfo.setOnAction(event -> onDepartmentInfo());
         btnResults.setOnAction(event -> onResults());
         btnProfile.setOnAction(event -> onProfile());
+        btnLogout.setOnAction(actionEvent -> closeWindow());
+
     }
 
 
@@ -46,6 +48,11 @@ public class StudentMenuController implements Initializable {
     private void onProfile() {
         Model.getInstance().getStudentSelectedMenu().set(StudentMenuOptions.PROFILE);
 
+    }
+
+    private void closeWindow() {
+        btnLogout.getScene().getWindow().hide();
+        Model.getInstance().getViewFactory().showLoginWindow();// Closes login stage
     }
 
 }

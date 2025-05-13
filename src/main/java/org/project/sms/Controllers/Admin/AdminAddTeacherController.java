@@ -59,7 +59,7 @@ public class AdminAddTeacherController implements Initializable {
         String username = teacherUsernameField.getText();
         String password = passwordField.getText();
 
-        TeacherDAO.addTeacher(fullName,email,username,password,guardian,phone);
+        TeacherDAO.addTeacher(fullName,username,email,password,guardian,phone);
         clearFields();
     }
 }

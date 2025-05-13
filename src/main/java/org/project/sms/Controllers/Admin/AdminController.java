@@ -25,6 +25,7 @@ public class AdminController implements Initializable {
         MenuOptions();
         initValues();
 
+
     }
 
 
@@ -60,4 +61,6 @@ public class AdminController implements Initializable {
             }
         });
     }
+
 }
+

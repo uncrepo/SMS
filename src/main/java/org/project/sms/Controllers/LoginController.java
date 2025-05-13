@@ -2,6 +2,7 @@ package org.project.sms.Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
 import org.project.sms.Models.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -22,6 +23,7 @@ public class LoginController implements Initializable {
     public PasswordField passwordField;
     public Label errorLabel;
     public Button loginButton;
+    public ImageView imageError;
 
 
     @Override
@@ -29,6 +31,7 @@ public class LoginController implements Initializable {
 //        roleComboBox.setItems(FXCollections.observableArrayList(AccountType.STUDENT, AccountType.TEACHER, AccountType.ADMIN));
 //        roleComboBox.setValue(Model.getInstance().getViewFactory().getLoginAccountType());
 //        roleComboBox.valueProperty().addListener(observable -> Model.getInstance().getViewFactory().setLoginAccountType(roleComboBox.getValue()));
+        imageError.setVisible(false);
         loginButton.setOnAction(event -> handleLogin());
 
     }
@@ -51,10 +54,16 @@ public class LoginController implements Initializable {
 
         if (email.isEmpty() || password.isEmpty()) {
             errorLabel.setText("Please fill in all fields.");
+            imageError.setVisible(true);
             return;
         } // add a ! icon infront of the message.
 
         User user = new UsersDAO().login(email, password);
+
+        if (user == null){
+            errorLabel.setText("Invalid email or password.");
+            imageError.setVisible(true);
+        }
 
         if (user != null) {
             completeLogin(user); // ✅ pass User object here

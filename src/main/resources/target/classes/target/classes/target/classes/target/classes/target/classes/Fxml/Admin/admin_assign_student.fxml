@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="750.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminAssignStudentsController">
+   <HBox spacing="6.0">
+      <padding>
+         <Insets left="20.0" top="90.0" />
+      </padding>
+      <children>
+              <!-- Filter and Actions -->
+              <!-- Teacher Table -->
+          <VBox fillWidth="false" prefHeight="600.0" prefWidth="650.0" spacing="15">
+              <TableView fx:id="studentsTableView" prefHeight="450.0" prefWidth="620.0" snapToPixel="false" VBox.vgrow="NEVER">
+                  <columns>
+                      <TableColumn fx:id="colStudentId" prefWidth="81.0" resizable="false" text="assigned ID" />
+                      <TableColumn fx:id="colFullName" prefWidth="195.0" resizable="false" text="Student's Name" />
+                      <TableColumn fx:id="colAcademicYear" prefWidth="132.0" resizable="false" text="Academic Year" />
+                      <TableColumn fx:id="colGrade" prefWidth="107.0" resizable="false" text="Grade" />
+                      <TableColumn fx:id="colSection" prefWidth="104.0" resizable="false" text="Section" />
+                      <!--            <TableColumn fx:id="colActions" text="Actions" prefWidth="150" >-->
+                      <!--                <cellFactory>-->
+                      <!--                    <Callback >-->
+                      <!--                        <TableCell>-->
+                      <!--                            <Button text="Edit" fx:id="editTeacherBtn" onAction="#onEditTeacherClick"/>-->
+                      <!--                        </TableCell>-->
+                      <!--                    </Callback>-->
+                      <!--                </cellFactory>-->
+                      <!--            </TableColumn>-->
+                  </columns>
+              </TableView>
+            <TableView fx:id="studentsTableViewNotAssigned" layoutX="10.0" layoutY="50.0" prefHeight="373.0" prefWidth="510.0" snapToPixel="false">
+               <columns>
+                  <TableColumn fx:id="colStudentIdNotAssigned" resizable="false" text="student ID" />
+                  <TableColumn fx:id="colFullNameNotAssigned" prefWidth="177.0" resizable="false" text="Student's Name" />
+                  <TableColumn fx:id="colAverageNotAssigned" prefWidth="134.0" resizable="false" text="Average" />
+                  <TableColumn fx:id="colPromotionNotAssigned" prefWidth="118.0" resizable="false" text="Promotion" />
+               </columns>
+            </TableView>
+            <padding>
+               <Insets top="40.0" />
+            </padding>
+          </VBox>
+         <VBox prefWidth="340.0" spacing="20.0">
+            <children>
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="200.0" spacing="10.0">
+                  <children>
+                     <Label text="Selected Student :">
+                        <font>
+                           <Font name="System Bold" size="14.0" />
+                        </font>
+                     </Label>
+                     <TextField fx:id="selectedStudentNameField" editable="false" prefHeight="30.0" prefWidth="160.0" promptText="Student's name" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="200.0" spacing="10.0">
+                  <children>
+                     <Label text="Selected Student's Id :">
+                        <font>
+                           <Font name="System Bold" size="14.0" />
+                        </font>
+                     </Label>
+                     <TextField fx:id="selectedStudentIdField" editable="false" prefHeight="30.0" prefWidth="92.0" promptText="Student's id" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="60.0" prefWidth="200.0" spacing="10.0">
+                  <children>
+                     <Label text="Previous Student's Class Id :">
+                        <font>
+                           <Font name="System Bold" size="14.0" />
+                        </font>
+                     </Label>
+                     <TextField fx:id="prevClassIdField" editable="false" prefHeight="30.0" prefWidth="92.0" promptText="Previous Class id" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="196.0" prefWidth="200.0" spacing="10.0">
+                  <children>
+                     <Label text="Current Academic Year" />
+                     <ComboBox fx:id="EditAcademicYearComboBox" prefHeight="25.0" prefWidth="121.0" promptText="Academic Year" />
+                     <Label layoutX="10.0" layoutY="14.0" text="(default)" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0">
+                  <children>
+                     <Label text="Grade" />
+                     <ComboBox fx:id="EditGradeComboBox" prefHeight="25.0" prefWidth="113.0" promptText="Grade" />
+                     <Label text="(required)" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="134.0" prefWidth="200.0" spacing="10.0">
+                  <children>
+                     <Label text="Section" />
+                     <ComboBox fx:id="EditSectionComboBox" prefHeight="25.0" prefWidth="89.0" promptText="Section" />
+                     <Label layoutX="156.0" layoutY="14.0" text="(required)" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="290.0" prefWidth="200.0" spacing="20.0">
+                  <children>
+                     <Button fx:id="unassignStudentBtn" prefHeight="25.0" prefWidth="116.0" text="Unassign Student" />
+                     <Button fx:id="updateAssignStudentBtn" prefHeight="25.0" prefWidth="155.0" text="Update Assigned Student" />
+                  </children>
+                  <VBox.margin>
+                     <Insets bottom="10.0" left="20.0" top="7.0" />
+                  </VBox.margin>
+               </HBox>
+               <Button fx:id="assignStudentBtn" prefHeight="25.0" prefWidth="182.0" text="Assign Student">
+                  <VBox.margin>
+                     <Insets left="20.0" />
+                  </VBox.margin>
+               </Button>
+            </children>
+            <HBox.margin>
+               <Insets top="90.0" />
+            </HBox.margin>
+         </VBox>
+      </children>
+   </HBox>
+     <HBox alignment="CENTER_LEFT" layoutX="24.0" layoutY="53.0" spacing="10">
+      <Label text="Student's Name or ID" />
+         <TextField fx:id="searchStudentField" prefHeight="25.0" prefWidth="197.0" promptText="Search by name or ID" />
+         <Button fx:id="searchBtn" prefWidth="100" text="Search">
+         <HBox.margin>
+            <Insets left="8.0" />
+         </HBox.margin></Button>
+      <Button fx:id="resetBtn" layoutX="349.0" layoutY="45.0" prefHeight="25.0" prefWidth="78.0" text="Reset" />
+      <padding>
+         <Insets top="35.0" />
+      </padding>
+     </HBox>
+<!--    <HBox layoutX="24.0" layoutY="400.0" spacing="20">-->
+<!--        <ComboBox fx:id="selectCourseComboBox" prefWidth="180.0" promptText="Select Course" />-->
+<!--        <ComboBox fx:id="assignYearComboBox" prefWidth="100" promptText="Select Year" />-->
+<!--        <ComboBox fx:id="assignSectionComboBox" prefWidth="120" promptText="Select Section" />-->
+<!--        <Button fx:id="assignTeacherBtn" prefWidth="100" text="Assign Teacher" />-->
+<!--    </HBox>-->
+   <Label text="Assign Students to Class">
+      <font>
+         <Font name="System Bold" size="20.0" />
+      </font>
+      <padding>
+         <Insets left="20.0" top="10.0" />
+      </padding>
+   </Label>
+   <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="18.0" prefHeight="60.0" prefWidth="785.0">
+      <padding>
+         <Insets top="35.0" />
+      </padding>
+      <children>
+         <Label layoutX="154.0" layoutY="45.0" text="Academic Year">
+            <padding>
+               <Insets left="15.0" />
+            </padding>
+            <HBox.margin>
+               <Insets right="6.0" />
+            </HBox.margin>
+         </Label>
+         <ComboBox fx:id="academicYearComboBox" layoutX="178.0" layoutY="10.0" prefHeight="25.0" prefWidth="125.0" promptText="Academic Year" />
+         <Label layoutX="107.0" layoutY="45.0" text="Grade">
+            <HBox.margin>
+               <Insets left="8.0" right="6.0" />
+            </HBox.margin>
+         </Label>
+         <ComboBox fx:id="gradeComboBox" prefHeight="25.0" prefWidth="108.0" promptText="Grade" />
+         <Label layoutX="488.0" layoutY="49.0" text="Section">
+            <HBox.margin>
+               <Insets left="19.0" />
+            </HBox.margin>
+         </Label>
+         <ComboBox fx:id="sectionComboBox" layoutX="526.0" layoutY="45.0" prefHeight="25.0" prefWidth="89.0" promptText="Section" />
+      </children>
+   </HBox>
+</AnchorPane>

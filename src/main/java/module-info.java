@@ -5,7 +5,7 @@ module org.project.sms {
     requires de.jensd.fx.glyphs.fontawesome;
     requires mysql.connector.j;
 
-
+    opens org.project.sms.Controllers.Admin to javafx.fxml;
     opens org.project.sms to javafx.fxml;
     exports org.project.sms;
     exports org.project.sms.Controllers;

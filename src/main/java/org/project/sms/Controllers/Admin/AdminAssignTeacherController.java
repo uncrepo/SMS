@@ -224,6 +224,8 @@ public class AdminAssignTeacherController implements Initializable {
 
     // Perform filtering based on the input search text, department, and section
     teacherTableView.setItems(TeacherDAO.searchAssignedTeachersByName(searchText, grade, section, academicYear,course));
+    teacherTableViewNotAssigned.setItems(TeacherDAO.getAllTeachersForAssign());
+
 }
 
 

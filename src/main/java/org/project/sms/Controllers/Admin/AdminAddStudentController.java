@@ -68,7 +68,7 @@ public class AdminAddStudentController implements Initializable {
         String username = StudentUsernameField.getText();
         String password = passwordField.getText();
 
-        StudentDAO.addStudent(fullName,email,username,password,guardian,phone);
+        StudentDAO.addStudent(fullName,username,email,password,guardian,phone);
         clearFields();
     }
 

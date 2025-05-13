@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<!-- AnchorPane Root -->
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.project.sms.Controllers.Teacher.teacherProfileController"
+            stylesheets="@../../Styles/Teacher/teacher.css"
+            styleClass="root-pane">
+
+   <!-- Hint Section -->
+   <Label text="* Required fields are marked in red" styleClass="hint-label" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="20.0" />
+
+   <!-- Title Section -->
+   <Label text="Teacher Profile" styleClass="title-label" AnchorPane.topAnchor="40.0" AnchorPane.leftAnchor="20.0" />
+
+   <!-- Main Layout -->
+   <HBox spacing="30.0" AnchorPane.topAnchor="80.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+      <children>
+         <!-- Left Section -->
+         <VBox alignment="CENTER_LEFT" spacing="15.0" styleClass="form-container">
+            <children>
+               <!-- Full Name -->
+               <HBox spacing="12.0" alignment="CENTER_LEFT" styleClass="form-field">
+                  <Label text="* Full Name:" styleClass="required-label" />
+                  <TextField fx:id="fullNameField" promptText="Enter full name" />
+               </HBox>
+
+               <!-- Gender -->
+               <HBox spacing="12.0" alignment="CENTER_LEFT" styleClass="form-field">
+                  <Label text="* Gender:" styleClass="required-label" />
+                  <RadioButton fx:id="maleRadio" text="Male" toggleGroup="$genderGroup" />
+                  <RadioButton fx:id="femaleRadio" text="Female" toggleGroup="$genderGroup" />
+               </HBox>
+
+               <!-- Grade -->
+               <HBox spacing="12.0" alignment="CENTER_LEFT" styleClass="form-field">
+                  <Label text="* Grade:" styleClass="required-label" />
+                  <ChoiceBox fx:id="gradeChoiceBox" prefWidth="150.0" promptText="Select grade" />
+               </HBox>
+
+               <!-- Email -->
+               <HBox spacing="12.0" alignment="CENTER_LEFT" styleClass="form-field">
+                  <Label text="Email:" styleClass="optional-label" />
+                  <TextField fx:id="emailField" promptText="Enter email (optional)" />
+               </HBox>
+
+               <!-- Guardian Number -->
+               <HBox spacing="12.0" alignment="CENTER_LEFT" styleClass="form-field">
+                  <Label text="* Guardian Number:" styleClass="required-label" />
+                  <TextField fx:id="guardianNumberField" promptText="Enter guardian number" />
+               </HBox>
+
+               <!-- Phone Number -->
+               <HBox spacing="12.0" alignment="CENTER_LEFT" styleClass="form-field">
+                  <Label text="Phone Number:" styleClass="optional-label" />
+                  <TextField fx:id="phoneNumberField" promptText="Enter phone number (optional)" />
+               </HBox>
+
+               <!-- Username -->
+               <HBox spacing="12.0" alignment="CENTER_LEFT" styleClass="form-field">
+                  <Label text="* Username:" styleClass="required-label" />
+                  <TextField fx:id="usernameField" promptText="Enter username" />
+                  <Button fx:id="copyUsernameButton" text="Copy" />
+               </HBox>
+
+               <!-- Password -->
+               <HBox spacing="12.0" alignment="CENTER_LEFT" styleClass="form-field">
+                  <Label text="* Password:" styleClass="required-label" />
+                  <PasswordField fx:id="passwordField" promptText="Enter password" />
+                  <Button fx:id="copyPasswordButton" text="Copy" />
+               </HBox>
+
+               <!-- Action Buttons -->
+               <HBox spacing="20.0" alignment="CENTER" styleClass="action-buttons">
+                  <Button fx:id="editButton" text="Edit" styleClass="primary-button" />
+                  <Button fx:id="saveButton" text="Save Changes" styleClass="primary-button" disable="true" />
+                  <Button fx:id="cancelButton" text="Cancel" styleClass="secondary-button" />
+               </HBox>
+            </children>
+         </VBox>
+
+         <!-- Right Section -->
+         <VBox spacing="20.0" alignment="TOP_CENTER" styleClass="upload-container">
+            <children>
+               <!-- Profile Picture -->
+               <VBox spacing="10.0" alignment="CENTER">
+                  <Label text="Upload Profile Picture" styleClass="optional-label" />
+                  <ImageView fx:id="profileImageView" fitHeight="120.0" fitWidth="120.0" preserveRatio="true" />
+                  <Button fx:id="uploadImageButton" text="Upload Image" />
+               </VBox>
+
+               <!-- National ID -->
+               <VBox spacing="10.0" alignment="CENTER">
+                  <Label text="Upload National ID" styleClass="optional-label" />
+                  <ImageView fx:id="nationalIdImageView" fitHeight="120.0" fitWidth="90.0" preserveRatio="true" />
+                  <Button fx:id="uploadIdButton" text="Upload Document" />
+               </VBox>
+            </children>
+         </VBox>
+      </children>
+   </HBox>
+</AnchorPane>
