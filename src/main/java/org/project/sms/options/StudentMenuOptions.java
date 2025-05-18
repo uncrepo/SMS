@@ -1,8 +1,8 @@
 package org.project.sms.options;
 
 public enum StudentMenuOptions {
-    DASHBOARD,
-    DEPARTMENT,
+    CURRENT_SEMESTER,
+    ASSIGNMENTS,
     RESULTS,
     PROFILE
 }

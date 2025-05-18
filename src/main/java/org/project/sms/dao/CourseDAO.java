@@ -31,7 +31,7 @@ public class CourseDAO {
                 "JOIN grade_course ON assign_teacher_class.grade_course_id = grade_course.grade_course_id " +
                 "JOIN Courses ON grade_course.course_id = Courses.course_id " +
                 "JOIN Grades ON grade_course.grade_id = Grades.grade_id " +
-                " WHERE grade LIKE ? AND section LIKE ? AND academic_year LIKE ?";
+                " WHERE Grades.grade LIKE ? AND Classes.section LIKE ? AND Classes.academic_year LIKE ?";
 
         try (Connection conn = Model.getInstance().getDbConnection().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {

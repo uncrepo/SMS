@@ -19,11 +19,12 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
 
 //    public ComboBox<AccountType> roleComboBox;
-    public TextField emailField;
+    public TextField usernameField;
     public PasswordField passwordField;
     public Label errorLabel;
     public Button loginButton;
     public ImageView imageError;
+
 
 
     @Override
@@ -37,28 +38,17 @@ public class LoginController implements Initializable {
     }
 
 
-//    private void onLogin() {
-//        Stage stage = (Stage) errorLabel.getScene().getWindow();
-//        // close login stage or overwrite ?
-//        if(Model.getInstance().getViewFactory().getLoginAccountType() == AccountType.STUDENT)
-//            Model.getInstance().getViewFactory().showStudentWindow();
-//        else if(Model.getInstance().getViewFactory().getLoginAccountType() == AccountType.TEACHER)
-//            Model.getInstance().getViewFactory().showTeacherWindow();
-//        else Model.getInstance().getViewFactory().showAdminWindow();
-//    }
-
-    //    @FXML
     public void handleLogin() {
-        String email = emailField.getText();
+        String username = usernameField.getText();
         String password = passwordField.getText();
 
-        if (email.isEmpty() || password.isEmpty()) {
+        if (username.isEmpty() || password.isEmpty()) {
             errorLabel.setText("Please fill in all fields.");
             imageError.setVisible(true);
             return;
         } // add a ! icon infront of the message.
 
-        User user = new UsersDAO().login(email, password);
+        User user = new UsersDAO().login(username, password);
 
         if (user == null){
             errorLabel.setText("Invalid email or password.");
@@ -100,7 +90,7 @@ public class LoginController implements Initializable {
     }
 
         private void closeLoginWindow() {
-            emailField.getScene().getWindow().hide(); // Closes login stage
+            usernameField.getScene().getWindow().hide(); // Closes login stage
         }
     }
 

@@ -4,18 +4,40 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Result {
-    private final StringProperty studentId;
-    private final StringProperty fullName;
-    private final StringProperty attendance;
-    private final StringProperty indivAsgn;
-    private final StringProperty grpAsgn;
-    private final StringProperty midExam;
-    private final StringProperty finalExam;
-    private final StringProperty total;
+    private  StringProperty studentId;
+    private  StringProperty fullName;
+    private  StringProperty attendance;
+    private  StringProperty indivAsgn;
+    private  StringProperty grpAsgn;
+    private  StringProperty midExam;
+    private  StringProperty finalExam;
+    private  StringProperty total;
+    private  StringProperty courseName;
+    private  StringProperty average;
+    private  StringProperty comment;
+
+
+    public Result(String id, String fullName,String average,String comment) {
+        this.studentId = new SimpleStringProperty(id);
+        this.fullName = new SimpleStringProperty(fullName);
+        this.average = new SimpleStringProperty(average);
+        this.comment = new SimpleStringProperty(comment);
+    }
+
 
     public Result(String id, String fullName,String attendance,String indivAsgn, String grpAsgn,String midExam,String finalExam, String total) {
          this.studentId = new SimpleStringProperty(id);
         this.fullName = new SimpleStringProperty(fullName);
+        this.attendance = new SimpleStringProperty(attendance);
+        this.indivAsgn = new SimpleStringProperty(indivAsgn);
+        this.grpAsgn = new SimpleStringProperty(grpAsgn);
+        this.midExam = new SimpleStringProperty(midExam);
+        this.finalExam = new SimpleStringProperty(finalExam);
+        this.total = new SimpleStringProperty(total);
+    }
+
+    public Result(String courseName,String attendance,String indivAsgn, String grpAsgn,String midExam,String finalExam, String total) {
+        this.courseName = new SimpleStringProperty(courseName);
         this.attendance = new SimpleStringProperty(attendance);
         this.indivAsgn = new SimpleStringProperty(indivAsgn);
         this.grpAsgn = new SimpleStringProperty(grpAsgn);
@@ -32,6 +54,9 @@ public class Result {
     public StringProperty midExamProperty() { return midExam; }
     public StringProperty finalExamProperty() { return finalExam; }
     public StringProperty totalProperty() { return total; }
+    public StringProperty commentProperty() { return comment; }
+    public StringProperty averageProperty() { return average; }
+
 
     public String getStudentId() { return studentId.get(); }
     public void setStudentId(String id) { this.studentId.set(id); }
@@ -56,5 +81,15 @@ public class Result {
 
     public String getTotal() { return total.get(); }
     public void setTotal(String userId) { this.total.set(userId); }
+
+    public String getCourseName() { return courseName.get(); }
+    public StringProperty courseNameProperty() { return courseName; }
+
+    public String getComment() { return comment.get(); }
+    public void setComment(String id) { this.comment.set(id); }
+
+    public String getAverage() { return average.get(); }
+    public void setAverage(String fullName) { this.average.set(fullName); }
+
 
 }

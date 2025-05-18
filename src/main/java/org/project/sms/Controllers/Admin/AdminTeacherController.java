@@ -48,6 +48,8 @@ public class AdminTeacherController implements Initializable {
 
     public ComboBox<String> sortByComboBox;
     public ComboBox<String> filterComboBox;
+    public Button previousBtn;
+    public Button nextBtn;
 
 
     public void initialize(URL location, ResourceBundle resources) {

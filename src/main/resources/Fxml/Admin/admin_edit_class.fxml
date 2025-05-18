@@ -39,11 +39,12 @@
             <children>
                <HBox spacing="30.0">
                   <children>
-                     <Button fx:id="editBtn" alignment="CENTER" prefHeight="25.0" prefWidth="77.0" text="Edit">
+                     <Button fx:id="addGradeBtn" alignment="CENTER" prefHeight="25.0" prefWidth="108.0" text="Add Grade">
                         <HBox.margin>
                            <Insets left="37.0" />
                         </HBox.margin>
                      </Button>
+                     <Button fx:id="editBtn" alignment="CENTER" layoutX="47.0" layoutY="10.0" prefHeight="25.0" prefWidth="94.0" text="Edit" />
                       <Button fx:id="deleteBtn" alignment="CENTER" prefWidth="100" text="Delete" />
                   </children>
                   <VBox.margin>
@@ -126,7 +127,7 @@
          <Insets left="20.0" top="10.0" />
       </padding>
    </Label>
-   <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="53.0">
+   <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="53.0" prefHeight="60.0" prefWidth="774.0">
       <padding>
          <Insets top="35.0" />
       </padding>
@@ -155,12 +156,12 @@
             </HBox.margin>
          </Label>
          <ComboBox fx:id="sectionComboBox" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="89.0" promptText="Section" />
-          <Button fx:id="searchBtn" text="Search">
+          <Button fx:id="searchBtn" prefHeight="25.0" prefWidth="123.0" text="Search">
             <HBox.margin>
                <Insets left="20.0" />
             </HBox.margin>
          </Button>
-          <Button fx:id="resetBtn" text="Reset">
+          <Button fx:id="resetBtn" prefHeight="25.0" prefWidth="86.0" text="Reset">
               <HBox.margin>
                   <Insets left="20.0" />
               </HBox.margin>

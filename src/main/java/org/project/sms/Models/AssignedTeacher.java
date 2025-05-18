@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class AssignedTeacher {
+    private  StringProperty prevClassId;
     private  StringProperty teacherId;
     private  StringProperty fullName;
     private  StringProperty email;
@@ -13,6 +14,7 @@ public class AssignedTeacher {
     private  StringProperty grade;
     private  StringProperty courseName;
     private  StringProperty section;
+    private  StringProperty semester;
 
 
     public AssignedTeacher(String fullName, String courseCode) {
@@ -41,10 +43,31 @@ public class AssignedTeacher {
         this.section  = new SimpleStringProperty(section);
     }
 
+    public AssignedTeacher(String teacherId, String fullName , String academicYear,String grade, String courseName, String section, String semester) {
+        this.teacherId = new SimpleStringProperty(teacherId);
+        this.fullName = new SimpleStringProperty(fullName);
+        this.academicYear = new SimpleStringProperty(academicYear);
+        this.grade = new SimpleStringProperty(grade);
+        this.courseName = new SimpleStringProperty(courseName);
+        this.section  = new SimpleStringProperty(section);
+        this.semester = new SimpleStringProperty(semester);
+
+    }
+
     public AssignedTeacher(String teacherId, String grade, String fullName) {
         this.teacherId = new SimpleStringProperty(teacherId);
         this.fullName = new SimpleStringProperty(fullName);
         this.grade = new SimpleStringProperty(grade);
+    }
+
+    public AssignedTeacher(String selectedTeacherId, String fullName, String prevClassId, String academicYear, String grade, String section, String course, String semester) {
+        this.teacherId=new SimpleStringProperty(selectedTeacherId);
+        this.fullName = new SimpleStringProperty(fullName);
+        this.academicYear = new SimpleStringProperty(academicYear);
+        this.section = new SimpleStringProperty(section);
+        this.grade = new SimpleStringProperty(grade);
+        this.courseName = new SimpleStringProperty(course);
+        this.prevClassId = new SimpleStringProperty(prevClassId);
     }
 
 
@@ -102,6 +125,22 @@ public class AssignedTeacher {
     public void setCourseName(String courseCode) { this.courseName.set(courseCode); }
     public StringProperty courseNameProperty() {
         return courseName;
+    }
+
+    public String getPrevClassId() {
+        return prevClassId.get();
+    }
+    public void setPrevClassId(String prevClassId) { this.prevClassId.set(prevClassId); }
+    public StringProperty prevClassIdProperty() {
+        return prevClassId;
+    }
+
+    public String getSemester() {
+        return semester.get();
+    }
+    public void setSemester(String courseCode) { this.semester.set(courseCode); }
+    public StringProperty semesterProperty() {
+        return semester;
     }
 
 

@@ -2,13 +2,12 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminProfileController">
+<AnchorPane prefHeight="400.0" prefWidth="448.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminProfileController">
    <children>
-      <Label prefHeight="25.0" prefWidth="180.0" text="Admin Profile">
+      <Label prefHeight="40.0" prefWidth="303.0" text="Admin Set Global Config">
          <padding>
             <Insets left="20.0" top="10.0" />
          </padding>
@@ -18,24 +17,21 @@
       </Label>
       <HBox prefHeight="100.0">
          <children>
-            <VBox alignment="CENTER_LEFT" prefHeight="287.0" prefWidth="480.0" spacing="15.0">
+            <VBox alignment="TOP_CENTER" prefHeight="287.0" prefWidth="480.0" spacing="15.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefWidth="400.0" spacing="12.0">
                      <children>
                         <Label text="Full Name" />
-                        <TextField fx:id="adminFullNameField" />
-                        <Label text="(required)" />
+                        <TextField fx:id="adminFullNameField" prefHeight="25.0" prefWidth="186.0" />
                      </children>
                      <padding>
                         <Insets left="40.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" disable="true" layoutX="10.0" layoutY="110.0" prefWidth="400.0" spacing="22.0">
+                  <HBox alignment="CENTER_LEFT" prefWidth="400.0" spacing="12.0">
                      <children>
-                        <Label text="Gender" />
-                        <RadioButton mnemonicParsing="false" text="male" />
-                        <RadioButton layoutX="90.0" layoutY="10.0" mnemonicParsing="false" text="female" />
-                        <Label text="(required)" />
+                        <Label text="Set Current Academic Year" />
+                        <ComboBox fx:id="academicYearComboBox" layoutX="160.0" layoutY="10.0" prefWidth="150.0" />
                      </children>
                      <padding>
                         <Insets left="40.0" />
@@ -43,100 +39,47 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="98.0" prefWidth="400.0" spacing="12.0">
                      <children>
-                        <Label text="Email" />
-                        <TextField fx:id="adminEmailField" />
-                        <Label layoutX="252.0" layoutY="14.0" text="(optional)" />
+                        <Label text="Set Current Semester" />
+                        <ComboBox fx:id="semesterComboBox" prefWidth="150.0" />
                      </children>
                      <padding>
                         <Insets left="40.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" disable="true" layoutX="10.0" layoutY="98.0" prefWidth="400.0" spacing="12.0">
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="120.0" prefWidth="400.0" spacing="12.0">
                      <children>
-                        <Label text="Guardian number" />
-                        <TextField fx:id="guardianField" />
-                        <Label text="(required)" />
+                        <Label text="Start Current Calendar" />
+                        <ComboBox fx:id="startCalendar" layoutX="160.0" layoutY="10.0" prefHeight="25.0" prefWidth="121.0" promptText="default" />
                      </children>
                      <padding>
                         <Insets left="40.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="150.0" prefWidth="400.0" spacing="12.0">
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="160.0" prefWidth="400.0" spacing="12.0">
                      <children>
-                        <Label text="Phone number" />
-                        <TextField fx:id="phoneNumberField" />
-                        <Label text="(optional)" />
+                        <Label text="End Current Calendar" />
+                        <ComboBox fx:id="endCalender" layoutX="160.0" layoutY="10.0" prefHeight="25.0" prefWidth="121.0" promptText="default" />
                      </children>
                      <padding>
                         <Insets left="40.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="129.0" prefWidth="400.0" spacing="12.0">
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="200.0" prefWidth="400.0" spacing="12.0">
                      <children>
-                        <Label text="Username" />
-                        <TextField fx:id="usernameField" />
-                        <Label text="(required)" />
-                        <Button layoutX="277.0" layoutY="10.0" mnemonicParsing="false" text="copy" />
+                        <Button fx:id="updateBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" text="Update">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
                      </children>
                      <padding>
                         <Insets left="40.0" />
                      </padding>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="232.0" prefWidth="400.0" spacing="12.0">
-                     <children>
-                        <Label text="Password" />
-                        <TextField fx:id="passwordField" />
-                        <Label text="(required)" />
-                        <Button mnemonicParsing="false" text="copy" />
-                     </children>
-                     <padding>
-                        <Insets left="40.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="232.0" prefWidth="400.0" spacing="50.0">
-                     <children>
-                        <Button fx:id="editBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Edit" />
-                        <Button fx:id="saveChangesBtn" layoutX="277.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Save changes" />
-                        <Button fx:id="cancelBtn" layoutX="110.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Cancel" />
-                     </children>
-                     <padding>
-                        <Insets bottom="40.0" left="100.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
                   </HBox>
                </children>
                <padding>
                   <Insets top="30.0" />
                </padding>
-            </VBox>
-            <VBox alignment="TOP_CENTER" fillWidth="false" prefWidth="330.0" spacing="30.0">
-               <children>
-                  <VBox>
-                     <children>
-                        <Label text="Upload image" />
-                        <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-                           <viewport>
-                              <Rectangle2D height="100.0" width="100.0" />
-                           </viewport>
-                        </ImageView>
-                        <Button mnemonicParsing="false" text="upload image" />
-                        <Label text="(optional)" />
-                     </children>
-                  </VBox>
-                  <VBox>
-                     <children>
-                        <Label prefHeight="17.0" text="Upload National ID" />
-                        <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button text="upload document" />
-                        <Label text="(optional)" />
-                     </children>
-                  </VBox>
-               </children>
-               <HBox.margin>
-                  <Insets top="12.0" />
-               </HBox.margin>
             </VBox>
          </children>
          <padding>

@@ -37,7 +37,7 @@ public class Model {
     // Navigation state
     private final ObjectProperty<AdminMenuOptions> adminSelectedMenu = new SimpleObjectProperty<>(AdminMenuOptions.DASHBOARD);
     private final ObjectProperty<TeacherMenuOptions> teacherSelectedMenu = new SimpleObjectProperty<>(TeacherMenuOptions.DASHBOARD);
-    private final ObjectProperty<StudentMenuOptions> studentSelectedMenu = new SimpleObjectProperty<>(StudentMenuOptions.DASHBOARD);
+    private final ObjectProperty<StudentMenuOptions> studentSelectedMenu = new SimpleObjectProperty<>(StudentMenuOptions.CURRENT_SEMESTER);
 
     // Role-specific factories
     private final AdminViewFactory adminViewFactory = new AdminViewFactory();
@@ -54,7 +54,6 @@ public class Model {
     public TeacherViewFactory getTeacherViewFactory() { return teacherViewFactory; }
     public StudentViewFactory getStudentViewFactory() { return studentViewFactory; }
 
-    private DBConnection dbConnection;
 
     public DBConnection getDbConnection() {
         return new DBConnection();
@@ -92,6 +91,12 @@ public class Model {
         return currentStudent;
     }
 
+    public String getCurrentAcademicYear() {
+        return "2024/25";
+    }
+    public String getCurrentSemester() {
+        return "1";
+    }
 }
 
 

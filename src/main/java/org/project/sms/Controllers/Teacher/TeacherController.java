@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import org.project.sms.Models.Model;
+import org.project.sms.options.AccountType;
 
 
 import java.net.URL;
@@ -21,7 +22,7 @@ public class TeacherController implements Initializable {
 
     private final String name = Model.getInstance().getCurrentTeacher().getFullName();
     private final String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-    private final String role = Model.getInstance().getCurrentUserRole().getName();
+    private final AccountType role = Model.getInstance().getCurrentUserRole().getValue();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -25,8 +25,9 @@ public class ClassDAO {
             stmt.setString(3, academicYear);
             ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 classId = rs.getString("class_id");
+                return classId;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,9 +48,21 @@ public class ClassDAO {
             classStmt.setString(2, section);
             classStmt.setString(3, academicYear);
 
-            // Execute the Users insert query
-            classStmt.executeUpdate();
+            int rowsAffected = classStmt.executeUpdate();
 
+            if (rowsAffected == 0) {
+                throw new SQLException("Creating user failed, no rows affected.");
+            }
+
+            // Retrieve the generated user_id from the Users table
+            try (ResultSet generatedKeys = classStmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int classId = generatedKeys.getInt(1);
+                    AssignmentDAO.generateAssignmentsForClass(gradeId,classId);
+                } else {
+                    throw new SQLException("User ID retrieval failed, no ID obtained.");
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -90,6 +103,28 @@ public class ClassDAO {
             e.printStackTrace();
         }
         return classes;
+    }
+
+    public static void generateAssignmentsForClass(int classId, int gradeId) {
+        String fetchCourses = "SELECT grade_course_id FROM grade_course WHERE grade_id = ?";
+        String insertAssignment = "INSERT INTO assignment_course (grade_course_id, class_id) VALUES (?, ?)";
+
+        try (PreparedStatement courseStmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(fetchCourses);
+             PreparedStatement insertStmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(insertAssignment)) {
+
+            courseStmt.setInt(1, gradeId);
+            ResultSet rs = courseStmt.executeQuery();
+
+            while (rs.next()) {
+                int gradeCourseId = rs.getInt("grade_course_id");
+                insertStmt.setInt(1, gradeCourseId);
+                insertStmt.setInt(2, classId);
+                insertStmt.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -141,8 +176,9 @@ public class ClassDAO {
         String query = "DELETE FROM classes WHERE class_id = ? ";
 
         try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {
-            stmt.setString(1, classId);
 
+            AssignmentDAO.deleteClassAssignments(classId);
+            stmt.setString(1, classId);
             stmt.executeUpdate();
 
         } catch (SQLException e) {

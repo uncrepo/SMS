@@ -2,23 +2,29 @@ package org.project.sms.Controllers.Admin;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import org.project.sms.Models.AssignedTeacher;
 import org.project.sms.Models.Teacher;
 import org.project.sms.dao.*;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AdminAssignTeacherController implements Initializable {
-    public TableView<Teacher> teacherTableView;
-    public TableColumn<Teacher, String> colTeacherId;
-    public TableColumn <Teacher, String>colFullName;
-    public TableColumn<Teacher, String> colAcademicYear;
-    public TableColumn<Teacher, String> colCourse;
-    public TableColumn <Teacher, String>colGrade;
-    public TableColumn <Teacher, String>colSection;
+    public TableView<AssignedTeacher> teacherTableView;
+    public TableColumn<AssignedTeacher, String> colTeacherId;
+    public TableColumn <AssignedTeacher, String>colFullName;
+    public TableColumn<AssignedTeacher, String> colAcademicYear;
+    public TableColumn<AssignedTeacher, String> colCourse;
+    public TableColumn <AssignedTeacher, String>colGrade;
+    public TableColumn <AssignedTeacher, String>colSection;
 
     public TextField selectedTeacherNameField;
     public TextField selectedTeacherIdField;
@@ -42,7 +48,6 @@ public class AdminAssignTeacherController implements Initializable {
     public Button searchBtn;
     public Button assignTeacherBtn;
     public Button unassignTeacherBtn;
-    public Button updateAssignTeacherBtn;
     public Button resetBtn;
 
     public TableView<Teacher> teacherTableViewNotAssigned;
@@ -50,11 +55,15 @@ public class AdminAssignTeacherController implements Initializable {
     public TableColumn<Teacher, String> colFullNameNotAssigned;
     public TableColumn<Teacher, String> colPhoneNotAssigned;
     public TableColumn<Teacher, String> colEmailNotAssigned;
-//    public ComboBox classAdvisorComboBox;
+    public Button previousAssignedTeachersBtn;
+    public Button nextAssignedTeachersBtn;
+    public Button previousTeachersBtn;
+    public Button nextTeachersBtn;
+    public Button editAssignTeacherBtn;
+    public TableColumn colSemester;
 
     public void initialize(URL location, ResourceBundle resources) {
         initTableCols();
-        initSelectedTeacher();
         initOptions();
         BtnClicks();
 
@@ -80,6 +89,7 @@ public class AdminAssignTeacherController implements Initializable {
         colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         colCourse.setCellValueFactory(new PropertyValueFactory<>("courseName"));
         colAcademicYear.setCellValueFactory(new PropertyValueFactory<>("academicYear"));
+        colSemester.setCellValueFactory(new PropertyValueFactory<>("semester"));
         colTeacherIdNotAssigned.setCellValueFactory(new PropertyValueFactory<>("teacherId"));
         colFullNameNotAssigned.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         colPhoneNotAssigned.setCellValueFactory(new PropertyValueFactory<>("phone"));
@@ -126,25 +136,194 @@ public class AdminAssignTeacherController implements Initializable {
         ObservableList<String> calendars = FXCollections.observableArrayList(CalendarDAO.getAllCalendar());
         academicYearComboBox.setItems(calendars);
 
-        EditCourseComboBox.setItems(courses);
-
-        if(EditGradeComboBox.getValue() != null) {
-            ObservableList<String> coursesByGrade = FXCollections.observableArrayList(CourseDAO.getAllCoursesByGrade(EditGradeComboBox.getValue()));
-            EditCourseComboBox.setItems(coursesByGrade);
-        }
-        EditGradeComboBox.setItems(grades);
-        EditAcademicYearComboBox.setItems(calendars);
-        EditSectionComboBox.setItems(FXCollections.observableArrayList("A","B","C","D"));
-        EditSemesterComboBox.setItems(FXCollections.observableArrayList("1","2"));
     }
 
     private void BtnClicks() {
         searchBtn.setOnAction(e -> filterTeachers());
-        assignTeacherBtn.setOnAction(e -> assignTeacher());
+        assignTeacherBtn.setOnAction(e -> newAssignTeacherDialog());
         unassignTeacherBtn.setOnAction(e -> unassignTeacher());
-        updateAssignTeacherBtn.setOnAction(e -> updateAssignedTeacher());
+        editAssignTeacherBtn.setOnAction(e -> editAssignedTeacherDialog());
         resetBtn.setOnAction(e -> clearSearchFields());
     }
+
+    private void editAssignedTeacherDialog() {
+        try {
+            AssignedTeacher editTeacher = teacherTableView.getSelectionModel().getSelectedItem();
+            if (editTeacher == null) {
+                showAlert("No Selection", "Please select a teacher to edit.", Alert.AlertType.WARNING);
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/admin_assign_teacher_dialog.fxml"));
+            AnchorPane anchorPane = loader.load();
+            AdminAssignTeacherDialogController controller = loader.getController();
+
+            controller.setAssignedTeacherForEdit(editTeacher);
+
+            Dialog<AssignedTeacher> dialog = new Dialog<>();
+            dialog.setTitle("Edit Assigned Teacher");
+            dialog.setHeaderText("Edit Teacher Information");
+
+            dialog.getDialogPane().setContent(anchorPane);
+
+            // Set the button types
+            ButtonType saveButtonType = new ButtonType("Update Teacher", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+
+            // Convert the result to a teacher object when the save button is clicked
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == saveButtonType) {
+                    AssignedTeacher updated = controller.getEditAssignedTeacherValues();
+                    editTeacher.setAcademicYear(updated.getAcademicYear());
+                    editTeacher.setGrade(updated.getGrade());
+                    editTeacher.setSection(updated.getSection());
+                    editTeacher.setSemester(updated.getSemester());
+                    return editTeacher;
+                }
+                return null;
+            });
+
+            Optional<AssignedTeacher> result = dialog.showAndWait();
+            result.ifPresent(updateTeacher -> {
+
+                // Update the teacher in the database
+                String assignedTeacherId = updateTeacher.getTeacherId();
+                String teacherId = TeacherDAO.getTeacherIdByAssignedId(assignedTeacherId);
+                String academicYear = updateTeacher.getAcademicYear();
+                String section = updateTeacher.getSection();
+                String grade = updateTeacher.getGrade();
+                String course = updateTeacher.getCourseName();
+                String semester = updateTeacher.getSemester();
+
+                String prevClassId = updateTeacher.getPrevClassId();
+                String gradeCourseId = GradeDAO.getGradeCourseID(grade,course);
+                String newClassId = ClassDAO.getClassID(grade,section,academicYear);
+
+                AssignmentDAO.unassignTeacherFromAssignment(prevClassId,gradeCourseId,teacherId,semester);
+                TeacherDAO.removeTeacherFromResults(prevClassId, gradeCourseId, teacherId,semester);
+                TeacherDAO.updateAssignedTeacher(assignedTeacherId,gradeCourseId,newClassId);
+                TeacherDAO.assignTeacherToResults(newClassId,gradeCourseId,teacherId,semester);
+                AssignmentDAO.assignTeacherToAssignment(newClassId,gradeCourseId,teacherId,semester);
+                showAlert("Success", "Teacher updated assign to ... updated successfully!", Alert.AlertType.INFORMATION);
+                loadTeacherData(); // Refresh the table
+            });
+
+        } catch (IOException e) {
+            showAlert("Failed", "Teacher information isn't updated!", Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
+    }
+
+
+    private void newAssignTeacherDialog() {
+        try {
+            Teacher teacher = teacherTableViewNotAssigned.getSelectionModel().getSelectedItem();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/admin_assign_teacher_dialog.fxml"));
+            AnchorPane anchorPane = loader.load();
+
+            Dialog<AssignedTeacher> dialog = new Dialog<>();
+            dialog.setTitle("Assign Teacher");
+            dialog.setHeaderText("Add Grade Information");
+
+            AdminAssignTeacherDialogController controller = loader.getController();
+            dialog.getDialogPane().setContent(anchorPane);
+
+            controller.setNewAssignTeacherForEdit(teacher);
+
+
+            // Set the button types
+            ButtonType saveButtonType = new ButtonType("Add Teacher", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+
+            // Convert the result to a teacher object when the save button is clicked
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == saveButtonType) {
+                    AssignedTeacher updated = controller.getNewAssignTeacherInfo();
+                    return new AssignedTeacher(
+                            updated.getTeacherId(),
+                            updated.getFullName(),
+                            updated.getAcademicYear(),
+                            updated.getGrade(),
+                            updated.getCourseName(),
+                            updated.getSection(),
+                            updated.getSemester()
+                    );
+                }
+                return null;
+            });
+
+            Optional<AssignedTeacher> result = dialog.showAndWait();
+            result.ifPresent(newAssign -> {
+                // Update the teacher in the database
+                String academicYear = newAssign.getAcademicYear();
+                String section = newAssign.getSection();
+                String grade = newAssign.getGrade();
+                String course = newAssign.getCourseName();
+                String semester = newAssign.getSemester();
+
+                String teacherId = newAssign.getTeacherId();
+                String gradeCourseId = GradeDAO.getGradeCourseID(grade,course);
+                String classId = ClassDAO.getClassID(grade,section,academicYear);
+
+
+                if (!TeacherDAO.checkAssignedTeacherExist(gradeCourseId,classId)) {
+                    // Perform assigning a teacher to a class.
+                    TeacherDAO.assignTeacherToClass(teacherId,gradeCourseId,classId);
+                    TeacherDAO.assignTeacherToResults(classId,gradeCourseId,teacherId,semester);
+                    AssignmentDAO.assignTeacherToAssignment(classId,gradeCourseId,teacherId,semester);
+                    showAlert("Success", " Teacher was assigned successfully!", Alert.AlertType.INFORMATION);
+                    loadTeacherData();
+                } else {
+                    // show error message here
+                    showAlert("Failed", " Teacher was already assigned for this Course!", Alert.AlertType.INFORMATION);
+                }
+            });
+        } catch (IOException e) {
+            showAlert("Failed", " Database error!", Alert.AlertType.INFORMATION);
+
+        }
+    }
+
+
+    private void unassignTeacher() {
+        AssignedTeacher selectedTeacher = teacherTableView.getSelectionModel().getSelectedItem();
+        if (selectedTeacher == null) {
+            showAlert("No Selection", "Please select a teacher to delete.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDialog.setTitle("Confirm Delete");
+        confirmDialog.setHeaderText("Delete Teacher");
+        confirmDialog.setContentText("Are you sure you want to delete " + selectedTeacher.getFullName() + "?");
+
+        Optional<ButtonType> result = confirmDialog.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Delete the teacher from the database
+            String assignId = selectedTeacher.getTeacherId();
+            String teacherId = TeacherDAO.getTeacherIdByAssignedId(assignId);
+            String grade = selectedTeacher.getGrade();
+            String course = selectedTeacher.getCourseName();
+            String academicYear = selectedTeacher.getAcademicYear();
+            String section = selectedTeacher.getSection();
+            String semester = selectedTeacher.getSemester();
+
+            String gradeCourseId = GradeDAO.getGradeCourseID(grade,course);
+            String prevClassId = ClassDAO.getClassID(grade,section,academicYear);
+
+            if (TeacherDAO.checkAssignedTeacherExist(assignId)) {
+                AssignmentDAO.unassignTeacherFromAssignment(prevClassId,gradeCourseId,teacherId,semester);
+                TeacherDAO.removeTeacherFromResults(prevClassId,gradeCourseId,teacherId,semester);
+                TeacherDAO.unassignTeacher(assignId);
+                showAlert("Success", "Teacher unassigned successfully!", Alert.AlertType.INFORMATION);
+                loadTeacherData();
+            } else {
+                // show error message here
+                System.out.println("There's not Assigned Teacher");
+            }
+        }
+    }
+
 
     private void updateAssignedTeacher() {
         String assignedTeacherId = selectedTeacherIdField.getText();
@@ -165,10 +344,9 @@ public class AdminAssignTeacherController implements Initializable {
         TeacherDAO.updateAssignedTeacher(assignedTeacherId,gradeCourseId,newClassId);
         TeacherDAO.assignTeacherToResults(newClassId,gradeCourseId,teacherId,semester);
         loadTeacherData();
-        clearSelectedFields();
     }
 
-    private void unassignTeacher() {
+    private void unassignTeacherOUTDATED() {
         String assignId = selectedTeacherIdField.getText();
         String teacherId = TeacherDAO.getTeacherIdByAssignedId(assignId);
         String grade = EditGradeComboBox.getValue();
@@ -251,6 +429,13 @@ public class AdminAssignTeacherController implements Initializable {
         courseComboBox.getSelectionModel().clearSelection();
         sectionComboBox.getSelectionModel().clearSelection();
         academicYearComboBox.getSelectionModel().clearSelection();
+    }
+
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
 }

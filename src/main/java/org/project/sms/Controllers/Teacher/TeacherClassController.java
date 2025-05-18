@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.project.sms.Models.Model;
 import org.project.sms.Models.Result;
 import org.project.sms.dao.*;
+import org.project.sms.utils.ExportUtils;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -48,6 +49,10 @@ public class TeacherClassController implements Initializable {
     public TextField finalExamField;
 
     private final String teacherId = Model.getInstance().getCurrentTeacher().getTeacherId();
+    public Button previousBtn;
+    public Button nextBtn;
+    public Button exportExcelBtn;
+    public Button exportPdfBtn;
 
 
     @Override
@@ -123,7 +128,18 @@ public class TeacherClassController implements Initializable {
     private void BtnClicks() {
         BtnSaveChanges.setOnAction(e -> saveChanges());
         BtnReset.setOnAction(e -> clearSelectedFields());
+        exportExcelBtn.setOnAction(e -> handleExportExcel());
+        exportPdfBtn.setOnAction(e -> handleExportPDF());
 
+    }
+
+    private void handleExportPDF() {
+        ExportUtils.exportToPDF(studentsTableView, exportPdfBtn.getScene().getWindow());
+    }
+
+
+    private void handleExportExcel() {
+        ExportUtils.exportToExcel(studentsTableView, exportExcelBtn.getScene().getWindow());
     }
 
     private void saveChanges() {
@@ -151,10 +167,10 @@ public class TeacherClassController implements Initializable {
         ObservableList<String> sections = FXCollections.observableArrayList(OptionsDAO.getAllSections(teacherId));
         sectionComboBox.setItems(sections);
 
-        ObservableList<String> calendars = FXCollections.observableArrayList(OptionsDAO.getAllAcademicYears(teacherId));
+        ObservableList<String> calendars = FXCollections.observableArrayList(CalendarDAO.getAllCalendar());
         academicYearComboBox.setItems(calendars);
 
-        ObservableList<String> semesters = FXCollections.observableArrayList(OptionsDAO.getAllSemesters(teacherId));
+        ObservableList<String> semesters = FXCollections.observableArrayList(Model.getInstance().getCurrentSemester());
         semesterComboBox.setItems(semesters);
 
     }

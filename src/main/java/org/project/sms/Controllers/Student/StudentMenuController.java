@@ -9,8 +9,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class StudentMenuController implements Initializable {
-    public Button btnDashboard;
-    public Button btnDepartmentInfo;
+    public Button btnCurrentSemester;
+    public Button btnAssignments;
     public Button btnResults;
     public Button btnProfile;
     public Button btnLogout;
@@ -21,8 +21,8 @@ public class StudentMenuController implements Initializable {
     }
 
     private void addListeners() {
-        btnDashboard.setOnAction(event -> onDashboard());
-        btnDepartmentInfo.setOnAction(event -> onDepartmentInfo());
+        btnCurrentSemester.setOnAction(event -> onCurrentSemester());
+        btnAssignments.setOnAction(event -> onAssignments());
         btnResults.setOnAction(event -> onResults());
         btnProfile.setOnAction(event -> onProfile());
         btnLogout.setOnAction(actionEvent -> closeWindow());
@@ -30,12 +30,12 @@ public class StudentMenuController implements Initializable {
     }
 
 
-    private void onDashboard() {
-        Model.getInstance().getStudentSelectedMenu().set(StudentMenuOptions.DASHBOARD);
+    private void onCurrentSemester() {
+        Model.getInstance().getStudentSelectedMenu().set(StudentMenuOptions.CURRENT_SEMESTER);
     }
 
-    private void onDepartmentInfo() {
-        Model.getInstance().getStudentSelectedMenu().set(StudentMenuOptions.DEPARTMENT);
+    private void onAssignments() {
+        Model.getInstance().getStudentSelectedMenu().set(StudentMenuOptions.ASSIGNMENTS);
 
     }
 

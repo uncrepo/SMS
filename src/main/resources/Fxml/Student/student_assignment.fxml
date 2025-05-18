@@ -5,14 +5,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Student.StudentAssignmentController">
    <children>
       <VBox alignment="CENTER_LEFT" prefHeight="650.0" prefWidth="600.0" spacing="15.0">
          <children>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="140.0" prefWidth="400.0" spacing="7.0">
                <children>
                   <Label text="Academic Calendar" />
-                  <ChoiceBox disable="true" prefHeight="25.0" prefWidth="93.0" />
+                  <ComboBox fx:id="academicYearComboBox" prefHeight="25.0" prefWidth="93.0" />
+                  <Label text="(default)" />
+               </children>
+               <padding>
+                  <Insets left="40.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="78.0" prefWidth="400.0" spacing="7.0">
+               <children>
+                  <Label text="Semester" />
+                  <ComboBox fx:id="semesterComboBox" prefHeight="25.0" prefWidth="93.0" />
                   <Label text="(default)" />
                </children>
                <padding>
@@ -22,8 +32,7 @@
             <HBox alignment="CENTER_LEFT" prefWidth="400.0" spacing="22.0">
                <children>
                   <Label text="Grade" />
-                  <ChoiceBox disable="true" prefHeight="25.0" prefWidth="125.0" />
-                  <Label text="(default)" />
+                  <ComboBox fx:id="gradeComboBox" prefHeight="25.0" prefWidth="125.0" />
                </children>
                <padding>
                   <Insets left="40.0" />
@@ -32,8 +41,7 @@
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="178.0" prefWidth="400.0" spacing="22.0">
                <children>
                   <Label text="Section" />
-                  <ChoiceBox disable="true" prefHeight="25.0" prefWidth="125.0" />
-                  <Label text="(default)" />
+                  <ComboBox fx:id="sectionComboBox" prefHeight="25.0" prefWidth="125.0" />
                </children>
                <padding>
                   <Insets left="40.0" />
@@ -41,8 +49,11 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefWidth="400.0" spacing="22.0">
                <children>
-                  <Label text="Subject" />
-                  <ChoiceBox disable="true" prefHeight="25.0" prefWidth="125.0" />
+                  <Label text="Course">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <ComboBox fx:id="subjectsComboBox" prefHeight="25.0" prefWidth="125.0" promptText="Select Course" />
                </children>
                <padding>
                   <Insets left="40.0" />
@@ -51,7 +62,7 @@
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="192.0" prefWidth="400.0" spacing="10.0">
                <children>
                   <Label text="Individual Assignment" />
-                  <TextArea disable="true" editable="false" prefHeight="160.0" prefWidth="315.0" />
+                  <TextArea fx:id="individualAssignmentField" disable="true" editable="false" prefHeight="160.0" prefWidth="315.0" />
                   <Label />
                </children>
                <padding>
@@ -65,7 +76,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <DatePicker disable="true" editable="false" prefHeight="25.0" prefWidth="117.0" />
+                  <DatePicker fx:id="indivDeadline" editable="false" prefHeight="25.0" prefWidth="117.0" />
                   <Label />
                </children>
                <padding>
@@ -75,7 +86,7 @@
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="190.0" prefWidth="400.0" spacing="10.0">
                <children>
                   <Label text="Group Assignment" />
-                  <TextArea disable="true" editable="false" prefHeight="160.0" prefWidth="315.0" />
+                  <TextArea fx:id="groupAssignmentField" disable="true" editable="false" prefHeight="160.0" prefWidth="315.0" />
                   <Label text="(optional)" />
                </children>
                <padding>
@@ -88,7 +99,7 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Label>
-                  <DatePicker disable="true" editable="false" prefHeight="25.0" prefWidth="117.0" />
+                  <DatePicker fx:id="groupDeadline" editable="false" prefHeight="25.0" prefWidth="117.0" />
                   <Label />
                </children>
                <padding>

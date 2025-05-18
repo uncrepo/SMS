@@ -12,7 +12,7 @@ public class TeacherMenuController implements Initializable {
     public Button btnDashboard;
     public Button btnClasses;
     public Button btnAssignments;
-    public Button btnGrades;
+    public Button btnProfile;
     public Button btnLogout;
 
     @Override
@@ -24,7 +24,7 @@ public class TeacherMenuController implements Initializable {
         btnDashboard.setOnAction(event -> onDashboard());
         btnClasses.setOnAction(event -> onClasses());
         btnAssignments.setOnAction(event -> onAssignments());
-        btnGrades.setOnAction(event -> onProfile());
+        btnProfile.setOnAction(event -> onProfile());
         btnLogout.setOnAction(actionEvent -> closeWindow());
 
     }

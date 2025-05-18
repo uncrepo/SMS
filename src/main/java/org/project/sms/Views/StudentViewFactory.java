@@ -7,7 +7,7 @@ import org.project.sms.Controllers.Student.StudentController;
 
 public class StudentViewFactory extends ViewFactory {
     //    admin views
-    private AnchorPane studentDashboardView;
+    private AnchorPane studentCurrentSemesterView;
     private AnchorPane studentDepartmentView;
     private AnchorPane studentResultsView;
     private AnchorPane studentProfileView;
@@ -17,21 +17,21 @@ public class StudentViewFactory extends ViewFactory {
         createStage("/Fxml/Student/student.fxml", new StudentController());
     }
 
-    public AnchorPane getStudentDashboardView() {
-        if(studentDashboardView==null) {
+    public AnchorPane getStudentCurrentSemester() {
+        if(studentCurrentSemesterView==null) {
             try {
-                studentDashboardView = new FXMLLoader(getClass().getResource("/Fxml/Student/student_dashboard.fxml")).load();
+                studentCurrentSemesterView = new FXMLLoader(getClass().getResource("/Fxml/Student/student_semester.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return studentDashboardView;
+        return studentCurrentSemesterView;
     }
 
-    public AnchorPane getStudentDepartmentView() {
+    public AnchorPane getStudentAssignmentView() {
         if(studentDepartmentView==null) {
             try {
-                studentDepartmentView = new FXMLLoader(getClass().getResource("/Fxml/Student/student_department.fxml")).load();
+                studentDepartmentView = new FXMLLoader(getClass().getResource("/Fxml/Student/student_assignment.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }

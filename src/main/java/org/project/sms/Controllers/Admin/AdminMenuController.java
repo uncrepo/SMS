@@ -14,20 +14,16 @@ public class AdminMenuController implements Initializable {
 
     public Button btnTeachers;
     public Button btnAssignTeacher;
-    public Button btnAddTeacher;
     public Button btnEditTeacher;
 
     public Button btnClasses;
     public Button btnAssignStudents;
     public Button btnGenerateSchedule;
-    public Button btnAddClass;
     public Button btnEditClass;
     public Button btnPrevClasses;
 
 
     public Button btnStudents;
-    public Button btnStudentStats;
-    public Button btnAddStudent;
     public Button btnEditStudent;
 
 
@@ -44,20 +40,16 @@ public class AdminMenuController implements Initializable {
 
         btnTeachers.setOnAction(actionEvent -> onTeachers());
         btnAssignTeacher.setOnAction(actionEvent -> onAssignTeacher());
-        btnAddTeacher.setOnAction(actionEvent -> onAddTeacher());
         btnEditTeacher.setOnAction(actionEvent -> onEditTeacher());
 
         btnClasses.setOnAction(actionEvent -> onClasses());
         btnAssignStudents.setOnAction(actionEvent -> onAssignStudents());
         btnGenerateSchedule.setOnAction(actionEvent -> onGenerateSchedule());
-        btnAddClass.setOnAction(actionEvent -> onAddClass());
         btnEditClass.setOnAction(actionEvent -> onEditClass());
         btnPrevClasses.setOnAction(actionEvent -> onPrevClasses());
 
 
         btnStudents.setOnAction(event -> onStudents());
-        btnStudentStats.setOnAction(actionEvent -> onStudentStats());
-        btnAddStudent.setOnAction(actionEvent -> onAddStudent());
         btnEditStudent.setOnAction(actionEvent -> onEditStudent());
 
 
@@ -76,10 +68,6 @@ public class AdminMenuController implements Initializable {
 
     }
 
-    private void onAddClass() {
-        Model.getInstance().getAdminSelectedMenu().set(AdminMenuOptions.ADD_NEW_CLASS);
-
-    }
 
     private void onEditClass() {
         Model.getInstance().getAdminSelectedMenu().set(AdminMenuOptions.EDIT_CLASS);
@@ -91,20 +79,12 @@ public class AdminMenuController implements Initializable {
 
     }
 
-    private void onStudentStats() {
-        Model.getInstance().getAdminSelectedMenu().set(AdminMenuOptions.STUDENT_STATS);
-
-    }
 
     private void onEditStudent() {
         Model.getInstance().getAdminSelectedMenu().set(AdminMenuOptions.EDIT_STUDENT);
 
     }
 
-    private void onAddStudent() {
-        Model.getInstance().getAdminSelectedMenu().set(AdminMenuOptions.ADD_NEW_STUDENT);
-
-    }
 
     private void onProfile() {
         Model.getInstance().getAdminSelectedMenu().set(AdminMenuOptions.ADMIN_PROFILE);
@@ -116,10 +96,6 @@ public class AdminMenuController implements Initializable {
 
     }
 
-    private void onAddTeacher() {
-        Model.getInstance().getAdminSelectedMenu().set(AdminMenuOptions.ADD_NEW_TEACHER);
-
-    }
 
     private void onAssignTeacher() {
         Model.getInstance().getAdminSelectedMenu().set(AdminMenuOptions.ASSIGN_TEACHER);

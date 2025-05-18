@@ -45,6 +45,12 @@ public class Class {
         this.section = new SimpleStringProperty(section);
     }
 
+    public Class(String grade, String section, String academicYear) {
+        this.grade = new SimpleStringProperty(grade);
+        this.section = new SimpleStringProperty(section);
+        this.academicYear = new SimpleStringProperty(academicYear);
+    }
+
 
     public void setClassId(String studentId) {
         this.classId.set(studentId);

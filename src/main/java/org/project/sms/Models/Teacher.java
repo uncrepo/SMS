@@ -14,6 +14,11 @@ public class Teacher {
     private  StringProperty grade;
     private  StringProperty courseName;
     private  StringProperty section;
+    private  StringProperty password;
+    private  StringProperty username;
+    private  StringProperty gender;
+    private  StringProperty status;
+
 
 
     public Teacher(String fullName, String courseCode) {
@@ -33,22 +38,51 @@ public class Teacher {
         this.section = new SimpleStringProperty(section);
     }
 
-    public Teacher(String teacherId, String fullName ,String email, String phone, String guardian) {
-        this.teacherId = new SimpleStringProperty(teacherId);
+    public Teacher(String id ,String fullName ,String email , String phone, String guardian) {
+        this.teacherId = new SimpleStringProperty(id);
         this.fullName = new SimpleStringProperty(fullName);
         this.email = new SimpleStringProperty(email);
         this.phone = new SimpleStringProperty(phone);
         this.guardian = new SimpleStringProperty(guardian);
     }
+    public Teacher(String fullName ,String email, String username, String password,String gender, String phone, String guardian, String phone2) {
+        this.fullName = new SimpleStringProperty(fullName);
+        this.email = new SimpleStringProperty(email);
+        this.username = new SimpleStringProperty(username);
+        this.password =  new SimpleStringProperty(password);
+        this.gender = new SimpleStringProperty(gender);
+        this.phone = new SimpleStringProperty(phone);
+        this.guardian = new SimpleStringProperty(guardian);
+    }
 
-    public Teacher(String teacherId, String fullName , String academicYear, String grade, String courseName, String section) {
+
+    public Teacher(String teacherId, String fullName ,String email, String phone, String guardian, String gender, String status) {
         this.teacherId = new SimpleStringProperty(teacherId);
         this.fullName = new SimpleStringProperty(fullName);
-        this.academicYear = new SimpleStringProperty(academicYear);
-        this.grade = new SimpleStringProperty(grade);
-        this.courseName = new SimpleStringProperty(courseName);
-        this.section  = new SimpleStringProperty(section);
+        this.email = new SimpleStringProperty(email);
+        this.phone = new SimpleStringProperty(phone);
+        this.guardian = new SimpleStringProperty(guardian);
+        this.status= new SimpleStringProperty(status);
+        this.gender = new SimpleStringProperty(gender);
     }
+
+    public Teacher(String fullName ,String email, String phone, String guardian, String gender, String status) {
+        this.fullName = new SimpleStringProperty(fullName);
+        this.email = new SimpleStringProperty(email);
+        this.phone = new SimpleStringProperty(phone);
+        this.guardian = new SimpleStringProperty(guardian);
+        this.gender = new SimpleStringProperty(gender);
+        this.status = new SimpleStringProperty(status);
+    }
+
+//    public Teacher(String teacherId, String fullName , String academicYear, String grade, String courseName, String section) {
+//        this.teacherId = new SimpleStringProperty(teacherId);
+//        this.fullName = new SimpleStringProperty(fullName);
+//        this.academicYear = new SimpleStringProperty(academicYear);
+//        this.grade = new SimpleStringProperty(grade);
+//        this.courseName = new SimpleStringProperty(courseName);
+//        this.section  = new SimpleStringProperty(section);
+//    }
 
     public Teacher(String teacherId, String grade, String fullName) {
         this.teacherId = new SimpleStringProperty(teacherId);
@@ -74,19 +108,19 @@ public class Teacher {
     }
 
     public String getPhone() {return phone.get();}
-    public void setPhone(String department) { this.phone.set(department); }
+    public void setPhone(String phone) { this.phone.set(phone); }
     public StringProperty phoneProperty() {
         return phone;
     }
 
     public String getGuardian() {return guardian.get();}
-    public void setGuardian(String department) { this.guardian.set(department); }
+    public void setGuardian(String guardian) { this.guardian.set(guardian); }
     public StringProperty guardianProperty() {
         return guardian;
     }
 
     public String getGrade() {return grade.get();}
-    public void setGrade(String department) { this.grade.set(department); }
+    public void setGrade(String grade) { this.grade.set(grade); }
     public StringProperty gradeProperty() {
         return grade;
     }
@@ -113,6 +147,29 @@ public class Teacher {
         return courseName;
     }
 
+    public String getUsername() {return username.get();}
+    public void setUsername(String username) { this.username.set(username); }
+    public StringProperty usernameProperty() {
+        return username;
+    }
+
+    public String getPassword() {return password.get();}
+    public void setPassword(String password) { this.password.set(password); }
+    public StringProperty passwordProperty() {
+        return password;
+    }
+
+    public String getGender() {return gender.get();}
+    public void setGender(String gender) { this.gender.set(gender); }
+    public StringProperty genderProperty() {
+        return gender;
+    }
+
+    public String getStatus() {return status.get();}
+    public void setStatus(String gender) { this.status.set(gender); }
+    public StringProperty statusProperty() {
+        return status;
+    }
 
 
 }

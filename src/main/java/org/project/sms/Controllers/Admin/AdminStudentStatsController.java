@@ -37,6 +37,8 @@ public class AdminStudentStatsController implements Initializable {
     public TableColumn colMidExam2;
     public TableColumn colFinalExam2;
     public TableColumn colTotal2;
+    public TextField academicField;
+    public TextField gradeField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

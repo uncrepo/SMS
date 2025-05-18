@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="627.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminClassResultController">
 <VBox fillWidth="false" layoutX="10.0" layoutY="27.0" prefHeight="600.0" prefWidth="939.0" spacing="15">
-      <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="View Class Details" />
+      <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="View Grade Results Details" />
    
     <HBox spacing="20">
          <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="25.0" prefWidth="134.0" spacing="5.0">
@@ -60,15 +60,15 @@
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="900.0" spacing="30.0" VBox.vgrow="NEVER">
          <children>
           <!-- Student Table -->
-          <TableView fx:id="studentTableView" prefHeight="430.0" prefWidth="450.0" HBox.hgrow="NEVER">
+          <TableView fx:id="studentsTableView" prefHeight="307.0" prefWidth="438.0" HBox.hgrow="NEVER">
               <columns>
                   <TableColumn fx:id="colStudentId" prefWidth="49.0" text="ID" />
                   <TableColumn fx:id="colFullName" prefWidth="149.0" text="Full name" />
-                  <TableColumn fx:id="colAverage" prefWidth="142.0" text="Average" />
-                  <TableColumn fx:id="colPromotion" prefWidth="109.0" text="Promotion" />
+                  <TableColumn fx:id="colAverage" prefWidth="77.0" text="Average" />
+                  <TableColumn fx:id="colPromotion" prefWidth="161.0" resizable="false" text="Promotion" />
               </columns>
           </TableView>
-             <TableView fx:id="coursesTableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="330.0" HBox.hgrow="NEVER">
+             <TableView fx:id="coursesTableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="330.0" HBox.hgrow="NEVER">
                  <columns>
                      <TableColumn fx:id="colCourseTitle" prefWidth="182.0" resizable="false" text="Subject" />
                      <TableColumn fx:id="colAssignedTeacher" prefWidth="147.0" resizable="false" text="Assigned Teachers" />
@@ -77,6 +77,16 @@
                   <Insets top="53.0" />
                </HBox.margin>
              </TableView>
+         </children>
+      </HBox>
+      <HBox layoutX="30.0" layoutY="60.0" prefHeight="25.0" prefWidth="469.0" spacing="20">
+         <children>
+            <Button fx:id="previousBtn" layoutX="535.0" layoutY="10.0" prefWidth="100" text="Previous">
+               <HBox.margin>
+                  <Insets left="250.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="nextBtn" layoutX="10.0" layoutY="10.0" prefWidth="100" text="Next" />
          </children>
       </HBox>
       <padding>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminEditStudentDialogController">
+   <children>
+      <HBox prefWidth="950.0">
+         <children>
+            <VBox alignment="CENTER_LEFT" prefHeight="359.0" prefWidth="520.0" spacing="18.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefWidth="400.0" spacing="12.0">
+                     <children>
+                        <Label text="Full Name" />
+                        <TextField fx:id="fullNameField" prefHeight="25.0" prefWidth="186.0" promptText="teacher full name" />
+                        <Label text="(required)" />
+                     </children>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="110.0" prefWidth="400.0" spacing="22.0">
+                     <children>
+                        <Label text="Gender" />
+                        <RadioButton fx:id="maleRadio" mnemonicParsing="false" text="male">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="genderGroup" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="femaleRadio" layoutX="90.0" layoutY="10.0" mnemonicParsing="false" text="female" toggleGroup="$genderGroup" />
+                        <Label text="(required)" />
+                     </children>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="98.0" prefWidth="400.0" spacing="12.0">
+                     <children>
+                        <Label text="Email" />
+                        <TextField fx:id="emailField" prefHeight="25.0" prefWidth="187.0" promptText="example@gmail.com" />
+                        <Label layoutX="252.0" layoutY="14.0" text="(optional)" />
+                     </children>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="150.0" prefWidth="400.0" spacing="12.0">
+                     <children>
+                        <Label text="Phone number" />
+                        <TextField fx:id="phoneNumberField" prefHeight="25.0" prefWidth="170.0" promptText="+251" />
+                        <Label text="(required)" />
+                     </children>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="98.0" prefWidth="400.0" spacing="12.0">
+                     <children>
+                        <Label text="Guardian number" />
+                        <TextField fx:id="guardianNumberField" prefHeight="25.0" prefWidth="169.0" promptText="+251" />
+                        <Label text="(optional)" />
+                     </children>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="129.0" prefWidth="400.0" spacing="12.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="60.0" text="STATUS" />
+                        <ComboBox fx:id="statusComboBox" prefHeight="25.0" prefWidth="124.0" promptText="default" />
+                     </children>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets top="55.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="359.0" prefWidth="420.0" spacing="10.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="95.0" text="Uploaded image" />
+                        <ImageView fx:id="uploadedImageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button fx:id="uploadImage" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="upload image" />
+                        <Label text="(required)" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="128.0" text="Uploaded National ID" />
+                        <ImageView fx:id="uploadedNationalIDView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button fx:id="uploadDocument" prefHeight="25.0" prefWidth="112.0" text="upload document" />
+                        <Label layoutX="50.0" layoutY="62.0" text="(required)" />
+                     </children>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="-25.0" top="35.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <Label prefHeight="40.0" prefWidth="266.0" text="Edit Teacher">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" top="10.0" />
+         </padding>
+      </Label>
+   </children>
+</AnchorPane>

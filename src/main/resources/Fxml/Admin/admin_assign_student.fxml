@@ -13,8 +13,8 @@
       <children>
               <!-- Filter and Actions -->
               <!-- Teacher Table -->
-          <VBox fillWidth="false" prefHeight="600.0" prefWidth="650.0" spacing="15">
-              <TableView fx:id="studentsTableView" prefHeight="450.0" prefWidth="620.0" snapToPixel="false" VBox.vgrow="NEVER">
+          <VBox fillWidth="false" prefHeight="560.0" prefWidth="769.0" spacing="5.0">
+              <TableView fx:id="studentsTableView" prefHeight="198.0" snapToPixel="false" VBox.vgrow="NEVER">
                   <columns>
                       <TableColumn fx:id="colStudentId" prefWidth="81.0" resizable="false" text="assigned ID" />
                       <TableColumn fx:id="colFullName" prefWidth="195.0" resizable="false" text="Student's Name" />
@@ -32,19 +32,52 @@
                       <!--            </TableColumn>-->
                   </columns>
               </TableView>
-            <TableView fx:id="studentsTableViewNotAssigned" layoutX="10.0" layoutY="50.0" prefHeight="373.0" prefWidth="510.0" snapToPixel="false">
+            <HBox layoutX="10.0" layoutY="586.0" prefHeight="25.0" prefWidth="642.0">
+               <children>
+                  <Button fx:id="previousAssignedBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Previous">
+                     <HBox.margin>
+                        <Insets left="400.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="nextAssignedBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Next">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <TableView fx:id="studentsTableViewNotAssigned" layoutX="10.0" layoutY="50.0" prefHeight="197.0" snapToPixel="false">
                <columns>
                   <TableColumn fx:id="colStudentIdNotAssigned" resizable="false" text="student ID" />
                   <TableColumn fx:id="colFullNameNotAssigned" prefWidth="177.0" resizable="false" text="Student's Name" />
+                  <TableColumn fx:id="colPreviousGrade" prefWidth="118.0" resizable="false" text="Previous Grade" />
                   <TableColumn fx:id="colAverageNotAssigned" prefWidth="134.0" resizable="false" text="Average" />
-                  <TableColumn fx:id="colPromotionNotAssigned" prefWidth="118.0" resizable="false" text="Promotion" />
+                  <TableColumn fx:id="colLastYear" prefWidth="97.0" resizable="false" text="Last Year" />
+                  <TableColumn fx:id="colComment" prefWidth="160.0" resizable="false" text="Promotion" />
                </columns>
             </TableView>
+            <HBox prefHeight="25.0" prefWidth="605.0">
+               <children>
+                  <Button fx:id="previousNotAssignedBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" text="Previous">
+                     <HBox.margin>
+                        <Insets left="400.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="nextNotAssignedBtn" layoutX="410.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" text="Next">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
             <padding>
-               <Insets top="40.0" />
+               <Insets top="35.0" />
             </padding>
           </VBox>
-         <VBox prefWidth="340.0" spacing="20.0">
+         <VBox prefWidth="340.0" spacing="15.0">
             <children>
                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="200.0" spacing="10.0">
                   <children>
@@ -97,28 +130,28 @@
                      <Label layoutX="156.0" layoutY="14.0" text="(required)" />
                   </children>
                </HBox>
-               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="290.0" prefWidth="200.0" spacing="20.0">
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="225.0" prefWidth="200.0" spacing="10.0">
                   <children>
-                     <Button fx:id="unassignStudentBtn" prefHeight="25.0" prefWidth="116.0" text="Unassign Student" />
-                     <Button fx:id="updateAssignStudentBtn" prefHeight="25.0" prefWidth="155.0" text="Update Assigned Student" />
+                     <Button fx:id="assignStudentBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" text="Assign Student">
+                        <HBox.margin>
+                           <Insets left="25.0" />
+                        </HBox.margin>
+                     </Button>
+                     <Button fx:id="assignMultipleStudentsBtn" layoutX="25.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Assign Multiple Students">
+                        <HBox.margin>
+                           <Insets left="15.0" />
+                        </HBox.margin>
+                     </Button>
                   </children>
-                  <VBox.margin>
-                     <Insets bottom="10.0" left="20.0" top="7.0" />
-                  </VBox.margin>
                </HBox>
-               <Button fx:id="assignStudentBtn" prefHeight="25.0" prefWidth="182.0" text="Assign Student">
-                  <VBox.margin>
-                     <Insets left="20.0" />
-                  </VBox.margin>
-               </Button>
             </children>
             <HBox.margin>
-               <Insets top="90.0" />
+               <Insets top="40.0" />
             </HBox.margin>
          </VBox>
       </children>
    </HBox>
-     <HBox alignment="CENTER_LEFT" layoutX="24.0" layoutY="53.0" spacing="10">
+     <HBox alignment="CENTER_LEFT" layoutX="24.0" layoutY="53.0" prefHeight="60.0" prefWidth="985.0" spacing="10">
       <Label text="Student's Name or ID" />
          <TextField fx:id="searchStudentField" prefHeight="25.0" prefWidth="197.0" promptText="Search by name or ID" />
          <Button fx:id="searchBtn" prefWidth="100" text="Search">
@@ -126,6 +159,15 @@
             <Insets left="8.0" />
          </HBox.margin></Button>
       <Button fx:id="resetBtn" layoutX="349.0" layoutY="45.0" prefHeight="25.0" prefWidth="78.0" text="Reset" />
+      <Button fx:id="updateAssignStudentBtn" prefHeight="25.0" prefWidth="91.0" text="Edit">
+         <HBox.margin>
+            <Insets left="40.0" />
+         </HBox.margin>
+      </Button>
+      <Button fx:id="unassignStudentBtn" prefHeight="25.0" prefWidth="143.0" text="Unassign Student">
+         <HBox.margin>
+            <Insets left="20.0" />
+         </HBox.margin></Button>
       <padding>
          <Insets top="35.0" />
       </padding>

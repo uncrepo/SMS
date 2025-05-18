@@ -2,8 +2,7 @@ package org.project.sms.dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.project.sms.Models.Model;
-import org.project.sms.Models.Student;
+import org.project.sms.Models.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,23 +11,87 @@ import java.util.List;
 
 public class StudentDAO {
 
+
+    public static void setAlreadyAssigned(String studentId) {
+            String query = "  UPDATE last_year_record " +
+                    "JOIN student_class ON last_year_record.student_class_id = student_class.student_class_id "+
+                    "JOIN Students ON student_class.student_id = Students.student_id " +
+                    "JOIN Classes ON student_class.class_id = classes.class_id " +
+                    "SET last_year_record.assigned_next_grade = ? " +
+                    "WHERE students.student_id = ? AND last_year_record.assigned_next_grade = 'NO' AND classes.academic_year = '2021/22' ";
+            ;
+            ObservableList<NotAssignedStudent> students = FXCollections.observableArrayList();
+
+            try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {
+
+                stmt.setString(1,"YES");
+                stmt.setString(2,studentId);
+                stmt.executeUpdate();
+
+                } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
+
+    public static void setNotAssigned(String studentId) {
+        String query = "  UPDATE last_year_record " +
+                "JOIN student_class ON last_year_record.student_class_id = student_class.student_class_id "+
+                "JOIN Students ON student_class.student_id = Students.student_id " +
+                "JOIN Classes ON student_class.class_id = classes.class_id " +
+                "SET last_year_record.assigned_next_grade = ?" +
+                "WHERE students.student_id = ? AND last_year_record.assigned_next_grade = 'YES' AND classes.academic_year = '2021/22' ";
+        ;
+        ObservableList<NotAssignedStudent> students = FXCollections.observableArrayList();
+
+        try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {
+
+            stmt.setString(1,"NO");
+            stmt.setString(2, studentId);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+    }
+
     public Student getStudentByUserId(String userId) {
-        String query = "SELECT users.full_name, students.email,students.students_id, students.phone, students.guardian" +
-                " FROM users JOIN students on users.user_id = students.user_id WHERE Users.user_id = ? ";
+        String query = "  SELECT  " +
+                "    Users.full_name, " +
+                "  Users.role, " +
+                "  Students.student_id,"+
+                "  Users.status,"+
+                "  Students.gender, "+
+                "    Students.phone, " +
+                "    Students.guardian, " +
+                "    Students.email, " +
+                "    Classes.section, " +
+                "    Classes.academic_year, " +
+                "    Grades.grade " +
+                "FROM student_class " +
+                "JOIN Classes ON student_class.class_id = Classes.class_id "+
+                "JOIN Students ON student_class.student_id =  Students.student_id " +
+                "JOIN Users ON Students.user_id = Users.user_id " +
+                "JOIN Grades ON Classes.grade_id = Grades.grade_id where Users.user_id = ?";
         try (Connection conn = Model.getInstance().getDbConnection().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, userId);
+
             ResultSet rs = stmt.executeQuery();
 
+
             if (rs.next()) {
-                Student student = new Student(
+                return new Student(
                         rs.getString("student_id"),
                         rs.getString("full_name"),
                         rs.getString("email"),
                         rs.getString("guardian"),
-                        rs.getString("phone"));
-                return student;
+                        rs.getString("phone"),
+                        rs.getString("gender"),
+                        rs.getString("status")
+                        );
             }
 
         } catch (Exception e) {
@@ -40,12 +103,14 @@ public class StudentDAO {
 
     public static ObservableList<Student> getAllStudents() {
         ObservableList<Student> teachers = FXCollections.observableArrayList();
-        String query = " SELECT \n" +
+        String query = " SELECT " +
                 "    Users.full_name, " +
                 "    Students.student_id, " +
                 "    Students.guardian, " +
                 "    Students.phone, " +
-                "    Students.email " +
+                "    Students.email, " +
+                "    Students.gender, "+
+                "    Users.status "+
                 "    FROM Users " +
                 "    JOIN Students ON Users.user_id = Students.user_id ";
 
@@ -58,7 +123,10 @@ public class StudentDAO {
                         rs.getString("full_name"),
                         rs.getString("email"),
                         rs.getString("guardian"),
-                        rs.getString("phone")
+                        rs.getString("phone"),
+                        rs.getString("gender"),
+                        rs.getString("status")
+
                 );
                 teachers.add(student);
             }
@@ -142,6 +210,44 @@ public class StudentDAO {
         return students;
     }
 
+    public static ObservableList<NotAssignedStudent> getStudentsNotAssigned() {
+        String query = "  SELECT  " +
+                "    Users.full_name, " +
+                "    students.student_id, "+
+                "    last_year_record.average, " +
+                "    last_year_record.comment, " +
+                "    Grades.grade, " +
+                "    Classes.academic_year " +
+                "FROM  last_year_record " +
+                "JOIN student_class ON last_year_record.student_class_id = student_class.student_class_id "+
+                "JOIN Students ON student_class.student_id = Students.student_id " +
+                "JOIN Classes ON student_class.class_id = classes.class_id " +
+                "JOIN Users ON students.user_id = Users.user_id " +
+                "JOIN Grades ON Classes.grade_id = Grades.grade_id " +
+                "WHERE last_year_record.assigned_next_grade = 'NO' ";
+        ;
+        ObservableList<NotAssignedStudent> students = FXCollections.observableArrayList();
+
+        try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    NotAssignedStudent student = new NotAssignedStudent(
+                            rs.getString("student_id"),
+                            rs.getString("full_name"),
+                            rs.getString("comment"),
+                            rs.getString("grade"),
+                            rs.getString("average"),
+                            rs.getString("academic_year")
+                    );
+                    students.add(student);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return students;
+    }
 
     public static ObservableList<Student> getAssignedStudents() {
         String query = "  SELECT  " +
@@ -221,23 +327,24 @@ public class StudentDAO {
         return students;
     }
 
+    public static List<Result> getStudentsClassResultsByGradeYearSection(String grade, String year, String section) {
+        List<Result> results = new ArrayList<>();
 
-    public static List<Student> getStudentsClassResultsByGradeYearSection(String grade, String year, String section) {
-        List<Student> students = new ArrayList<>();
-
-        String query = " SELECT \n" +
-                "    Users.full_name," +
-                "    Students.student_id," +
-                "    Averages.average," +
-                "    Students.academic_year," +
-                "    Grades.grade," +
-                "    Averages.section," +
-                "    Averages.comment," +
-                "    Users.guardian " +
-                "    FROM Users " +
-                "    JOIN Averages ON Averages.student_id = Students.student_id " +
-                "    JOIN Grades ON Grades.grade_id = Teachers.grade_id " +
-                "    JOIN Students ON Users.user_id = Students.user_id  WHERE grade_id = ? AND academic_year = ? AND section = ?";
+        String query ="  SELECT  " +
+                "    Users.full_name, " +
+                "    students.student_id, "+
+                "    last_year_record.average, " +
+                "    last_year_record.comment, " +
+                "    Grades.grade, " +
+                "    Classes.academic_year " +
+                "FROM  last_year_record " +
+                "JOIN student_class ON last_year_record.student_class_id = student_class.student_class_id "+
+                "JOIN Students ON student_class.student_id = Students.student_id " +
+                "JOIN Classes ON student_class.class_id = classes.class_id " +
+                "JOIN Users ON students.user_id = Users.user_id " +
+                "JOIN Grades ON Classes.grade_id = Grades.grade_id " +
+                " AND grades.grade_id = ? AND classes.academic_year = ? AND classes.section = ? " +
+                " ORDER BY average DESC ";
 
         try (Connection conn = Model.getInstance().getDbConnection().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -249,96 +356,96 @@ public class StudentDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                students.add(new Student(
+                results.add(new Result(
                         rs.getString("student_id"),
                         rs.getString("full_name"),
-                        rs.getString("email"),
-                        rs.getString("guardian"),
-                        rs.getString("phone")
+                        rs.getString("average"),
+                        rs.getString("comment")
                 ));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return students;
+        return results;
     }
 
-        public static void addStudent(String fullName, String email, String username, String password, String phone, String guardian) {
-            String userQuery = "INSERT INTO Users (full_name, username, password, role) VALUES (?, ?, ?, 'STUDENT')";
-            String studentQuery = "INSERT INTO Students (user_id, phone, guardian, email) VALUES (?, ?, ?, ?)";
+    public static void addStudent(AddStudent newStudent) {
+        String userQuery = "INSERT INTO Users (full_name, username, password, role) VALUES (?, ?, ?, 'STUDENT')";
+        String teacherQuery = "INSERT INTO Students (user_id, phone, guardian, email, gender) VALUES (?, ?, ?, ?, ?)";
 
-            try (Connection conn = Model.getInstance().getDbConnection().getConnection();
-                 PreparedStatement userStmt = conn.prepareStatement(userQuery, Statement.RETURN_GENERATED_KEYS);
-                 PreparedStatement studentStmt = conn.prepareStatement(studentQuery)) {
+        try (Connection conn = Model.getInstance().getDbConnection().getConnection();
+             PreparedStatement userStmt = conn.prepareStatement(userQuery, Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement teacherStmt = conn.prepareStatement(teacherQuery)) {
 
-                // Set the parameters for the Users table
-                userStmt.setString(1, fullName);
-                userStmt.setString(2, username);
-                userStmt.setString(3, password);
+            // Set the parameters for the Users table
+            userStmt.setString(1, newStudent.getFullName());
+            userStmt.setString(2, newStudent.getUsername());
+            userStmt.setString(3, newStudent.getPassword());
 
-                // Execute the Users insert query
-                int rowsAffected = userStmt.executeUpdate();
+            // Execute the Users insert query
+            int rowsAffected = userStmt.executeUpdate();
 
-                if (rowsAffected == 0) {
-                    throw new SQLException("Creating user failed, no rows affected.");
-                }
-
-                // Retrieve the generated user_id from the Users table
-                try (ResultSet generatedKeys = userStmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        int userId = generatedKeys.getInt(1);
-
-                        // Now, set the parameters for the Students table using the retrieved user_id
-                        studentStmt.setInt(1, userId);
-                        studentStmt.setString(2, phone);
-                        studentStmt.setString(3, guardian);
-                        studentStmt.setString(4, email);
-
-                        // Execute the Students insert query
-                        studentStmt.executeUpdate();
-                    } else {
-                        throw new SQLException("User ID retrieval failed, no ID obtained.");
-                    }
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (rowsAffected == 0) {
+                throw new SQLException("Creating user failed, no rows affected.");
             }
-        }
 
+            // Retrieve the generated user_id from the Users table
+            try (ResultSet generatedKeys = userStmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int userId = generatedKeys.getInt(1);
 
-    public static ObservableList<Student > searchStudentsByName(String searchText) {
-        ObservableList<Student> students = FXCollections.observableArrayList();
-        String query = " SELECT" +
-                " Users.full_name, " +
-                " Students.student_id, " +
-                " Students.guardian, " +
-                " Students.phone, " +
-                " Students.email " +
-                " FROM Users " +
-                " JOIN Students ON Users.user_id = Students.user_id " +
-                "WHERE full_name LIKE ?";
+                    // Now, set the parameters for the Students table using the retrieved user_id
+                    teacherStmt.setInt(1, userId);
+                    teacherStmt.setString(2, newStudent.getPhone());
+                    teacherStmt.setString(3, newStudent.getGuardian());
+                    teacherStmt.setString(4, newStudent.getEmail());
+                    teacherStmt.setString(5, newStudent.getGender());
 
-        try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {
-            stmt.setString(1, "%" + searchText + "%");
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Student student = new Student(
-                            rs.getString("student_id"),
-                            rs.getString("full_name"),
-                            rs.getString("email"),
-                            rs.getString("phone"),
-                            rs.getString("guardian")
-                    );
-                    students.add(student);
+                    // Execute the Students insert query
+                    teacherStmt.executeUpdate();
+                } else {
+                    throw new SQLException("User ID retrieval failed, no ID obtained.");
                 }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return students;
     }
+
+
+//    public static ObservableList<Student > searchStudentsByName(String searchText) {
+//        ObservableList<Student> students = FXCollections.observableArrayList();
+//        String query = " SELECT" +
+//                " Users.full_name, " +
+//                " Students.student_id, " +
+//                " Students.guardian, " +
+//                " Students.phone, " +
+//                " Students.email " +
+//                " FROM Users " +
+//                " JOIN Students ON Users.user_id = Students.user_id " +
+//                "WHERE full_name LIKE ?";
+//
+//        try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {
+//            stmt.setString(1, "%" + searchText + "%");
+//
+//            try (ResultSet rs = stmt.executeQuery()) {
+//                while (rs.next()) {
+//                    Student student = new Student(
+//                            rs.getString("student_id"),
+//                            rs.getString("full_name"),
+//                            rs.getString("email"),
+//                            rs.getString("phone"),
+//                            rs.getString("guardian")
+//                    );
+//                    students.add(student);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return students;
+//    }
 
 
     public static void updateStudent(String studentId, String email, String phone, String guardian) {
@@ -389,11 +496,11 @@ public class StudentDAO {
 
 
     public static boolean checkAssignedStudentExist(String classId, String studentId) {
-        String query = "SELECT DISTINCT * FROM student_class WHERE student_class_id = ? AND class_id = ? AND student_id = ?";
+        String query = "SELECT DISTINCT * FROM student_class WHERE class_id = ? AND student_id = ?";
 
         try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {
-            stmt.setString(2, classId);
-            stmt.setString(3, studentId);
+            stmt.setString(1, classId);
+            stmt.setString(2, studentId);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -558,6 +665,158 @@ public class StudentDAO {
             }
             return studentId;
         }
+
+    public static ObservableList<Student> searchStudentsByName(String searchText) {
+        ObservableList<Student> students= FXCollections.observableArrayList();
+        String query = " SELECT" +
+                " Users.full_name, " +
+                " Students.student_id, " +
+                " Students.guardian, " +
+                " Students.phone, " +
+                " Students.email, " +
+                " Students.gender, " +
+                " Users.status " +
+                " FROM Users " +
+                " JOIN Students ON Users.user_id = Students.user_id " +
+                "WHERE full_name LIKE ?";
+
+        try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {
+            stmt.setString(1, "%" + searchText + "%");
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Student student = new Student(
+                            rs.getString("student_id"),
+                            rs.getString("full_name"),
+                            rs.getString("email"),
+                            rs.getString("guardian"),
+                            rs.getString("phone"),
+                            rs.getString("gender"),
+                            rs.getString("status")
+                    );
+                    students.add(student);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return students;
+    }
+
+    public static void updateStudentInfo(Student student) {
+        String query = "UPDATE Students " +
+                "JOIN Users ON Students.user_id = Users.user_id " +
+                "SET Users.full_name = ?, " +
+                "Students.email = ?, " +
+                "Students.phone = ?, " +
+                "Students.guardian = ?, " +
+                "Students.gender = ?, " +
+                "Users.status = ? " +
+                "WHERE Students.student_id = ?";
+
+        try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {
+            stmt.setString(1, student.getFullName());
+            stmt.setString(2, student.getEmail());
+            stmt.setString(3, student.getPhone());
+            stmt.setString(4, student.getGuardian());
+            stmt.setString(5, student.getGender());
+            stmt.setString(6, student.getStatus());
+
+            stmt.setString(7, student.getStudentId());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to update teacher: " + e.getMessage());
+        }
+    }
+
+    public static void updateStudent(Student student) {
+        String query = "UPDATE Students s " +
+                "JOIN Users u ON s.user_id = u.user_id " +
+                "SET u.full_name = ?, " +
+                "u.email = ?, " +
+                "u.phone = ?, " +
+                "u.guardian = ?, " +
+                "s.grade_id = ?, " +
+                "s.section = ?, " +
+                "s.academic_year = ? " +
+                "WHERE s.student_id = ?";
+
+        try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {
+            stmt.setString(1, student.getFullName());
+            stmt.setString(2, student.getEmail());
+            stmt.setString(3, student.getPhone());
+            stmt.setString(4, student.getGuardian());
+            stmt.setString(5, GradeDAO.getGradeID(student.getGrade()));
+            stmt.setString(6, student.getSection());
+            stmt.setString(7, student.getAcademicYear());
+            stmt.setString(8, student.getStudentId());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to update student: " + e.getMessage());
+        }
+    }
+
+//    public static void deleteStudent(String studentId) {
+//        String query = "DELETE Students, Users FROM Students " +
+//                "JOIN Users ON Students.user_id = Users.user_id " +
+//                "WHERE Students.student_id = ?";
+//
+//        try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {
+//            stmt.setString(1, studentId);
+//            stmt.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            throw new RuntimeException("Failed to delete student: " + e.getMessage());
+//        }
+//    }
+
+    public static List<Student> searchStudents(String searchText) {
+        List<Student> students = new ArrayList<>();
+        String query = "SELECT " +
+                "Users.full_name, " +
+                "Students.student_id, " +
+                "Users.phone, " +
+                "Users.email, " +
+                "Users.guardian, " +
+                "Students.grade_id, " +
+                "Students.section, " +
+                "Students.academic_year, " +
+                "Students.is_active " +
+                "FROM Users " +
+                "JOIN Students ON Users.user_id = Students.user_id " +
+                "WHERE Users.full_name LIKE ? OR Students.student_id LIKE ? OR Users.email LIKE ?";
+
+        try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {
+            String searchPattern = "%" + searchText + "%";
+            stmt.setString(1, searchPattern);
+            stmt.setString(2, searchPattern);
+            stmt.setString(3, searchPattern);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                students.add(new Student(
+                        rs.getString("student_id"),
+                        rs.getString("full_name"),
+                        rs.getString("email"),
+                        rs.getString("guardian"),
+                        rs.getString("phone"),
+                        rs.getString("grade_id"),
+                        rs.getString("section"),
+                        rs.getString("academic_year")
+//                        rs.getBoolean("is_active")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return students;
+    }
+
+
 
 }
 

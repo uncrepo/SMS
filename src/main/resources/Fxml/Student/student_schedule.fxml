@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@../../styles/admin_styles.css"
+            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.project.sms.Controllers.Student.StudentScheduleController">
+
+    <VBox spacing="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="My Class Schedule" styleClass="page-title">
+                <font>
+                    <Font name="System Bold" size="24.0"/>
+                </font>
+            </Label>
+        </HBox>
+
+        <!-- Controls -->
+        <HBox spacing="15" alignment="CENTER_LEFT" styleClass="control-bar">
+            <VBox spacing="5">
+                <Label text="Academic Year" styleClass="input-label"/>
+                <ComboBox fx:id="academicYearComboBox" prefWidth="150" promptText="Select Year" styleClass="combo-box"/>
+            </VBox>
+            <VBox spacing="5" alignment="BOTTOM_LEFT">
+                <Button fx:id="refreshBtn" styleClass="action-button, primary-button" onAction="#handleRefresh">
+                    <graphic>
+                        <HBox spacing="5" alignment="CENTER">
+                            <FontAwesomeIconView glyphName="REFRESH" size="1.2em"/>
+                            <Label text="Refresh Schedule" textFill="WHITE"/>
+                        </HBox>
+                    </graphic>
+                </Button>
+            </VBox>
+        </HBox>
+
+        <!-- Class Info -->
+        <HBox spacing="15" styleClass="info-container">
+            <VBox spacing="5">
+                <Label text="Grade:" styleClass="info-label"/>
+                <Label fx:id="gradeLabel" text="--" styleClass="info-value"/>
+            </VBox>
+            <VBox spacing="5">
+                <Label text="Section:" styleClass="info-label"/>
+                <Label fx:id="sectionLabel" text="--" styleClass="info-value"/>
+            </VBox>
+            <VBox spacing="5">
+                <Label text="Class Teacher:" styleClass="info-label"/>
+                <Label fx:id="classTeacherLabel" text="--" styleClass="info-value"/>
+            </VBox>
+        </HBox>
+
+        <!-- Schedule Table -->
+        <VBox spacing="10" VBox.vgrow="ALWAYS" styleClass="schedule-container">
+            <Label text="Weekly Schedule" styleClass="section-title">
+                <font>
+                    <Font name="System Bold" size="16.0"/>
+                </font>
+            </Label>
+            <TableView fx:id="scheduleTableView" VBox.vgrow="ALWAYS" styleClass="schedule-table">
+                <columns>
+                    <TableColumn fx:id="colPeriod" text="Period" prefWidth="120" styleClass="period-column"/>
+                    <TableColumn fx:id="colMonday" text="Monday" prefWidth="176" styleClass="day-column"/>
+                    <TableColumn fx:id="colTuesday" text="Tuesday" prefWidth="176" styleClass="day-column"/>
+                    <TableColumn fx:id="colWednesday" text="Wednesday" prefWidth="176" styleClass="day-column"/>
+                    <TableColumn fx:id="colThursday" text="Thursday" prefWidth="176" styleClass="day-column"/>
+                    <TableColumn fx:id="colFriday" text="Friday" prefWidth="176" styleClass="day-column"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <!-- Course Summary -->
+        <VBox spacing="10" styleClass="schedule-container">
+            <Label text="Course Summary" styleClass="section-title">
+                <graphic>
+                    <FontAwesomeIconView glyphName="BOOK" size="1.2em"/>
+                </graphic>
+            </Label>
+            <TableView fx:id="courseSummaryTableView" prefHeight="150" styleClass="summary-table">
+                <columns>
+                    <TableColumn fx:id="colCourseName" text="Course" prefWidth="200"/>
+                    <TableColumn fx:id="colTeacherName" text="Teacher" prefWidth="200"/>
+                    <TableColumn fx:id="colTeacherEmail" text="Contact" prefWidth="200"/>
+                    <TableColumn fx:id="colClassesPerWeek" text="Classes/Week" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </VBox>
+</AnchorPane>

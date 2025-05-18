@@ -4,6 +4,8 @@ module org.project.sms {
     requires java.sql;
     requires de.jensd.fx.glyphs.fontawesome;
     requires mysql.connector.j;
+    requires itextpdf;
+    requires org.apache.poi.ooxml;
 
     opens org.project.sms.Controllers.Admin to javafx.fxml;
     opens org.project.sms to javafx.fxml;

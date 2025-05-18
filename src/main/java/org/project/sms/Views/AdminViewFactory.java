@@ -10,22 +10,14 @@ public class AdminViewFactory extends ViewFactory {
     //    admin views
     private AnchorPane adminDashboardView;
 
-
     private AnchorPane adminStudentsView;
-    private AnchorPane adminAddStudentView;
-    private AnchorPane adminStudentStatsView;
     private AnchorPane adminEditStudentView;
-
-
 
     private AnchorPane adminTeachersView;
     private AnchorPane adminEditTeacherView;
     private AnchorPane adminAssignTeacherView;
-    private AnchorPane adminAddTeacherView;
-
 
     private AnchorPane adminClassesView;
-    private AnchorPane adminAddClassView;
     private AnchorPane adminEditClassView;
     private AnchorPane adminClassScheduleView;
     private AnchorPane adminAssignStudentsView;
@@ -85,27 +77,7 @@ public class AdminViewFactory extends ViewFactory {
         return adminStudentsView;
     }
 
-    public AnchorPane getAdminStudentStatsView() {
-        if (adminStudentStatsView == null) {
-            try {
-                adminStudentStatsView = new FXMLLoader(getClass().getResource("/Fxml/Admin/admin_student_stats.fxml")).load();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return adminStudentStatsView;
-    }
 
-    public AnchorPane getAdminAddTeacherView() {
-        if (adminAddTeacherView == null) {
-            try {
-                adminAddTeacherView = new FXMLLoader(getClass().getResource("/Fxml/Admin/admin_new_teacher.fxml")).load();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return adminAddTeacherView;
-    }
 
     public AnchorPane getAdminAssignTeacherView() {
         if (adminAssignTeacherView == null) {
@@ -151,16 +123,6 @@ public class AdminViewFactory extends ViewFactory {
         return adminClassScheduleView;
     }
 
-    public AnchorPane getAdminAddClassView() {
-        if (adminAddClassView == null) {
-            try {
-                adminAddClassView = new FXMLLoader(getClass().getResource("/Fxml/Admin/admin_new_class.fxml")).load();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return adminAddClassView;
-    }
 
     public AnchorPane getAdminEditClassView() {
         if (adminEditClassView == null) {
@@ -206,16 +168,6 @@ public class AdminViewFactory extends ViewFactory {
         return adminLogsView;
     }
 
-    public AnchorPane getAdminAddStudentView() {
-        if (adminAddStudentView == null) {
-            try {
-                adminAddStudentView = new FXMLLoader(getClass().getResource("/Fxml/Admin/admin_new_student.fxml")).load();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return adminAddStudentView;
-    }
 
     public AnchorPane getAdminEditStudentView() {
         if (adminEditStudentView == null) {

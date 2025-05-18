@@ -11,10 +11,13 @@ import java.util.List;
 
 public class OptionsDAO {
 
+    private static final String currentAcademicYear = Model.getInstance().getCurrentAcademicYear();
+
+
     public static List<String> getAllGrades(String teacherId) {
         List<String> grades = new ArrayList<>();
         String query = """
-        SELECT Grades.grade FROM assign_teacher_class 
+        SELECT DISTINCT Grades.grade FROM assign_teacher_class 
             JOIN grade_course ON assign_teacher_class.grade_course_id = grade_course.grade_course_id
             JOIN Grades ON grade_course.grade_id = Grades.grade_id
             where assign_teacher_class.teacher_id = ?
@@ -40,7 +43,7 @@ public class OptionsDAO {
     public static List<String> getAllCourses(String teacherId) {
         List<String> courses = new ArrayList<>();
         String query = """
-        SELECT Courses.course_name FROM assign_teacher_class 
+        SELECT DISTINCT Courses.course_name FROM assign_teacher_class 
             JOIN grade_course ON assign_teacher_class.grade_course_id = grade_course.grade_course_id
             JOIN Grades ON grade_course.grade_id = Grades.grade_id
             JOIN Courses ON grade_course.course_id = Courses.course_id
@@ -68,7 +71,7 @@ public class OptionsDAO {
     public static List<String> getAllSections(String teacherId) {
         List<String> sections = new ArrayList<>();
         String query = """
-        SELECT Classes.section FROM assign_teacher_class 
+        SELECT DISTINCT Classes.section FROM assign_teacher_class 
             JOIN Classes ON assign_teacher_class.class_id = Classes.class_id
             where assign_teacher_class.teacher_id = ?
 """;
@@ -96,7 +99,7 @@ public class OptionsDAO {
         String query = """
         SELECT Classes.academic_year FROM assign_teacher_class 
             JOIN Classes ON assign_teacher_class.class_id = Classes.class_id
-            where assign_teacher_class.teacher_id = ?
+            where assign_teacher_class.teacher_id = ? AND classes.academic_year = ?
 """;
 
 
@@ -104,6 +107,8 @@ public class OptionsDAO {
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, teacherId);
+            stmt.setString(2, currentAcademicYear);
+
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -118,29 +123,95 @@ public class OptionsDAO {
     }
 
     public static List<String> getAllSemesters(String teacherId) {
-        List<String> semesters = new ArrayList<>();
+        return null;
+    }
+
+    public static List<String> getStudentGrade(String studentId) {
+        List<String> grades = new ArrayList<>();
         String query = """
-        SELECT DISTINCT Results.semester FROM Results 
-            JOIN Teachers ON Results.teacher_id = Teachers.teacher_id
-            where Teachers.teacher_id = ?
+        SELECT Grades.grade FROM student_class 
+            JOIN Classes ON student_class.class_id = Classes.class_id
+            JOIN Grades ON Classes.grade_id = Grades.grade_id
+            where student_class.student_id = ?
+""";
+
+        try (Connection conn = Model.getInstance().getDbConnection().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, studentId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                grades.add(
+                        rs.getString("grade")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return grades;
+    }
+
+
+    public static List<String> getStudentCourses(String studentId) {
+        List<String> courses = new ArrayList<>();
+        String query = """
+        SELECT Courses.course_name FROM student_class 
+            JOIN Classes ON student_class.class_id = Classes.class_id
+            JOIN Grades ON classes.grade_id = Grades.grade_id
+            JOIN grade_course ON Classes.grade_id = grade_course.grade_id
+            JOIN Courses ON grade_course.course_id = Courses.course_id
+            where student_class.student_id = ?
 """;
 
 
         try (Connection conn = Model.getInstance().getDbConnection().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            stmt.setString(1, teacherId);
+            stmt.setString(1, studentId);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                semesters.add(
-                        rs.getString("semester")
+                courses.add(
+                        rs.getString("course_name")
                 );
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return semesters;
+        return courses;
     }
-}
+
+    public static List<String> getStudentSection(String studentId) {
+        List<String> sections = new ArrayList<>();
+        String query = """
+        SELECT Classes.section FROM student_class 
+            JOIN Classes ON student_class.class_id = Classes.class_id
+            where student_class.student_id = ?
+""";
+
+
+        try (Connection conn = Model.getInstance().getDbConnection().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, studentId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                sections.add(
+                        rs.getString("section")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sections;
+    }
+
+    }
+
+
+
+
 
