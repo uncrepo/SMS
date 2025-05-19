@@ -5,28 +5,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="1010.0" prefWidth="303.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Teacher.TeacherMenuController">
+<AnchorPane prefHeight="1028.0" prefWidth="272.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Teacher.TeacherMenuController">
     <VBox prefHeight="1028.0" prefWidth="256.0" spacing="10" style="-fx-padding: 15; -fx-background-color: #34495e;" styleClass="btnDashboard" stylesheets="@../../Styles/Teacher/teacher.css">
         <children>
             <!-- Dashboard Button -->
-            <Button fx:id="btnDashboard" prefHeight="54.0" prefWidth="180.0" styleClass="btnDashboard" text="  Dashboard" textFill="WHITE">
+            <Button fx:id="btnSchedule" prefHeight="54.0" prefWidth="180.0" styleClass="btnDashboard" text="     Schedule" textFill="WHITE">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
             <graphic>
                 <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../../../target/classes/images_and_icons/18364628541605810028-128.png" />
+                    <Image url="@../../images_and_icons/2176597581715247275-128.png" />
                 </ImageView>
             </graphic></Button>
 
             <!-- Classes Button -->
-            <Button fx:id="btnClasses" prefHeight="51.0" prefWidth="183.0" styleClass="btnDashboard" text="        Classes" textFill="WHITE">
+            <Button fx:id="btnClasses" prefHeight="51.0" prefWidth="183.0" styleClass="btnDashboard" text="   Grade Roster" textFill="WHITE">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
             <graphic>
                 <ImageView fitHeight="36.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../images_and_icons/5310765951631541782-128.png" />
+                    <Image url="@../../images_and_icons/8332323691638280423-128.png" />
                 </ImageView>
             </graphic></Button>
 
@@ -41,19 +41,19 @@
                 </ImageView>
             </graphic></Button>
 
+            <!-- Separator -->
+            <Separator opacity="0.41" prefWidth="180.0" />
+
             <!-- Grades Button -->
-            <Button fx:id="btnProfile" prefHeight="50.0" prefWidth="188.0" styleClass="btnDashboard" text="Profile" textFill="WHITE">
+            <Button fx:id="btnProfile" prefHeight="50.0" prefWidth="188.0" styleClass="btnDashboard" text="  Profile" textFill="WHITE">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
             <graphic>
                 <ImageView fitHeight="39.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../images_and_icons/8332323691638280423-128.png" />
+                    <Image url="@../../images_and_icons/97866692316276568473766-128.png" />
                 </ImageView>
             </graphic></Button>
-
-            <!-- Separator -->
-            <Separator opacity="0.41" prefWidth="180.0" />
 
             <!-- Logout Button -->
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="66.0" prefWidth="164.0">

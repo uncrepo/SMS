@@ -3,15 +3,17 @@ package org.project.sms.Controllers.Teacher;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.project.sms.Models.Model;
 import org.project.sms.dao.CalendarDAO;
 import org.project.sms.dao.OptionsDAO;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -23,11 +25,11 @@ import java.util.ResourceBundle;
 public class TeacherAssignmentController implements Initializable {
 
 
-    public ComboBox <String>academicYearComboBox;
-    public ComboBox <String>semesterComboBox;
-    public ComboBox <String>gradeComboBox;
-    public ComboBox <String>sectionComboBox;
-    public ComboBox <String>courseComboBox;
+    public ComboBox<String> academicYearComboBox;
+    public ComboBox<String> semesterComboBox;
+    public ComboBox<String> gradeComboBox;
+    public ComboBox<String> sectionComboBox;
+    public ComboBox<String> courseComboBox;
     public TextArea indivAsgnField;
     public TextArea groupAsgnField;
 
@@ -36,17 +38,120 @@ public class TeacherAssignmentController implements Initializable {
 
     private static final String teacherId = Model.getInstance().getCurrentTeacher().getTeacherId();
     public Button updateAsgnBtn;
+    public Button resetBtn;
+    public VBox TeacherAssignment;
+
+    @FXML
+    private TextField titleField;
+    @FXML
+    private CheckBox isFileCheck;
+    @FXML
+    private Button attachBtn;
+    @FXML
+    private Label selectedFileLabel;
+    @FXML
+    private TextArea descriptionArea;
+    @FXML
+    private Button submitBtn;
+    @FXML
+    private Label statusLabel;
+
+
+    private File selectedFile = null;
+
+
+    public void initializeH() {
+        attachBtn.setDisable(true);
+        descriptionArea.setDisable(false);
+
+        isFileCheck.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
+            attachBtn.setDisable(!isSelected);
+            descriptionArea.setDisable(isSelected);
+            if (!isSelected) {
+                selectedFileLabel.setText("No file selected");
+                selectedFile = null;
+            }
+        });
+
+        attachBtn.setOnAction(e -> chooseFile());
+
+        submitBtn.setOnAction(e -> handleSubmit());
+    }
+
+    private void chooseFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Assignment File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PDF Files", "*.pdf"),
+                new FileChooser.ExtensionFilter("All Files", "*.*")
+        );
+
+        File file = fileChooser.showOpenDialog(getStage());
+        if (file != null) {
+            selectedFile = file;
+            selectedFileLabel.setText(file.getName());
+        } else {
+            selectedFileLabel.setText("No file selected");
+        }
+    }
+
+    private void handleSubmit() {
+        String title = titleField.getText().trim();
+        boolean fileBased = isFileCheck.isSelected();
+
+        if (title.isEmpty()) {
+            statusLabel.setText("Title is required.");
+            return;
+        }
+
+        if (fileBased) {
+            if (selectedFile == null) {
+                statusLabel.setText("Please select a file.");
+                return;
+            }
+
+            // TODO: Save file to server/disk and record in DB
+            System.out.println("Uploading file: " + selectedFile.getAbsolutePath());
+            // e.g., fileService.saveAssignmentFile(title, selectedFile);
+
+        } else {
+            String description = descriptionArea.getText().trim();
+            if (description.isEmpty()) {
+                statusLabel.setText("Please provide assignment text.");
+                return;
+            }
+
+            // TODO: Save text-based assignment to DB
+            System.out.println("Saving text assignment: " + description);
+            // e.g., assignmentDAO.saveTextAssignment(title, description);
+        }
+
+        statusLabel.setText("Assignment submitted successfully!");
+        resetForm();
+    }
+
+    private void resetForm() {
+        titleField.clear();
+        selectedFile = null;
+        selectedFileLabel.setText("No file selected");
+        descriptionArea.clear();
+        isFileCheck.setSelected(false);
+    }
+
+    private Stage getStage() {
+        return (Stage) titleField.getScene().getWindow();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initOptions();
         setupCommonListener();
-        BtnClicks();
+//        BtnClicks();
+        initializeH();
     }
 
     private void BtnClicks() {
         updateAsgnBtn.setOnAction(e -> updateAssignmentsForTeacher());
-
     }
 
 
@@ -114,7 +219,7 @@ public class TeacherAssignmentController implements Initializable {
         JOIN courses c ON gc.course_id = c.course_id
         JOIN classes cls ON ac.class_id = cls.class_id
         JOIN grades g ON cls.grade_id = g.grade_id
-        WHERE cls.academic_year = ? AND g.grade_name = ? AND cls.section = ? AND c.course_name = ? AND atc.teacher_id = ?
+        WHERE cls.academic_year = ? AND g.grade = ? AND cls.section = ? AND c.course_name = ? AND atc.teacher_id = ?
     """;
 
         try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {
@@ -160,7 +265,7 @@ public class TeacherAssignmentController implements Initializable {
         JOIN classes cls ON ac.class_id = cls.class_id
         JOIN grades g ON cls.grade_id = g.grade_id
         SET ac.individual_assignment = ?, ac.group_assignment = ?,ac.indivAsgn_deadline = ?, ac.grpAsgn_deadline = ?
-        WHERE cls.academic_year = ? AND g.grade_name = ? AND cls.section = ? AND c.course_name = ? AND atc.teacher_id = ?
+        WHERE cls.academic_year = ? AND g.grade = ? AND cls.section = ? AND c.course_name = ? AND atc.teacher_id = ?
     """;
 
             try (PreparedStatement stmt = Model.getInstance().getDbConnection().getConnection().prepareStatement(query)) {

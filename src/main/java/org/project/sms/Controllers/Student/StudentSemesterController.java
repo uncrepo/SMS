@@ -1,5 +1,6 @@
 package org.project.sms.Controllers.Student;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -42,18 +43,33 @@ public class StudentSemesterController implements Initializable {
         initTableCols();
         initOptions();
 
-        // Load the teacher data
         loadStudentCurrentSemesterData();
+        // Load the teacher data
+//        setupComboBoxListeners();
 
     }
 
 
     private void loadStudentCurrentSemesterData() {
-        String semester = semesterComboBox.getValue();
-        String classId = ClassDAO.getClassID(gradeComboBox.getValue(),sectionComboBox.getValue(),academicYearComboBox.getValue());
-        String studentId = Model.getInstance().getCurrentStudent().getStudentId();
+        String grade = gradeComboBox.getValue();
+        String section = sectionComboBox.getValue();
+        String academic = academicYearComboBox.getValue();
+        String semester = String.valueOf(SettingDAO.getCurrentSemester()); //semesterComboBox.getValue();
+        String classId = ClassDAO.getClassID(grade,section,academic);
         studentTableView.setItems(FXCollections.observableArrayList(ResultDAO.getStudentCurrentSemester(studentId,semester,classId)));
+
     }
+
+
+//    private void setupComboBoxListeners() {
+//        ChangeListener<String> comboListener = (obs, oldVal, newVal) -> {
+//            loadStudentCurrentSemesterData();
+//        };
+//
+//        academicYearComboBox.valueProperty().addListener(comboListener);
+//        gradeComboBox.valueProperty().addListener(comboListener);
+//        sectionComboBox.valueProperty().addListener(comboListener);
+//    }
 
 
 
@@ -69,16 +85,20 @@ public class StudentSemesterController implements Initializable {
 
 
     private void initOptions() {
-        List<String> grade = OptionsDAO.getStudentGrade(studentId);
-        gradeComboBox.setItems(FXCollections.observableArrayList(grade));
+        String grade = OptionsDAO.getStudentGrade(studentId,SettingDAO.getCurrentAcademicYear());
+        gradeComboBox.setValue(grade);
+        gradeField.setText(grade);
 
-        List<String> section = OptionsDAO.getStudentSection(studentId);
-        sectionComboBox.setItems(FXCollections.observableArrayList(section));
+        String section = OptionsDAO.getStudentSection(studentId,SettingDAO.getCurrentAcademicYear());
+        sectionComboBox.setValue(section);
+        sectionField.setText(section);
 
-        semesterComboBox.setValue(Model.getInstance().getCurrentSemester());
+        semesterComboBox.setValue(String.valueOf(SettingDAO.getCurrentSemester()));
 
-        academicYearComboBox.setValue(Model.getInstance().getCurrentAcademicYear());
 
+        String academic = SettingDAO.getCurrentAcademicYear();
+        academicYearComboBox.setValue(academic);
+        academicYearField.setText(academic);
     }
 
 }

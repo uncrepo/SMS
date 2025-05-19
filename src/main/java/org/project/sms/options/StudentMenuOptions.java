@@ -4,5 +4,5 @@ public enum StudentMenuOptions {
     CURRENT_SEMESTER,
     ASSIGNMENTS,
     RESULTS,
-    PROFILE
+    SCHEDULE, PROFILE
 }

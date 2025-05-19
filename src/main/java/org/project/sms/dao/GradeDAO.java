@@ -14,7 +14,7 @@ import java.util.List;
 public class GradeDAO {
     public static List<String> getAllGrades() {
         List<String> grades = new ArrayList<>();
-        String query = "SELECT grade FROM grades ORDER BY grade";
+        String query = "SELECT grade FROM grades ORDER BY grade_id ";
 
         try (Connection conn = Model.getInstance().getDbConnection().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {

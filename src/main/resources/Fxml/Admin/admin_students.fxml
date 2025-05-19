@@ -8,8 +8,8 @@
 <AnchorPane prefHeight="640.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminStudentsController">
         <!-- Filter and Actions -->
         <!-- Teacher Table -->
-    <VBox fillWidth="false" layoutX="14.0" layoutY="53.0" prefHeight="526.0" prefWidth="1073.0">
-      <Label text="Students Details">
+    <VBox fillWidth="false" layoutX="14.0" layoutY="53.0" prefHeight="526.0" prefWidth="1053.0">
+      <Label text="Assigned Students Details">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -20,7 +20,7 @@
             <Insets top="27.0" />
          </VBox.margin>
       </Label>
-        <TableView fx:id="studentsTableView" prefHeight="412.0" prefWidth="1055.0" snapToPixel="false" VBox.vgrow="NEVER">
+        <TableView fx:id="studentsTableView" prefHeight="291.0" prefWidth="887.0" snapToPixel="false" VBox.vgrow="NEVER">
             <columns>
                 <TableColumn fx:id="colStudentId" prefWidth="45.0" resizable="false" text="ID" />
                 <TableColumn fx:id="colFullName" prefWidth="146.0" resizable="false" text="Student's Name" />
@@ -29,9 +29,7 @@
                 <TableColumn fx:id="colGuardian" minWidth="0.0" prefWidth="129.0" resizable="false" text="Guardian Number" />
                 <TableColumn fx:id="colAcademicYear" prefWidth="100.0" resizable="false" text="Academic Year" />
                 <TableColumn fx:id="colGrade" prefWidth="98.0" resizable="false" text="Grade" />
-            <TableColumn fx:id="colSection" prefWidth="73.0" resizable="false" text="Section" />
-                <TableColumn fx:id="colAverage" prefWidth="75.0" resizable="false" text="Average" />
-            <TableColumn fx:id="colPromotion" prefWidth="108.0" resizable="false" text="Promotion" />
+            <TableColumn fx:id="colSection" prefWidth="87.0" resizable="false" text="Section" />
                 <!--            <TableColumn fx:id="colActions" text="Actions" prefWidth="150" >-->
                 <!--                <cellFactory>-->
                 <!--                    <Callback >-->
@@ -99,7 +97,7 @@
       </children>
    </HBox>
 
-    <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="586.0" prefHeight="25.0" prefWidth="983.0" spacing="10.0">
+    <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="479.0" prefHeight="25.0" prefWidth="983.0" spacing="10.0">
         <Label text="Sort by">
          <font>
             <Font name="System Bold" size="12.0" />

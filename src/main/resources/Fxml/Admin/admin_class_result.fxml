@@ -4,8 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="627.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminClassResultController">
-<VBox fillWidth="false" layoutX="10.0" layoutY="27.0" prefHeight="600.0" prefWidth="939.0" spacing="15">
+<AnchorPane prefHeight="594.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminClassResultController">
+<VBox fillWidth="false" layoutX="32.0" layoutY="27.0" prefWidth="940.0" spacing="15">
       <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="View Grade Results Details" />
    
     <HBox spacing="20">
@@ -29,6 +29,9 @@
          </HBox>
         <Button fx:id="showClassBtn" prefWidth="100" text="Show" />
          <Button fx:id="resetBtn" layoutX="535.0" layoutY="10.0" prefWidth="100" text="Reset" />
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
     </HBox>
       <HBox layoutX="10.0" layoutY="55.0" spacing="20">
          <children>
@@ -60,7 +63,7 @@
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="900.0" spacing="30.0" VBox.vgrow="NEVER">
          <children>
           <!-- Student Table -->
-          <TableView fx:id="studentsTableView" prefHeight="307.0" prefWidth="438.0" HBox.hgrow="NEVER">
+          <TableView fx:id="studentsTableView" maxHeight="275.0" prefHeight="269.0" HBox.hgrow="NEVER">
               <columns>
                   <TableColumn fx:id="colStudentId" prefWidth="49.0" text="ID" />
                   <TableColumn fx:id="colFullName" prefWidth="149.0" text="Full name" />
@@ -68,10 +71,10 @@
                   <TableColumn fx:id="colPromotion" prefWidth="161.0" resizable="false" text="Promotion" />
               </columns>
           </TableView>
-             <TableView fx:id="coursesTableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="330.0" HBox.hgrow="NEVER">
+             <TableView fx:id="coursesTableView" maxHeight="200.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" HBox.hgrow="NEVER">
                  <columns>
                      <TableColumn fx:id="colCourseTitle" prefWidth="182.0" resizable="false" text="Subject" />
-                     <TableColumn fx:id="colAssignedTeacher" prefWidth="147.0" resizable="false" text="Assigned Teachers" />
+                     <TableColumn fx:id="colAssignedTeacher" prefWidth="190.0" resizable="false" text="Assigned Teachers" />
                  </columns>
                <HBox.margin>
                   <Insets top="53.0" />

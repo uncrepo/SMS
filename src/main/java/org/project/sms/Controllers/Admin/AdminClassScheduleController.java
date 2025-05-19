@@ -46,7 +46,7 @@ public class AdminClassScheduleController implements Initializable {
         // Initialize ComboBoxes
         gradeComboBox.setItems(FXCollections.observableArrayList("1", "10", "11", "12"));
         sectionComboBox.setItems(FXCollections.observableArrayList("A", "B", "C", "D"));
-        academicYearComboBox.setItems(FXCollections.observableArrayList("2023/24", "2024/25"));
+        academicYearComboBox.setItems(FXCollections.observableArrayList("2022/23","2023/24", "2024/25"));
 
         // Initialize TableView columns
         initializeTableColumns();
@@ -165,10 +165,9 @@ public class AdminClassScheduleController implements Initializable {
                         if (conflicts.isEmpty()) {
                             // Save the schedule
                             scheduleDAO.saveSchedule(schedule);
-                            rowData.put(day, String.format("%s\n%s\n%s",
+                            rowData.put(day, String.format("%s\n%s",
                                     courseName,
-                                    selectedTeacher.getFullName(),
-                                    selectedTeacher.getEmail()));
+                                    selectedTeacher.getFullName()));
                             courseScheduleCount.put(courseId, courseScheduleCount.get(courseId) + 1);
                             slotFilled = true;
                             break;

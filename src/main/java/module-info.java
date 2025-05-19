@@ -8,6 +8,8 @@ module org.project.sms {
     requires org.apache.poi.ooxml;
 
     opens org.project.sms.Controllers.Admin to javafx.fxml;
+    opens org.project.sms.Controllers.Student to javafx.fxml;
+    opens org.project.sms.Controllers.Teacher to javafx.fxml;
     opens org.project.sms to javafx.fxml;
     exports org.project.sms;
     exports org.project.sms.Controllers;

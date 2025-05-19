@@ -17,7 +17,8 @@ import java.time.LocalTime;
 import java.util.*;
 
 public class StudentScheduleController implements Initializable {
-    @FXML private ComboBox<String> academicYearComboBox;
+    public Button refreshBtn;
+    public ComboBox<String> academicYearComboBox;
     @FXML private Label gradeLabel;
     @FXML private Label sectionLabel;
     @FXML private Label classTeacherLabel;
@@ -49,19 +50,16 @@ public class StudentScheduleController implements Initializable {
     public static class CourseSummary {
         private final String courseName;
         private final String teacherName;
-        private final String teacherEmail;
         private final int classesPerWeek;
 
-        public CourseSummary(String courseName, String teacherName, String teacherEmail, int classesPerWeek) {
+        public CourseSummary(String courseName, String teacherName, int classesPerWeek) {
             this.courseName = courseName;
             this.teacherName = teacherName;
-            this.teacherEmail = teacherEmail;
             this.classesPerWeek = classesPerWeek;
         }
 
         public String getCourseName() { return courseName; }
         public String getTeacherName() { return teacherName; }
-        public String getTeacherEmail() { return teacherEmail; }
         public int getClassesPerWeek() { return classesPerWeek; }
     }
 
@@ -74,7 +72,7 @@ public class StudentScheduleController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Initialize ComboBox
-        academicYearComboBox.setItems(FXCollections.observableArrayList("2023/24", "2024/25"));
+        academicYearComboBox.setItems(FXCollections.observableArrayList("2022/23","2023/24", "2024/25"));
         academicYearComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 loadStudentInfo(newVal);
@@ -87,7 +85,7 @@ public class StudentScheduleController implements Initializable {
         initializeCourseSummaryColumns();
 
         // Select current academic year
-        academicYearComboBox.getSelectionModel().select("2024/25");
+        academicYearComboBox.getSelectionModel().select("2022/23");
     }
 
     private void initializeTableColumns() {
@@ -110,17 +108,17 @@ public class StudentScheduleController implements Initializable {
     private void handleRefresh() {
         String academicYear = academicYearComboBox.getValue();
         if (academicYear != null) {
-            loadStudentInfo(academicYear);
+//            loadStudentInfo(academicYear);
             loadSchedule(academicYear);
         }
     }
 
     private void loadStudentInfo(String academicYear) {
-        String query = "SELECT g.grade, c.section, t.first_name, t.last_name " +
-                "FROM Students s " +
-                "JOIN Classes c ON s.class_id = c.class_id " +
+        String query = "SELECT g.grade, c.section " +
+                "FROM student_class sc " +
+                "JOIN Classes c ON sc.class_id = c.class_id " +
                 "JOIN Grades g ON c.grade_id = g.grade_id " +
-                "JOIN Teachers t ON c.class_teacher_id = t.teacher_id " +
+                "JOIN students s ON sc.student_id = s.student_id " +
                 "WHERE s.student_id = ? AND c.academic_year = ?";
 
         try (Connection conn = Model.getInstance().getDbConnection().getConnection();
@@ -132,11 +130,9 @@ public class StudentScheduleController implements Initializable {
             if (rs.next()) {
                 currentGrade = rs.getString("grade");
                 currentSection = rs.getString("section");
-                String teacherName = rs.getString("first_name") + " " + rs.getString("last_name");
 
                 gradeLabel.setText(currentGrade);
                 sectionLabel.setText(currentSection);
-                classTeacherLabel.setText(teacherName);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -180,10 +176,11 @@ public class StudentScheduleController implements Initializable {
     }
 
     private String getClassInfo(String grade, String section, String day, String periodNumber, String academicYear) {
-        String query = "SELECT c.course_name, t.first_name, t.last_name " +
+        String query = "SELECT c.course_name, users.full_name " +
                 "FROM Schedules s " +
                 "JOIN Courses c ON s.course_id = c.course_id " +
                 "JOIN Teachers t ON s.teacher_id = t.teacher_id " +
+                "JOIN Users users ON t.user_id = users.user_id " +
                 "WHERE s.grade_id = ? " +
                 "AND s.section = ? " +
                 "AND s.day_of_week = ? " +
@@ -200,7 +197,7 @@ public class StudentScheduleController implements Initializable {
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                String teacherName = rs.getString("first_name") + " " + rs.getString("last_name");
+                String teacherName = rs.getString("full_name");
                 return String.format("%s\n%s",
                         rs.getString("course_name"),
                         teacherName);
@@ -213,10 +210,11 @@ public class StudentScheduleController implements Initializable {
 
     private void updateCourseSummary(Map<String, CourseSummary> summaries, String grade, String section,
                                      String day, String periodNumber, String academicYear) {
-        String query = "SELECT c.course_id, c.course_name, t.first_name, t.last_name, t.email " +
+        String query = "SELECT c.course_id, c.course_name, users.full_name, t.email " +
                 "FROM Schedules s " +
                 "JOIN Courses c ON s.course_id = c.course_id " +
                 "JOIN Teachers t ON s.teacher_id = t.teacher_id " +
+                "JOIN Users ON t.user_id = Users.user_id " +
                 "WHERE s.grade_id = ? " +
                 "AND s.section = ? " +
                 "AND s.day_of_week = ? " +
@@ -235,7 +233,7 @@ public class StudentScheduleController implements Initializable {
             if (rs.next()) {
                 String courseId = rs.getString("course_id");
                 String courseName = rs.getString("course_name");
-                String teacherName = rs.getString("first_name") + " " + rs.getString("last_name");
+                String teacherName = rs.getString("full_name");
                 String teacherEmail = rs.getString("email");
 
                 if (summaries.containsKey(courseId)) {
@@ -244,7 +242,6 @@ public class StudentScheduleController implements Initializable {
                     summaries.put(courseId, new CourseSummary(
                             existing.getCourseName(),
                             existing.getTeacherName(),
-                            existing.getTeacherEmail(),
                             existing.getClassesPerWeek() + 1
                     ));
                 } else {
@@ -252,7 +249,6 @@ public class StudentScheduleController implements Initializable {
                     summaries.put(courseId, new CourseSummary(
                             courseName,
                             teacherName,
-                            teacherEmail,
                             1
                     ));
                 }

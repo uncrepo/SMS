@@ -16,7 +16,7 @@ public class ResultDAO {
     public static List<Result> getCurrentActiveClass(String classId,String semester, String gradeCourseId, String teacherId) {
         List<Result> results = new ArrayList<>();
         String query = """
-                SELECT 
+                SELECT DISTINCT 
                 Users.full_name,
 				students.student_id,
 				Results.result_id,
@@ -89,6 +89,7 @@ public class ResultDAO {
         List<Result> results = new ArrayList<>();
         String query = """
             SELECT
+                DISTINCT 
                 Results.attendance,
                 Results.mid_exam,
                 Results.final_exam,

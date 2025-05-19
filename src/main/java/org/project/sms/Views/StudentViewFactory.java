@@ -1,6 +1,7 @@
 package org.project.sms.Views;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import org.project.sms.Controllers.Student.StudentController;
 
@@ -8,7 +9,8 @@ import org.project.sms.Controllers.Student.StudentController;
 public class StudentViewFactory extends ViewFactory {
     //    admin views
     private AnchorPane studentCurrentSemesterView;
-    private AnchorPane studentDepartmentView;
+    private AnchorPane studentScheduleView;
+    private AnchorPane studentAssignmentView;
     private AnchorPane studentResultsView;
     private AnchorPane studentProfileView;
 
@@ -29,14 +31,14 @@ public class StudentViewFactory extends ViewFactory {
     }
 
     public AnchorPane getStudentAssignmentView() {
-        if(studentDepartmentView==null) {
+        if(studentAssignmentView==null) {
             try {
-                studentDepartmentView = new FXMLLoader(getClass().getResource("/Fxml/Student/student_assignment.fxml")).load();
+                studentAssignmentView = new FXMLLoader(getClass().getResource("/Fxml/Student/student_assignment.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return studentDepartmentView;
+        return studentAssignmentView;
     }
 
     public AnchorPane getStudentResultsView() {
@@ -61,5 +63,16 @@ public class StudentViewFactory extends ViewFactory {
         return studentProfileView;
     }
 
+
+    public AnchorPane getStudentSchedule() {
+        if(studentScheduleView==null) {
+            try {
+                studentScheduleView = new FXMLLoader(getClass().getResource("/Fxml/Student/student_schedule.fxml")).load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return studentScheduleView;
+    }
 
 }

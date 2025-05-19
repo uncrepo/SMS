@@ -1,5 +1,6 @@
 package org.project.sms.Controllers.Admin;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -31,29 +32,24 @@ public class AdminEditClassController implements Initializable {
     public ComboBox<String> sectionComboBox;
     public ComboBox<String> academicYearComboBox;
 
-    public Button searchBtn;
     public Button resetBtn;
 
 
-    public Button toggleEnableBtn;
     public Button editBtn;
 
 
-    public Button saveChangesBtn;
     public Button deleteBtn;
 
     public TextField selectedClassIdField;
-    public ComboBox<String> EditAcademicYearComboBox;
-    public ComboBox<String> EditGradeComboBox;
-    public ComboBox<String> EditSectionComboBox;
     public Button addGradeBtn;
 
 
     public void initialize(URL location, ResourceBundle resources) {
         initTableCols();
-//        initSelectedClass();
+        initSelectedClass();
         initOptions();
         BtnClicks();
+        setupComboBoxListeners();
 
         // Load the teacher data
         loadClassesData();
@@ -124,9 +120,6 @@ public class AdminEditClassController implements Initializable {
         classesTableView.getSelectionModel().selectedItemProperty().addListener((obs,oldValue,newValue) -> {
             if (newValue != null) {
                 selectedClassIdField.setText(newValue.getClassId());
-                EditSectionComboBox.setValue(newValue.getSection());
-                EditGradeComboBox.setValue(newValue.getGrade());
-                EditAcademicYearComboBox.setValue(newValue.getAcademicYear());
             }
         });
 
@@ -144,33 +137,17 @@ public class AdminEditClassController implements Initializable {
         ObservableList<String> calendars = FXCollections.observableArrayList(CalendarDAO.getAllCalendar());
         academicYearComboBox.setItems(calendars);
 
-        EditGradeComboBox.setItems(grades);
-        EditAcademicYearComboBox.setItems(calendars);
-        EditSectionComboBox.setItems(FXCollections.observableArrayList("A","B","C","D"));
     }
 
 
 
     private void BtnClicks() {
-        searchBtn.setOnAction(e -> filterClasses());
         deleteBtn.setOnAction(e -> removeClass());
-        saveChangesBtn.setOnAction(e -> updateClassInfo());
         resetBtn.setOnAction(e -> clearSearchFields());
         addGradeBtn.setOnAction(e -> addClassDialog());
         editBtn.setOnAction(e -> editClassDialog());
     }
 
-    private void updateClassInfo() {
-        String classId = selectedClassIdField.getText();
-
-        String academicYear = EditAcademicYearComboBox.getValue();
-        String grade = EditGradeComboBox.getValue();
-        String section = EditSectionComboBox.getValue();
-
-        ClassDAO.updateClass(classId,academicYear,grade, section);
-        loadClassesData();
-        clearSelectedFields();
-    }
 
     private void removeClass() {
         Class selectedClass = classesTableView.getSelectionModel().getSelectedItem();
@@ -257,18 +234,18 @@ public class AdminEditClassController implements Initializable {
         classesTableView.setItems(FXCollections.observableArrayList(ClassDAO.searchClassesByYearGradeSection(academicYear,grade,section)));
     }
 
-
-    private void clearSelectedFields() {
-        EditAcademicYearComboBox.getSelectionModel().clearSelection();
-        EditGradeComboBox.getSelectionModel().clearSelection();;
-        EditSectionComboBox.getSelectionModel().clearSelection();;
-        selectedClassIdField.clear();
+    private void setupComboBoxListeners() {
+        ChangeListener<String> comboListener = (obs, oldVal, newVal) -> {
+            filterClasses();
+        };
     }
+
 
     private void clearSearchFields() {
         academicYearComboBox.getSelectionModel().clearSelection();
         gradeComboBox.getSelectionModel().clearSelection();
         sectionComboBox.getSelectionModel().clearSelection();
+        selectedClassIdField.clear();
     }
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {

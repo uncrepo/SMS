@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="550.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminEditStudentController">
+<AnchorPane prefHeight="471.0" prefWidth="946.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminEditStudentController">
    <HBox spacing="10.0">
       <padding>
          <Insets left="25.0" top="90.0" />
@@ -13,10 +13,10 @@
       <children>
               <!-- Filter and Actions -->
               <!-- Teacher Table -->
-          <VBox fillWidth="false" prefHeight="670.0" prefWidth="800.0" spacing="11.0">
+          <VBox fillWidth="false" prefHeight="514.0" prefWidth="800.0" spacing="11.0">
             <HBox spacing="30.0">
                <children>
-                  <Button fx:id="addStudentBtn" alignment="CENTER" prefHeight="25.0" prefWidth="119.0" text="Add Teacher">
+                  <Button fx:id="addStudentBtn" alignment="CENTER" prefHeight="25.0" prefWidth="119.0" text="Add Student">
                      <HBox.margin>
                         <Insets left="37.0" />
                      </HBox.margin>
@@ -28,7 +28,7 @@
                   <Insets left="320.0" />
                </VBox.margin>
             </HBox>
-              <TableView fx:id="studentTableView" prefHeight="425.0" prefWidth="760.0" snapToPixel="false" VBox.vgrow="NEVER">
+              <TableView fx:id="studentTableView" prefHeight="300.0" prefWidth="763.0" snapToPixel="false" VBox.vgrow="NEVER">
                   <columns>
                       <TableColumn fx:id="colStudentId" prefWidth="34.0" text="ID" />
                       <TableColumn fx:id="colFullName" prefWidth="153.0" text="Student's Name" />
@@ -36,7 +36,7 @@
                       <TableColumn fx:id="colPhone" prefWidth="93.0" text="Phone" />
                       <TableColumn fx:id="colGuardian" prefWidth="100.0" text="Guardian" />
                   <TableColumn fx:id="colGender" prefWidth="100.0" text="Gender" />
-                  <TableColumn fx:id="colStatus" prefWidth="100.0" text="Status" />
+                  <TableColumn fx:id="colStatus" prefWidth="103.0" text="Status" />
                   </columns>
               </TableView>
             <padding>
@@ -58,7 +58,7 @@
       </padding>
      </HBox>
 
-    <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="586.0" prefHeight="25.0" spacing="10.0">
+    <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="460.0" prefHeight="25.0" spacing="10.0">
         <Label text="Sort by">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -85,7 +85,7 @@
 <!--        <ComboBox fx:id="assignSectionComboBox" prefWidth="120" promptText="Select Section" />-->
 <!--        <Button fx:id="assignTeacherBtn" prefWidth="100" text="Assign Teacher" />-->
 <!--    </HBox>-->
-   <Label text="Edit/Remove Teacher">
+   <Label text="Edit/Remove Student">
       <font>
          <Font name="System Bold" size="20.0" />
       </font>

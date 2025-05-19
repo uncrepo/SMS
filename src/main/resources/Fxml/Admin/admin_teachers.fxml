@@ -9,7 +9,7 @@
         <!-- Filter and Actions -->
         <!-- Teacher Table -->
     <VBox fillWidth="false" layoutX="14.0" layoutY="70.0" prefHeight="500.0" prefWidth="1049.0" spacing="15">
-        <TableView fx:id="teacherTableView" prefWidth="1040.0" snapToPixel="false" VBox.vgrow="NEVER">
+        <TableView fx:id="teacherTableView" prefHeight="268.0" prefWidth="1043.0" snapToPixel="false" VBox.vgrow="NEVER">
             <columns>
                 <TableColumn fx:id="colTeacherId" prefWidth="34.0" resizable="false" text="ID" />
                 <TableColumn fx:id="colFullName" prefWidth="158.0" resizable="false" text="Teacher's Name" />
@@ -64,7 +64,7 @@
       </padding>
      </HBox>
 
-    <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="525.0" prefHeight="25.0" prefWidth="1017.0" spacing="10.0">
+    <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="400.0" prefHeight="25.0" prefWidth="1017.0" spacing="10.0">
         <Label text="Sort by">
          <font>
             <Font name="System Bold" size="12.0" />

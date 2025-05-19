@@ -23,7 +23,7 @@
             <font>
                <Font name="System Bold" size="14.0" />
             </font></Button>
-            <Button fx:id="btnAssignments" prefWidth="200.0" styleClass="btnDashboard" stylesheets="@../../Styles/Student/student.css" text="Assignment" textFill="WHITE">
+            <Button fx:id="btnAssignments" prefWidth="200.0" styleClass="btnDashboard" stylesheets="@../../Styles/Student/student.css" text="   Assignment" textFill="WHITE">
             <graphic>
                <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -37,7 +37,18 @@
             <rotationAxis>
                <Point3D />
             </rotationAxis></Button>
-            <Button fx:id="btnResults" prefWidth="200.0" styleClass="btnDashboard" stylesheets="@../../Styles/Student/student.css" text="Results" textFill="WHITE">
+            <Button fx:id="btnSchedule" prefWidth="200.0" styleClass="btnDashboard" stylesheets="@../../Styles/Student/student.css" text="        Schedule" textFill="WHITE">
+            <graphic>
+               <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../images_and_icons/2176597581715247275-128.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font></Button>
+            <Button fx:id="btnResults" prefWidth="200.0" styleClass="btnDashboard" stylesheets="@../../Styles/Student/student.css" text="           Results" textFill="WHITE">
             <graphic>
                <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -48,7 +59,9 @@
             <font>
                <Font name="System Bold" size="14.0" />
             </font></Button>
-            <Button fx:id="btnProfile" prefWidth="200.0" styleClass="btnDashboard" stylesheets="@../../Styles/Student/student.css" text="Profile" textFill="WHITE">
+
+            <Separator prefWidth="180" />
+         <Button fx:id="btnProfile" layoutX="25.0" layoutY="217.0" prefWidth="200.0" styleClass="btnDashboard" stylesheets="@../../Styles/Student/student.css" text="          Profile" textFill="WHITE">
             <graphic>
                <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -58,9 +71,8 @@
             </graphic>
             <font>
                <Font name="System Bold" size="14.0" />
-            </font></Button>
-
-            <Separator prefWidth="180" />
+            </font>
+         </Button>
       
             <Button fx:id="btnLogout" prefWidth="180" style="-fx-text-fill: red;" styleClass="btnLogout" text="Logout" textFill="RED">
             <font>

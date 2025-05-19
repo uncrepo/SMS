@@ -8,12 +8,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import org.project.sms.Models.AssignedTeacher;
+import org.project.sms.Models.NotAssignedStudent;
+import org.project.sms.Models.Student;
 import org.project.sms.Models.Teacher;
 import org.project.sms.dao.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -57,10 +60,15 @@ public class AdminAssignTeacherController implements Initializable {
     public TableColumn<Teacher, String> colEmailNotAssigned;
     public Button previousAssignedTeachersBtn;
     public Button nextAssignedTeachersBtn;
-    public Button previousTeachersBtn;
-    public Button nextTeachersBtn;
+    public Button previousNotAssignedTeachersBtn;
+    public Button nextNotAssignedTeachersBtn;
     public Button editAssignTeacherBtn;
     public TableColumn colSemester;
+
+    private int currentPage = 0;
+    private int currentPageNotAssigned = 0;
+
+    private final int ROWS_PER_PAGE = 6;
 
     public void initialize(URL location, ResourceBundle resources) {
         initTableCols();
@@ -406,6 +414,32 @@ public class AdminAssignTeacherController implements Initializable {
 
 }
 
+    private void setupPaginationButtons() {
+        previousAssignedTeachersBtn.setOnAction(event -> {
+            if (currentPage > 0) {
+                currentPage--;
+                loadFilteredPage();
+            }
+        });
+
+        nextAssignedTeachersBtn.setOnAction(event -> {
+            currentPage++;
+            loadFilteredPage();
+        });
+
+        previousNotAssignedTeachersBtn.setOnAction(event -> {
+            if (currentPageNotAssigned > 0) {
+                currentPageNotAssigned--;
+                loadFilteredNotAssignedPage();
+            }
+        });
+
+        nextNotAssignedTeachersBtn.setOnAction(event -> {
+            currentPageNotAssigned++;
+            loadFilteredNotAssignedPage();
+        });
+    }
+
 
     private void clearSelectedFields() {
         EditGradeComboBox.getSelectionModel().clearSelection();
@@ -430,6 +464,41 @@ public class AdminAssignTeacherController implements Initializable {
         sectionComboBox.getSelectionModel().clearSelection();
         academicYearComboBox.getSelectionModel().clearSelection();
     }
+
+    private void loadFilteredPage() {
+        String academicYear = academicYearComboBox.getValue();
+        String grade = gradeComboBox.getValue();
+        String section = sectionComboBox.getValue();
+
+
+        int offset = currentPage * ROWS_PER_PAGE;
+
+        List<AssignedTeacher> results = FilterDAO.getAssignedTeachersByFilter(
+                academicYear, grade, section, ROWS_PER_PAGE, offset
+        );
+
+        teacherTableView.setItems(FXCollections.observableArrayList(results));
+
+        // Optional: Disable buttons if on bounds
+        previousAssignedTeachersBtn.setDisable(currentPage == 0);
+        nextAssignedTeachersBtn.setDisable(results.size() < ROWS_PER_PAGE);
+    }
+
+    private void loadFilteredNotAssignedPage() {
+
+        int offset = currentPageNotAssigned * ROWS_PER_PAGE;
+
+        List<Teacher> results = FilterDAO.getNotAssignedTeachersByFilter(
+                ROWS_PER_PAGE, offset
+        );
+
+        teacherTableViewNotAssigned.setItems(FXCollections.observableArrayList(results));
+
+        // Optional: Disable buttons if on bounds
+        previousNotAssignedTeachersBtn.setDisable(currentPageNotAssigned == 0);
+        nextNotAssignedTeachersBtn.setDisable(results.size() < ROWS_PER_PAGE);
+    }
+
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);

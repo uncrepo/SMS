@@ -1,54 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.project.sms.Controllers.Admin.AdminClassScheduleController"
-            stylesheets="@../../Styles/Aadmin/schedule.css">
-    <VBox spacing="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@../../Styles/Admin/schedule.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Admin.AdminClassScheduleController">
+    <VBox fillWidth="false" spacing="12.0" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
         <!-- Header -->
         <HBox alignment="CENTER_LEFT" spacing="10">
-            <Label text="Class Schedule Generator" styleClass="page-title">
+            <Label styleClass="page-title" text="Class Schedule Generator">
                 <font>
-                    <Font name="System Bold" size="24.0"/>
+                    <Font name="System Bold" size="24.0" />
                 </font>
             </Label>
         </HBox>
 
         <!-- Controls -->
-        <HBox spacing="15" alignment="CENTER_LEFT" styleClass="control-bar">
+        <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="control-bar">
             <VBox spacing="5">
-                <Label text="Grade" styleClass="input-label"/>
-                <ComboBox fx:id="gradeComboBox" prefWidth="150" promptText="Select Grade" styleClass="combo-box"/>
+                <Label styleClass="input-label" text="Grade" />
+                <ComboBox fx:id="gradeComboBox" prefWidth="150" promptText="Select Grade" styleClass="combo-box" />
             </VBox>
             <VBox spacing="5">
-                <Label text="Section" styleClass="input-label"/>
-                <ComboBox fx:id="sectionComboBox" prefWidth="150" promptText="Select Section" styleClass="combo-box"/>
+                <Label styleClass="input-label" text="Section" />
+                <ComboBox fx:id="sectionComboBox" prefWidth="150" promptText="Select Section" styleClass="combo-box" />
             </VBox>
             <VBox spacing="5">
-                <Label text="Academic Year" styleClass="input-label"/>
-                <ComboBox fx:id="academicYearComboBox" prefWidth="150" promptText="Academic Year" styleClass="combo-box"/>
+                <Label styleClass="input-label" text="Academic Year" />
+                <ComboBox fx:id="academicYearComboBox" prefWidth="150" promptText="Academic Year" styleClass="combo-box" />
             </VBox>
-            <VBox spacing="5" alignment="BOTTOM_LEFT">
-                <Button fx:id="generateBtn" styleClass="action-button, primary-button" onAction="#handleGenerateSchedule">
+            <VBox alignment="BOTTOM_LEFT" spacing="5">
+                <Button fx:id="generateBtn" onAction="#handleGenerateSchedule" styleClass="action-button, primary-button">
                     <graphic>
-                        <HBox spacing="5" alignment="CENTER">
-                            <FontAwesomeIconView glyphName="CALENDAR_PLUS_O" size="1.2em"/>
-                            <Label text="Generate Schedule" textFill="WHITE"/>
+                        <HBox alignment="CENTER" spacing="5">
+                            <FontAwesomeIconView glyphName="CALENDAR_PLUS_O" size="1.2em" />
+                            <Label text="Generate Schedule" textFill="WHITE" />
                         </HBox>
                     </graphic>
                 </Button>
             </VBox>
-            <VBox spacing="5" alignment="BOTTOM_LEFT">
-                <Button fx:id="clearBtn" styleClass="action-button, secondary-button" onAction="#handleClearSchedule">
+            <VBox alignment="BOTTOM_LEFT" spacing="5">
+                <Button fx:id="clearBtn" onAction="#handleClearSchedule" styleClass="action-button, secondary-button">
                     <graphic>
-                        <HBox spacing="5" alignment="CENTER">
-                            <FontAwesomeIconView glyphName="TRASH" size="1.2em"/>
-                            <Label text="Clear Schedule" textFill="WHITE"/>
+                        <HBox alignment="CENTER" spacing="5">
+                            <FontAwesomeIconView glyphName="TRASH" size="1.2em" />
+                            <Label text="Clear Schedule" textFill="WHITE" />
                         </HBox>
                     </graphic>
                 </Button>
@@ -56,32 +53,32 @@
         </HBox>
 
         <!-- Schedule Table -->
-        <VBox spacing="10" VBox.vgrow="ALWAYS" styleClass="schedule-container">
-            <Label text="Class Schedule" styleClass="section-title">
+        <VBox fillWidth="false" styleClass="schedule-container" VBox.vgrow="ALWAYS">
+            <Label styleClass="section-title" text="Class Schedule">
                 <font>
-                    <Font name="System Bold" size="16.0"/>
+                    <Font name="System Bold" size="16.0" />
                 </font>
             </Label>
-            <TableView fx:id="scheduleTableView" VBox.vgrow="ALWAYS" styleClass="schedule-table">
+            <TableView fx:id="scheduleTableView" styleClass="schedule-table" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="colPeriod" text="Period" prefWidth="120" styleClass="period-column"/>
-                    <TableColumn fx:id="colMonday" text="Monday" prefWidth="176" styleClass="day-column"/>
-                    <TableColumn fx:id="colTuesday" text="Tuesday" prefWidth="176" styleClass="day-column"/>
-                    <TableColumn fx:id="colWednesday" text="Wednesday" prefWidth="176" styleClass="day-column"/>
-                    <TableColumn fx:id="colThursday" text="Thursday" prefWidth="176" styleClass="day-column"/>
-                    <TableColumn fx:id="colFriday" text="Friday" prefWidth="176" styleClass="day-column"/>
+                    <TableColumn fx:id="colPeriod" prefWidth="120" styleClass="period-column" text="Period" />
+                    <TableColumn fx:id="colMonday" prefWidth="176" styleClass="day-column" text="Monday" />
+                    <TableColumn fx:id="colTuesday" prefWidth="176" styleClass="day-column" text="Tuesday" />
+                    <TableColumn fx:id="colWednesday" prefWidth="176" styleClass="day-column" text="Wednesday" />
+                    <TableColumn fx:id="colThursday" prefWidth="176" styleClass="day-column" text="Thursday" />
+                    <TableColumn fx:id="colFriday" prefWidth="176" styleClass="day-column" text="Friday" />
                 </columns>
             </TableView>
         </VBox>
 
         <!-- Conflicts Section -->
         <VBox fx:id="conflictBox" spacing="10" styleClass="conflicts-container">
-            <Label text="Schedule Conflicts" styleClass="section-title">
+            <Label styleClass="section-title" text="Schedule Conflicts">
                 <graphic>
-                    <FontAwesomeIconView glyphName="EXCLAMATION_TRIANGLE" size="1.2em"/>
+                    <FontAwesomeIconView glyphName="EXCLAMATION_TRIANGLE" size="1.2em" />
                 </graphic>
             </Label>
-            <ListView fx:id="conflictListView" prefHeight="120" styleClass="conflict-list"/>
+            <ListView fx:id="conflictListView" prefHeight="120" styleClass="conflict-list" />
         </VBox>
     </VBox>
 </AnchorPane>

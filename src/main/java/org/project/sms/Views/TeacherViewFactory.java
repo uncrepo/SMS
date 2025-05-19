@@ -7,7 +7,7 @@ import org.project.sms.Controllers.Teacher.TeacherController;
 
 public class TeacherViewFactory extends ViewFactory {
     // teachers views
-    private AnchorPane teacherDashboardView;
+    private AnchorPane teacherScheduleView;
     private AnchorPane teacherClassesView;
     private AnchorPane teacherAssignmentsView;
     private AnchorPane teacherProfileView;
@@ -17,15 +17,15 @@ public class TeacherViewFactory extends ViewFactory {
         createStage("/Fxml/Teacher/teacher.fxml",new TeacherController());
     }
 
-    public AnchorPane getTeacherDashboardView() {
-        if(teacherDashboardView==null) {
+    public AnchorPane getTeacherScheduleView() {
+        if(teacherScheduleView==null) {
             try {
-                teacherDashboardView = new FXMLLoader(getClass().getResource("/Fxml/Teacher/teacher_dashboard.fxml")).load();
+                teacherScheduleView = new FXMLLoader(getClass().getResource("/Fxml/Teacher/teacher_schedule.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return teacherDashboardView;
+        return teacherScheduleView;
     }
 
     public AnchorPane getTeacherAssignmentsView() {

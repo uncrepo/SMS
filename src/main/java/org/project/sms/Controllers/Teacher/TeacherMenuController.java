@@ -9,11 +9,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TeacherMenuController implements Initializable {
-    public Button btnDashboard;
     public Button btnClasses;
     public Button btnAssignments;
     public Button btnProfile;
     public Button btnLogout;
+    public Button btnSchedule;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -21,7 +21,7 @@ public class TeacherMenuController implements Initializable {
     }
 
     private void addListeners() {
-        btnDashboard.setOnAction(event -> onDashboard());
+        btnSchedule.setOnAction(event -> onSchedule());
         btnClasses.setOnAction(event -> onClasses());
         btnAssignments.setOnAction(event -> onAssignments());
         btnProfile.setOnAction(event -> onProfile());
@@ -30,8 +30,8 @@ public class TeacherMenuController implements Initializable {
     }
 
 
-    private void onDashboard() {
-        Model.getInstance().getTeacherSelectedMenu().set(TeacherMenuOptions.DASHBOARD);
+    private void onSchedule() {
+        Model.getInstance().getTeacherSelectedMenu().set(TeacherMenuOptions.SCHEDULE);
     }
 
     private void onClasses() {

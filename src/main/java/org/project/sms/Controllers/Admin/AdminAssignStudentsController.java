@@ -62,6 +62,8 @@ public class AdminAssignStudentsController implements Initializable {
     public Button nextAssignedBtn;
 
     private int currentPage = 0;
+    private int currentPageNotAssigned = 0;
+
     private final int ROWS_PER_PAGE = 7;
 
 //    public ComboBox classAdvisorComboBox;
@@ -84,10 +86,6 @@ public class AdminAssignStudentsController implements Initializable {
         // Filter action on search
     }
 
-//    private void loadStudentData() {
-//        studentsTableView.setItems(FXCollections.observableArrayList(StudentDAO.getAssignedStudents()));
-//        studentsTableViewNotAssigned.setItems(FXCollections.observableArrayList(StudentDAO.getStudentsNotAssigned()));
-//    }
 
 
     private void initTableCols() {
@@ -132,14 +130,14 @@ public class AdminAssignStudentsController implements Initializable {
         });
 
         previousNotAssignedBtn.setOnAction(event -> {
-            if (currentPage > 0) {
-                currentPage--;
+            if (currentPageNotAssigned > 0) {
+                currentPageNotAssigned--;
                 loadFilteredNotAssignedPage();
             }
         });
 
         nextNotAssignedBtn.setOnAction(event -> {
-            currentPage++;
+            currentPageNotAssigned++;
             loadFilteredNotAssignedPage();
         });
     }
@@ -148,6 +146,7 @@ public class AdminAssignStudentsController implements Initializable {
         String academicYear = academicYearComboBox.getValue();
         String grade = gradeComboBox.getValue();
         String section = sectionComboBox.getValue();
+
 
         int offset = currentPage * ROWS_PER_PAGE;
 
@@ -164,7 +163,7 @@ public class AdminAssignStudentsController implements Initializable {
 
     private void loadFilteredNotAssignedPage() {
 
-        int offset = currentPage * ROWS_PER_PAGE;
+        int offset = currentPageNotAssigned * ROWS_PER_PAGE;
 
         List<NotAssignedStudent> results = FilterDAO.getNotAssignedStudentsByFilter(
                 ROWS_PER_PAGE, offset
@@ -173,15 +172,15 @@ public class AdminAssignStudentsController implements Initializable {
         studentsTableViewNotAssigned.setItems(FXCollections.observableArrayList(results));
 
         // Optional: Disable buttons if on bounds
-        previousAssignedBtn.setDisable(currentPage == 0);
-        nextAssignedBtn.setDisable(results.size() < ROWS_PER_PAGE);
+        previousNotAssignedBtn.setDisable(currentPageNotAssigned == 0);
+        nextNotAssignedBtn.setDisable(results.size() < ROWS_PER_PAGE);
     }
 
 
     private void initSelectedStudent(){
         studentsTableView.getSelectionModel().selectedItemProperty().addListener((obs,oldValue,newValue) -> {
             if (newValue != null) {
-                clearSelectedFields();
+                studentsTableViewNotAssigned.getSelectionModel().clearSelection();
                 selectedStudentNameField.setText(newValue.getFullName());
                 selectedStudentIdField.setText(newValue.getStudentId());
                 EditAcademicYearComboBox.setValue(newValue.getAcademicYear());
@@ -193,7 +192,7 @@ public class AdminAssignStudentsController implements Initializable {
 
         studentsTableViewNotAssigned.getSelectionModel().selectedItemProperty().addListener((obs,oldValue,newValue) -> {
             if (newValue != null) {
-                clearSelectedFields();
+                studentsTableView.getSelectionModel().clearSelection();
                 selectedStudentNameField.setText(newValue.getFullName());
                 selectedStudentIdField.setText(newValue.getStudentId());
                 prevClassIdField.setText(null);
@@ -364,6 +363,7 @@ public class AdminAssignStudentsController implements Initializable {
         gradeComboBox.setValue("default");
         sectionComboBox.setValue("default");
         academicYearComboBox.setValue("default");
+        searchStudentField.clear();
     }
 
 //    private void setupCommonListener() {

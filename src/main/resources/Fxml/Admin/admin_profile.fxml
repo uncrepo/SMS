@@ -22,63 +22,48 @@
                   <HBox alignment="CENTER_LEFT" prefWidth="400.0" spacing="12.0">
                      <children>
                         <Label text="Full Name" />
-                        <TextField fx:id="adminFullNameField" prefHeight="25.0" prefWidth="186.0" />
+                        <TextField fx:id="adminFullNameField" editable="false" prefHeight="25.0" prefWidth="186.0" />
                      </children>
-                     <padding>
-                        <Insets left="40.0" />
-                     </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefWidth="400.0" spacing="12.0">
-                     <children>
-                        <Label text="Set Current Academic Year" />
-                        <ComboBox fx:id="academicYearComboBox" layoutX="160.0" layoutY="10.0" prefWidth="150.0" />
-                     </children>
-                     <padding>
-                        <Insets left="40.0" />
-                     </padding>
+
+                  <HBox alignment="CENTER_LEFT" spacing="10">
+                     <Label text="Academic Year:" />
+                     <Label fx:id="academicYearLabel" />
+                     <Button onAction="#editAcademicYear" text="Edit" />
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="98.0" prefWidth="400.0" spacing="12.0">
-                     <children>
-                        <Label text="Set Current Semester" />
-                        <ComboBox fx:id="semesterComboBox" prefWidth="150.0" />
-                     </children>
-                     <padding>
-                        <Insets left="40.0" />
-                     </padding>
+
+                  <HBox alignment="CENTER_LEFT" spacing="10">
+                     <Label text="Semester:" />
+                     <Label fx:id="semesterLabel" />
+                     <Button onAction="#editSemester" text="Edit" />
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="120.0" prefWidth="400.0" spacing="12.0">
-                     <children>
-                        <Label text="Start Current Calendar" />
-                        <ComboBox fx:id="startCalendar" layoutX="160.0" layoutY="10.0" prefHeight="25.0" prefWidth="121.0" promptText="default" />
-                     </children>
-                     <padding>
-                        <Insets left="40.0" />
-                     </padding>
+
+                  <HBox alignment="CENTER_LEFT" spacing="10">
+                     <Label text="Calendar Start:" />
+                     <Label fx:id="calendarStartLabel" />
+                     <Button onAction="#editCalendarStart" text="Edit" />
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="160.0" prefWidth="400.0" spacing="12.0">
-                     <children>
-                        <Label text="End Current Calendar" />
-                        <ComboBox fx:id="endCalender" layoutX="160.0" layoutY="10.0" prefHeight="25.0" prefWidth="121.0" promptText="default" />
-                     </children>
-                     <padding>
-                        <Insets left="40.0" />
-                     </padding>
+
+                  <HBox alignment="CENTER_LEFT" spacing="10">
+                     <Label text="Calendar End:" />
+                     <Label fx:id="calendarEndLabel" />
+                     <Button onAction="#editCalendarEnd" text="Edit" />
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="200.0" prefWidth="400.0" spacing="12.0">
-                     <children>
-                        <Button fx:id="updateBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" text="Update">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <padding>
-                        <Insets left="40.0" />
-                     </padding>
+
+                  <HBox alignment="CENTER_LEFT" spacing="10">
+                     <Label text="Maintenance Mode:" />
+                     <Label fx:id="maintenanceLabel" />
+                     <Button onAction="#editMaintenanceMode" text="Edit" />
+                  </HBox>
+
+                  <HBox alignment="CENTER_LEFT" spacing="10">
+                     <Label text="Default Password for new users:" />
+                     <Label fx:id="defaultPasswordLabel" />
+                     <Button onAction="#editDefaultPassword" text="Edit" />
                   </HBox>
                </children>
                <padding>
-                  <Insets top="30.0" />
+                  <Insets left="48.0" top="30.0" />
                </padding>
             </VBox>
          </children>

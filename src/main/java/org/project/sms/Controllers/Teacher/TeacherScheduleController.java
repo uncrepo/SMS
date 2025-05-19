@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import org.project.sms.Models.Model;
 import org.project.sms.dao.ScheduleDAO;
 
@@ -17,6 +18,8 @@ import java.time.LocalTime;
 import java.util.*;
 
 public class TeacherScheduleController implements Initializable {
+    public Button refreshBtn;
+    public GridPane summaryGrid;
     @FXML private ComboBox<String> academicYearComboBox;
     @FXML private TableView<Map<String, String>> scheduleTableView;
     @FXML private TableColumn<Map<String, String>, String> colPeriod;
@@ -47,7 +50,7 @@ public class TeacherScheduleController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Initialize ComboBox
-        academicYearComboBox.setItems(FXCollections.observableArrayList("2023/24", "2024/25"));
+        academicYearComboBox.setItems(FXCollections.observableArrayList("2022/23","2023/24", "2024/25"));
         academicYearComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 loadSchedule(newVal);
@@ -58,7 +61,7 @@ public class TeacherScheduleController implements Initializable {
         initializeTableColumns();
 
         // Select current academic year
-        academicYearComboBox.getSelectionModel().select("2024/25");
+        academicYearComboBox.getSelectionModel().select("2022/23");
     }
 
     private void initializeTableColumns() {

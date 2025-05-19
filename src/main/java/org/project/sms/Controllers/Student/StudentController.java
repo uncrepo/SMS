@@ -39,6 +39,7 @@ public class StudentController implements Initializable {
         Model.getInstance().getStudentSelectedMenu().addListener((obs, oldVal, newVal) -> {
             switch (newVal) {
                 case CURRENT_SEMESTER -> student_parent.setCenter(Model.getInstance().getStudentViewFactory().getStudentCurrentSemester());
+                case SCHEDULE -> student_parent.setCenter(Model.getInstance().getStudentViewFactory().getStudentSchedule());
                 case ASSIGNMENTS -> student_parent.setCenter(Model.getInstance().getStudentViewFactory().getStudentAssignmentView());
                 case RESULTS -> student_parent.setCenter(Model.getInstance().getStudentViewFactory().getStudentResultsView());
                 case PROFILE -> student_parent.setCenter(Model.getInstance().getStudentViewFactory().getStudentProfileView());

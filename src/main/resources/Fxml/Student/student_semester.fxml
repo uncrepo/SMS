@@ -49,7 +49,7 @@
                      <Font name="System Bold" size="14.0" />
                   </font>
                </Label>
-               <TextField fx:id="academicYearField" editable="false" prefHeight="25.0" prefWidth="55.0" />
+               <TextField fx:id="academicYearField" editable="false" prefHeight="25.0" prefWidth="72.0" text="2022/23" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="42.0" layoutY="10.0" spacing="6.0">
@@ -59,7 +59,7 @@
                      <Font name="System Bold" size="14.0" />
                   </font>
                </Label>
-               <TextField fx:id="gradeField" prefHeight="25.0" prefWidth="55.0" />
+               <TextField fx:id="gradeField" prefHeight="25.0" prefWidth="55.0" text="Grade 3" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="208.0" layoutY="10.0" spacing="6.0">
@@ -69,7 +69,7 @@
                      <Font name="System Bold" size="14.0" />
                   </font>
                </Label>
-               <TextField fx:id="sectionField" editable="false" prefHeight="25.0" prefWidth="55.0" />
+               <TextField fx:id="sectionField" editable="false" prefHeight="25.0" prefWidth="55.0" text="A" />
             </children>
          </HBox>
       </children>
@@ -104,18 +104,18 @@
                <Insets right="6.0" />
             </HBox.margin>
          </Label>
-         <ComboBox fx:id="academicYearComboBox" disable="true" layoutX="178.0" layoutY="10.0" prefHeight="25.0" prefWidth="125.0" promptText="Academic Year" />
+         <ComboBox fx:id="academicYearComboBox" layoutX="178.0" layoutY="10.0" prefHeight="25.0" prefWidth="125.0" promptText="2022/23" />
          <Label layoutX="107.0" layoutY="45.0" text="Semester">
             <HBox.margin>
                <Insets left="8.0" right="6.0" />
             </HBox.margin>
          </Label>
-         <ComboBox fx:id="semesterComboBox" disable="true" prefHeight="25.0" prefWidth="95.0" promptText="Semester" />
+         <ComboBox fx:id="semesterComboBox" prefHeight="25.0" prefWidth="95.0" promptText="1" />
          <Label layoutX="242.0" layoutY="29.0" text="Grade">
             <HBox.margin>
                <Insets left="25.0" />
             </HBox.margin></Label>
-         <ComboBox fx:id="gradeComboBox" disable="true" layoutX="280.0" layoutY="25.0" prefHeight="25.0" prefWidth="88.0" promptText="Grade" />
+         <ComboBox fx:id="gradeComboBox" layoutX="280.0" layoutY="25.0" prefHeight="25.0" prefWidth="88.0" promptText="Grade 3" />
          <Label text="Section">
             <padding>
                <Insets left="15.0" />
@@ -124,7 +124,7 @@
                <Insets right="6.0" />
             </HBox.margin>
          </Label>
-         <ComboBox fx:id="sectionComboBox" disable="true" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="89.0" promptText="Section" />
+         <ComboBox fx:id="sectionComboBox" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="89.0" promptText="A" />
       </children>
    </HBox>
 </AnchorPane>

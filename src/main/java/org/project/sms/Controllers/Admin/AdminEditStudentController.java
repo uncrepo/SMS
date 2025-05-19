@@ -1,5 +1,6 @@
 package org.project.sms.Controllers.Admin;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,11 +11,14 @@ import javafx.scene.layout.GridPane;
 import org.project.sms.Models.AddStudent;
 import org.project.sms.Models.Student;
 import org.project.sms.Models.Teacher;
+import org.project.sms.dao.FilterDAO;
 import org.project.sms.dao.StudentDAO;
 import org.project.sms.dao.TeacherDAO;
+import org.project.sms.options.SortOptions;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -51,13 +55,21 @@ public class AdminEditStudentController implements Initializable {
     public Button previousBtn;
     public Button nextBtn;
 
+    private int currentPage = 0;
+    private final int ROWS_PER_PAGE = 11;
+
+
     public void initialize(URL location, ResourceBundle resources) {
         initTableCols();
 
         setupEventHandlers();
 
+        setupComboBoxListeners();
+        setupPaginationButtons();
+        loadFilteredPage();
+
         // Load the teacher data
-        loadStudentsData();
+//        loadStudentsData();
 
         // Filter action on search
     }
@@ -66,7 +78,6 @@ public class AdminEditStudentController implements Initializable {
 
     private void loadStudentsData() {
         studentTableView.setItems(FXCollections.observableArrayList(StudentDAO.getAllStudents()));
-
     }
 
 
@@ -79,6 +90,9 @@ public class AdminEditStudentController implements Initializable {
         colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+
+        sortByComboBox.setItems(FXCollections.observableArrayList(SortOptions.AssignedStudentDetailsFilter));
+        filterComboBox.setItems(FXCollections.observableArrayList(SortOptions.CommonFilers));
     }
 
 
@@ -121,7 +135,7 @@ public class AdminEditStudentController implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             // Delete the teacher from the database
             StudentDAO.deleteStudent(selectedStudent.getStudentId());
-            loadStudentsData(); // Refresh the table
+            loadFilteredPage(); // Refresh the table
             showAlert("Success", "Student deleted successfully!", Alert.AlertType.INFORMATION);
         }
     }
@@ -184,7 +198,7 @@ public class AdminEditStudentController implements Initializable {
             result.ifPresent(student -> {
                 // Update the teacher in the database
                 StudentDAO.addStudent(student);
-                loadStudentsData(); // Refresh the table
+                loadFilteredPage();
                 showAlert("Success", "A new Student was added successfully!", Alert.AlertType.INFORMATION);
             });
 
@@ -240,7 +254,7 @@ public class AdminEditStudentController implements Initializable {
             result.ifPresent(student -> {
                 // Update the teacher in the database
                 StudentDAO.updateStudentInfo(student);
-                loadStudentsData(); // Refresh the table
+                loadFilteredPage();
                 showAlert("Success", "Student information updated successfully!", Alert.AlertType.INFORMATION);
             });
 
@@ -252,6 +266,43 @@ public class AdminEditStudentController implements Initializable {
 
     private void clearSearchFields() {
         searchStudentField.clear();
+    }
+
+    private void setupComboBoxListeners() {
+        ChangeListener<String> comboListener = (obs, oldVal, newVal) -> {
+            currentPage = 0;
+            loadFilteredPage();
+        };
+    }
+
+
+    private void setupPaginationButtons() {
+        previousBtn.setOnAction(event -> {
+            if (currentPage > 0) {
+                currentPage--;
+                loadFilteredPage();
+            }
+        });
+
+        nextBtn.setOnAction(event -> {
+            currentPage++;
+            loadFilteredPage();
+        });
+    }
+
+    private void loadFilteredPage() {
+
+        int offset = currentPage * ROWS_PER_PAGE;
+
+        List<Student> results = FilterDAO.getAllStudentsDetailsForEditByFilter(
+                ROWS_PER_PAGE, offset
+        );
+
+        studentTableView.setItems(FXCollections.observableArrayList(results));
+
+        // Optional: Disable buttons if on bounds
+        previousBtn.setDisable(currentPage == 0);
+        nextBtn.setDisable(results.size() < ROWS_PER_PAGE);
     }
 
 

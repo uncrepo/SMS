@@ -39,10 +39,11 @@ public class TeacherController implements Initializable {
     private void MenuOptions() {
         Model.getInstance().getTeacherSelectedMenu().addListener((obs, oldVal, newVal) -> {
             switch (newVal) {
+                case SCHEDULE -> teacher_parent.setCenter(Model.getInstance().getTeacherViewFactory().getTeacherScheduleView());
                 case ASSIGNMENTS -> teacher_parent.setCenter(Model.getInstance().getTeacherViewFactory().getTeacherAssignmentsView());
                 case CLASSES -> teacher_parent.setCenter(Model.getInstance().getTeacherViewFactory().getTeacherClassesView());
                 case PROFILE -> teacher_parent.setCenter(Model.getInstance().getTeacherViewFactory().getTeacherProfileView());
-                default -> teacher_parent.setCenter(Model.getInstance().getTeacherViewFactory().getTeacherDashboardView());
+                default -> teacher_parent.setCenter(Model.getInstance().getTeacherViewFactory().getTeacherScheduleView());
             }
         });
     }

@@ -25,7 +25,7 @@
                   <Insets bottom="-7.0" />
                </VBox.margin>
             </HBox>
-              <TableView fx:id="teacherTableView" prefHeight="255.0" prefWidth="698.0" snapToPixel="false" VBox.vgrow="NEVER">
+              <TableView fx:id="teacherTableView" prefHeight="204.0" prefWidth="703.0" snapToPixel="false" VBox.vgrow="NEVER">
                   <columns>
                       <TableColumn fx:id="colTeacherId" prefWidth="40.0" resizable="false" text="ID" />
                       <TableColumn fx:id="colFullName" prefWidth="154.0" resizable="false" text="Teacher's Name" />
@@ -33,7 +33,7 @@
                       <TableColumn fx:id="colGrade" prefWidth="87.0" resizable="false" text="Grade" />
                       <TableColumn fx:id="colCourse" prefWidth="154.0" resizable="false" text="Course" />
                   <TableColumn fx:id="colSection" resizable="false" text="Section" />
-                  <TableColumn fx:id="colSemester" resizable="false" text="Semester" />
+                  <TableColumn fx:id="colSemester" prefWidth="83.0" resizable="false" text="Semester" />
                       <!--            <TableColumn fx:id="colActions" text="Actions" prefWidth="150" >-->
                       <!--                <cellFactory>-->
                       <!--                    <Callback >-->
@@ -64,12 +64,12 @@
                   <Button fx:id="nextAssignedTeachersBtn" prefHeight="25.0" prefWidth="140.0" text="Next" />
                </children>
             </HBox>
-            <TableView fx:id="teacherTableViewNotAssigned" layoutX="10.0" layoutY="50.0" prefHeight="203.0" prefWidth="518.0" snapToPixel="false">
+            <TableView fx:id="teacherTableViewNotAssigned" layoutX="10.0" layoutY="50.0" prefHeight="185.0" prefWidth="521.0" snapToPixel="false">
                <columns>
                   <TableColumn fx:id="colTeacherIdNotAssigned" prefWidth="48.0" resizable="false" text="ID" />
                   <TableColumn fx:id="colFullNameNotAssigned" prefWidth="181.0" resizable="false" text="Teacher's Name" />
                   <TableColumn fx:id="colPhoneNotAssigned" prefWidth="108.0" resizable="false" text="Phone" />
-                  <TableColumn fx:id="colEmailNotAssigned" prefWidth="180.0" resizable="false" text="Email" />
+                  <TableColumn fx:id="colEmailNotAssigned" prefWidth="183.0" resizable="false" text="Email" />
                </columns>
             </TableView>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="50.0" prefHeight="25.0" prefWidth="634.0" spacing="20.0">
@@ -78,12 +78,12 @@
                      <HBox.margin>
                         <Insets left="200.0" />
                      </HBox.margin></Button>
-                  <Button fx:id="previousTeachersBtn" prefHeight="25.0" prefWidth="100.0" text="Previous">
+                  <Button fx:id="previousNotAssignedTeachersBtn" prefHeight="25.0" prefWidth="100.0" text="Previous">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="nextTeachersBtn" prefHeight="25.0" prefWidth="90.0" text="Next" />
+                  <Button fx:id="nextNotAssignedTeachersBtn" prefHeight="25.0" prefWidth="90.0" text="Next" />
                </children>
             </HBox>
             <padding>
@@ -113,7 +113,7 @@
 <!--        <ComboBox fx:id="assignSectionComboBox" prefWidth="120" promptText="Select Section" />-->
 <!--        <Button fx:id="assignTeacherBtn" prefWidth="100" text="Assign Teacher" />-->
 <!--    </HBox>-->
-   <Label text="Assign Teacher to Class">
+   <Label text="Assign Teacher to Grade">
       <font>
          <Font name="System Bold" size="20.0" />
       </font>

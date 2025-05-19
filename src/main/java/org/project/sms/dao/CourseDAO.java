@@ -55,7 +55,7 @@ public class CourseDAO {
 
     public static List<String> getAllCourses() {
         List<String> courses = new ArrayList<>();
-        String query = "SELECT " +
+        String query = "SELECT DISTINCT " +
                 "    Courses.course_name " +
                 "FROM " +
                 "    grade_course " +
@@ -81,7 +81,7 @@ public class CourseDAO {
 
     public static List<String> getAllCoursesByGrade(String grade) {
         List<String> courses = new ArrayList<>();
-        String query = "SELECT " +
+        String query = "SELECT DISTINCT " +
                 "    Courses.course_name " +
                 "FROM " +
                 "    grade_course " +

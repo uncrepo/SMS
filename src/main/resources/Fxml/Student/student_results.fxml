@@ -8,7 +8,7 @@
 <AnchorPane prefHeight="600.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.sms.Controllers.Student.StudentResultsController">
    <HBox spacing="20.0">
       <padding>
-         <Insets left="24.0" right="20.0" top="94.0" />
+         <Insets left="10.0" right="20.0" top="94.0" />
       </padding>
       <children>
               <!-- Filter and Actions -->
@@ -21,13 +21,13 @@
             </Label>
               <TableView fx:id="studentTableView" prefHeight="526.0" prefWidth="550.0" snapToPixel="false" VBox.vgrow="NEVER">
                   <columns>
-                      <TableColumn fx:id="colFullName" prefWidth="160.0" text="Subject" />
+                      <TableColumn fx:id="colCourseFirstSemester" prefWidth="160.0" text="Course" />
                       <TableColumn fx:id="colAttendance" prefWidth="73.0" text="attendance" />
                       <TableColumn fx:id="colIndivAsgn" prefWidth="64.0" text="indiv Asgn" />
                       <TableColumn fx:id="colGrpAsgn" prefWidth="76.0" text="group Asgn" />
                       <TableColumn fx:id="colMidExam" prefWidth="65.0" text="mid exam" />
                       <TableColumn fx:id="colFinalExam" prefWidth="65.0" text="final exam" />
-                      <TableColumn fx:id="colTotal" prefWidth="53.0" text="total" />
+                      <TableColumn fx:id="colTotal" editable="false" prefWidth="45.0" sortable="false" text="total" />
                       <!--            <TableColumn fx:id="colActions" text="Actions" prefWidth="150" >-->
                       <!--                <cellFactory>-->
                       <!--                    <Callback >-->
@@ -39,6 +39,19 @@
                       <!--            </TableColumn>-->
                   </columns>
               </TableView>
+            <HBox alignment="CENTER" spacing="6.0">
+               <children>
+                  <Label text="1st Average :">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="averageLabel1" prefHeight="20.0" prefWidth="40.0" />
+               </children>
+               <VBox.margin>
+                  <Insets left="300.0" />
+               </VBox.margin>
+            </HBox>
             <padding>
                <Insets top="60.0" />
             </padding>
@@ -55,15 +68,28 @@
                </Label>
                <TableView fx:id="studentTableView2" prefHeight="526.0" prefWidth="550.0" snapToPixel="false" VBox.vgrow="NEVER">
                   <columns>
-                     <TableColumn fx:id="colFullName2" prefWidth="160.0" text="Subject" />
+                     <TableColumn fx:id="colCourseSecondSemester" prefWidth="160.0" text="Course" />
                      <TableColumn fx:id="colAttendance2" prefWidth="73.0" text="attendance" />
                      <TableColumn fx:id="colIndivAsgn2" prefWidth="64.0" text="indiv Asgn" />
                      <TableColumn fx:id="colGrpAsgn2" prefWidth="76.0" text="group Asgn" />
                      <TableColumn fx:id="colMidExam2" prefWidth="65.0" text="mid exam" />
                      <TableColumn fx:id="colFinalExam2" prefWidth="65.0" text="final exam" />
-                     <TableColumn fx:id="colTotal2" prefWidth="53.0" text="total" />
+                     <TableColumn fx:id="colTotal2" prefWidth="44.0" text="total" />
                   </columns>
                </TableView>
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="435.0" spacing="6.0">
+                  <children>
+                     <Label text="2nd Average :">
+                        <font>
+                           <Font name="System Bold" size="14.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="averageLabel2" prefHeight="20.0" prefWidth="40.0" />
+                  </children>
+                  <VBox.margin>
+                     <Insets left="300.0" />
+                  </VBox.margin>
+               </HBox>
             </children>
          </VBox>
       </children>
@@ -77,7 +103,7 @@
                      <Font name="System Bold" size="14.0" />
                   </font>
                </Label>
-               <TextField fx:id="academicField" disable="true" prefHeight="25.0" prefWidth="73.0" />
+               <Label fx:id="academic" prefHeight="25.0" prefWidth="73.0" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="42.0" layoutY="10.0" spacing="6.0">
@@ -87,7 +113,7 @@
                      <Font name="System Bold" size="14.0" />
                   </font>
                </Label>
-               <TextField fx:id="gradeField" disable="true" prefHeight="25.0" prefWidth="71.0" />
+               <Label fx:id="grade" prefHeight="25.0" prefWidth="71.0" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="208.0" layoutY="10.0" spacing="6.0">
@@ -97,17 +123,20 @@
                      <Font name="System Bold" size="14.0" />
                   </font>
                </Label>
-               <TextField fx:id="sectionField" disable="true" prefHeight="25.0" prefWidth="55.0" />
+               <Label fx:id="section" prefHeight="25.0" prefWidth="55.0" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="400.0" layoutY="10.0" spacing="6.0">
             <children>
-               <Label text="Average :">
+               <Label text="Total Average :">
                   <font>
                      <Font name="System Bold" size="14.0" />
                   </font>
                </Label>
-               <TextField fx:id="averageField" disable="true" prefHeight="25.0" prefWidth="68.0" />
+               <Label fx:id="totalAverageLabel" prefHeight="25.0" prefWidth="68.0">
+                  <font>
+                     <Font name="System Bold" size="18.0" />
+                  </font></Label>
             </children>
          </HBox>
       </children>

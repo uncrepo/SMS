@@ -1,6 +1,7 @@
 package org.project.sms.Controllers.Admin;
 
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,15 +10,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import org.project.sms.Models.Model;
+import org.project.sms.Models.Student;
 import org.project.sms.Models.Teacher;
-import org.project.sms.dao.CalendarDAO;
-import org.project.sms.dao.CourseDAO;
-import org.project.sms.dao.GradeDAO;
-import org.project.sms.dao.TeacherDAO;
+import org.project.sms.dao.*;
 import org.project.sms.options.DepartmentOptions;
 import org.project.sms.options.SectionOptions;
+import org.project.sms.options.SortOptions;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -51,13 +52,21 @@ public class AdminTeacherController implements Initializable {
     public Button previousBtn;
     public Button nextBtn;
 
+    private int currentPage = 0;
+    private final int ROWS_PER_PAGE = 16;
+
+
 
     public void initialize(URL location, ResourceBundle resources) {
         initTableCols();
         initOptions();
 
+        setupPaginationButtons();
+        setupComboBoxListeners();
+        loadFilteredPage();
+
         // Load the teacher data
-        loadTeacherData();
+//        loadTeacherData();
 
         // Filter action on search
         searchBtn.setOnAction(e -> filterTeachers());
@@ -73,6 +82,50 @@ public class AdminTeacherController implements Initializable {
 
     private void loadTeacherData() {
         teacherTableView.setItems(FXCollections.observableArrayList(TeacherDAO.getAllTeachersDefault()));
+    }
+
+    private void setupComboBoxListeners() {
+        ChangeListener<String> comboListener = (obs, oldVal, newVal) -> {
+            currentPage = 0;
+            loadFilteredPage();
+        };
+
+        academicYearComboBox.valueProperty().addListener(comboListener);
+        gradeComboBox.valueProperty().addListener(comboListener);
+        sectionComboBox.valueProperty().addListener(comboListener);
+    }
+
+
+    private void setupPaginationButtons() {
+        previousBtn.setOnAction(event -> {
+            if (currentPage > 0) {
+                currentPage--;
+                loadFilteredPage();
+            }
+        });
+
+        nextBtn.setOnAction(event -> {
+            currentPage++;
+            loadFilteredPage();
+        });
+    }
+
+    private void loadFilteredPage() {
+        String academicYear = academicYearComboBox.getValue();
+        String grade = gradeComboBox.getValue();
+        String section = sectionComboBox.getValue();
+
+        int offset = currentPage * ROWS_PER_PAGE;
+
+        List<Teacher> results = FilterDAO.getAllTeachersDetailsByFilter(
+                academicYear, grade, section, ROWS_PER_PAGE, offset
+        );
+
+        teacherTableView.setItems(FXCollections.observableArrayList(results));
+
+        // Optional: Disable buttons if on bounds
+        previousBtn.setDisable(currentPage == 0);
+        nextBtn.setDisable(results.size() < ROWS_PER_PAGE);
     }
 
     private void filterTeachers() {
@@ -116,8 +169,9 @@ public class AdminTeacherController implements Initializable {
         ObservableList<String> calendars = FXCollections.observableArrayList(CalendarDAO.getAllCalendar());
         academicYearComboBox.setItems(calendars);
 
-//        sortByComboBox.setItems();
-//        filterComboBox.setItems();
+        sortByComboBox.setItems(FXCollections.observableArrayList(SortOptions.AssignedStudentDetailsFilter));
+        filterComboBox.setItems(FXCollections.observableArrayList(SortOptions.CommonFilers));
+
 
 
     }

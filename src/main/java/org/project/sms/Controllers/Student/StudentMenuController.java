@@ -14,6 +14,7 @@ public class StudentMenuController implements Initializable {
     public Button btnResults;
     public Button btnProfile;
     public Button btnLogout;
+    public Button btnSchedule;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -22,10 +23,17 @@ public class StudentMenuController implements Initializable {
 
     private void addListeners() {
         btnCurrentSemester.setOnAction(event -> onCurrentSemester());
+        btnSchedule.setOnAction(event -> onSchedule());
+
         btnAssignments.setOnAction(event -> onAssignments());
         btnResults.setOnAction(event -> onResults());
         btnProfile.setOnAction(event -> onProfile());
         btnLogout.setOnAction(actionEvent -> closeWindow());
+
+    }
+
+    private void onSchedule() {
+        Model.getInstance().getStudentSelectedMenu().set(StudentMenuOptions.SCHEDULE);
 
     }
 

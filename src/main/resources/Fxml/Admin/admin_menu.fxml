@@ -12,7 +12,7 @@
 
     <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="220.0" spacing="10.0" style="-fx-background-color: #eeeeee;">
     <VBox alignment="TOP_CENTER" prefHeight="860.0" prefWidth="200.0" spacing="10" style="-fx-padding: 15; -fx-background-color: #0d365e;">
-    <Button fx:id="btnDashboard" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" styleClass="btnDashboard" stylesheets="@../../Styles/Aadmin/admin.css" text="    Dashboard" textFill="WHITE">
+    <Button fx:id="btnDashboard" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" styleClass="btnDashboard" stylesheets="@../../Styles/Admin/admin.css" text="    Dashboard" textFill="WHITE">
             <font>
                <Font name="System Bold" size="15.0" />
             </font>
@@ -24,7 +24,7 @@
                </ImageView>
             </graphic></Button>
 <!--    <Button fx:id="btnClasses" prefWidth="180" text="Classes" />-->
-    <Button fx:id="btnStudents" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" styleClass="btnDashboard" stylesheets="@../../Styles/Aadmin/admin.css" text="    Students">
+    <Button fx:id="btnStudents" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" styleClass="btnDashboard" stylesheets="@../../Styles/Admin/admin.css" text="    Students">
             <font>
                <Font name="System Bold" size="15.0" />
             </font>
@@ -46,7 +46,7 @@
                   </font></Button>
             </children>
          </VBox>
-    <Button fx:id="btnTeachers" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" styleClass="btnDashboard" stylesheets="@../../Styles/Aadmin/admin.css" text="     Teachers">
+    <Button fx:id="btnTeachers" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" styleClass="btnDashboard" stylesheets="@../../Styles/Admin/admin.css" text="     Teachers">
             <font>
                <Font name="System Bold" size="15.0" />
             </font>
@@ -72,7 +72,7 @@
                <Insets left="30.0" />
             </padding>
          </VBox>
-    <Button fx:id="btnClasses" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" styleClass="btnDashboard" stylesheets="@../../Styles/Aadmin/admin.css" text="    Grades">
+    <Button fx:id="btnClasses" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" styleClass="btnDashboard" stylesheets="@../../Styles/Admin/admin.css" text="    Grades">
             <font>
                <Font name="System Bold" size="15.0" />
             </font>
@@ -108,7 +108,7 @@
          </VBox>
 
     <Separator prefWidth="180" />
-         <Button fx:id="btnAdminProfile" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" styleClass="btnDashboard" stylesheets="@../../Styles/Aadmin/admin.css" text="   Admin Config">
+         <Button fx:id="btnAdminProfile" alignment="TOP_LEFT" prefWidth="180" style="-fx-background-color: transparent;" styleClass="btnDashboard" stylesheets="@../../Styles/Admin/admin.css" text="   Admin Config">
             <font>
                <Font name="System Bold" size="15.0" />
             </font>
@@ -125,7 +125,7 @@
                <Font name="System Bold" size="15.0" />
             </font>
             <stylesheets>
-               <URL value="@../../Styles/Aadmin/admin.css" />
+               <URL value="@../../Styles/Admin/admin.css" />
                <URL value="@../../Styles/Teacher/teacher.css" />
             </stylesheets></Button>
 

@@ -4,6 +4,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.project.sms.Controllers.Admin.AdminController;
 import org.project.sms.Controllers.Student.StudentController;
@@ -45,7 +46,9 @@ public class ViewFactory implements ViewNavigator {
             if (controller != null) loader.setController(controller);
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
+            Image icon = new Image(getClass().getResourceAsStream("/images_and_icons/2176597581715247275-128.png"));
             stage.setScene(scene);
+            stage.getIcons().add(icon);
             stage.setTitle("School Management System");
             stage.show();
         } catch (Exception e) {
